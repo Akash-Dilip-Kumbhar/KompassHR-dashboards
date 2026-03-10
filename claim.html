@@ -326,38 +326,200 @@
 
 <body>
     <div id="main-wrapper">
-        <!-- Sidebar -->
-        <aside class="sidebar d-none d-lg-block">
-            <div class="p-4 text-center border-bottom">
-                <img src="probus%20logo%20new%20white.png" alt="Logo" style="max-height: 40px; filter: invert(0.8);">
-            </div>
-            <div class="sidebar-menu p-3">
-                <h6 class="text-muted text-uppercase fs-11 fw-bold mb-3">Main Menu</h6>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-1">
-                        <a href="dashboard.html" class="nav-link text-dark p-2 rounded d-flex align-items-center gap-2">
-                            <i class="ti ti-smart-home fs-18"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item mb-1">
-                        <a href="employee.html" class="nav-link text-dark p-2 rounded d-flex align-items-center gap-2">
-                            <i class="ti ti-users fs-18"></i> Employees
-                        </a>
-                    </li>
-                    <li class="nav-item mb-1">
-                        <a href="#"
-                            class="nav-link active bg-primary text-white p-2 rounded d-flex align-items-center gap-2">
-                            <i class="ti ti-file-invoice fs-18"></i> Claims
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </aside>
 
-        <!-- Page Wrapper -->
-        <main class="page-wrapper">
+        <!-- Header -->
+        <div class="header">
+            <div class="main-header d-flex justify-content-between align-items-center">
+                <div class="header-left">
+                    <a href="javascript:void(0)" class="company-bx">
+                        <img src="assets/img/KompassHR.png" alt="Kompass HR Logo">
+                        <span class="company-name">Kompass HR</span>
+                    </a>
+                </div>
+
+                <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+                    <span class="bar-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
+                <!-- Search Bar -->
+                <div class="input-group d-none d-lg-flex ms-3">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-text"><i class="ti ti-search"></i></span>
+                </div>
+                <!-- Right Side Icons -->
+                <div class="d-flex align-items-center ms-auto">
+                    <div class="navbar-icons">
+                        <button class="nav-icon" title="Chat">
+                            <i class="ti ti-message-dots"></i>
+                        </button>
+                        <button class="nav-icon btnFullscreen" title="Fullscreen">
+                            <i class="ti ti-arrows-maximize"></i>
+                        </button>
+                        <button class="nav-icon" title="Apps">
+                            <i class="ti ti-layout-grid"></i>
+                        </button>
+                        <button class="nav-icon" title="Mail">
+                            <i class="ti ti-mail"></i>
+                        </button>
+                        <button class="nav-icon notification-bell" title="Notifications">
+                            <i class="ti ti-bell"></i>
+                            <span class="badge bg-danger">3</span>
+                        </button>
+                    </div>
+                    <!-- User Dropdown -->
+                    <div class="dropdown ms-2">
+                        <a href="javascript:void(0);" class="d-flex align-items-center" data-bs-toggle="dropdown">
+                            <img src="assets/img/avatar-01.jpg" alt="User" class="header-user-avatar">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end p-2" style="min-width: 180px;">
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-user me-2"></i>My Profile</a>
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-settings me-2"></i>Settings</a>
+                            <hr class="dropdown-divider my-1">
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-logout me-2"></i>Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Header -->
+
+        <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <!-- Profile Section -->
+          <div class="menu-profile2">
+            <div class="profile-img">
+              <img src="assets/img/avatar-02.jpg" alt="User" class="menu-profile-image">
+            </div>
+            <div class="profile-details">
+              <div class="profile-name">
+                DHEERENDRA <br><span class="accent">KUMAR JOSHI</span>
+              </div>
+              <p class="profile-role">Manager</p>
+            </div>
+          </div>
+
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="Menu-tab" data-bs-toggle="tab" data-bs-target="#Menu-tab-pane"
+                type="button" role="tab" aria-controls="Menu-tab-pane" aria-selected="true"><i
+                  class="fa-solid fa-list"></i> <span>Menu</span> </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><i
+                  class="fa-solid fa-table-cells-large"></i> <span>Dashboard</span></button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
+                type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><i
+                  class="fa-solid fa-cubes"></i>
+                <span>others</span></button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
+                type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false"><i
+                  class="fa-solid fa-gear"></i>
+                <span>Setting</span></button>
+            </li>
+          </ul>
+
+          <ul>
+           <li class="">
+							<a href="index.html" class="">
+								<i class="ti ti-layout-dashboard"></i>
+								<span>Lead</span>
+							</a>
+
+						</li>
+            <li>
+              <a href="recuritment.html">
+                <i class="ti ti-user-search"></i>
+                <span>Recruitment</span>
+              </a>
+            </li>
+            <li>
+              <a href="operation_dashboard.html">
+                <i class="ti ti-settings-automation"></i>
+                <span>Operation</span>
+              </a>
+            </li>
+            <li>
+              <a href="onboarding-dashboard.html">
+                <i class="ti ti-user-plus"></i>
+                <span>Onboarding</span>
+              </a>
+            </li>
+            <li>
+              <a href="employee.html">
+                <i class="ti ti-building"></i>
+                <span>HR Space</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="attendance.html">
+                <i class="ti ti-clock-check"></i>
+                <span>Attendance</span>
+              </a>
+            </li>
+            <li>
+              <a href="Leave_dashboard.html">
+                <i class="ti ti-calendar-event"></i>
+                <span>Leave</span>
+              </a>
+            </li>
+            <li>
+              <a href="payroll.html">
+                <i class="ti ti-wallet"></i>
+                <span>Payroll</span>
+              </a>
+            </li>
+            <li>
+              <a href="claim.html">
+                <i class="ti ti-receipt"></i>
+                <span>Claim</span>
+              </a>
+            </li>
+            <li>
+              <a href="vms_dashboard.html">
+                <i class="ti ti-device-desktop"></i>
+                <span>VMS</span>
+              </a>
+            </li>
+            <li>
+              <a href="Pms_dashboard.html">
+                <i class="ti ti-chart-bar"></i>
+                <span>PMS</span>
+              </a>
+            </li>
+            <li>
+              <a href="ticketdashboard_manager.html">
+                <i class="ti ti-ticket"></i>
+                <span>Tickets</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /Sidebar -->
+  <!-- Page Wrapper -->
+    <div class="page-wrapper">
+      <!-- ===== MAIN CONTENT ===== -->
+      <div class="content attendance-db">
+ 
+
+
             <!-- Header -->
-            <header class="d-flex align-items-center justify-content-between mb-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
                 <div>
                     <h4 class="fw-bold mb-0">Claim Management Dashboard</h4>
                     <p class="text-muted mb-0">Overview of employee reimbursements and expenses</p>
@@ -750,7 +912,8 @@
 
         </main>
     </div>
-
+</div>
+</div>
     <!-- Scripts -->
     <!-- jQuery -->
     <script src="assets/js/jquery-3.7.1.min.js"></script>
