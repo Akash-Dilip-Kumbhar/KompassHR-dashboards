@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="Kompass HR - Claim Management Dashboard">
+    <meta name="keywords" content="hr, dashboard, claims, reimbursement, finance">
+    <meta name="author" content="Kompass HR">
+    <title>Claim Management Dashboard - Kompass HR</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+
+    <!-- Google Fonts: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Feather CSS -->
+    <link rel="stylesheet" href="assets/plugins/icons/feather/feather.css">
+    <!-- Tabler Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #F26522;
+            --primary-light: #FFEDE5;
+            --secondary: #0C4B5E;
+            --success: #03C95A;
+            --danger: #E70D0D;
+            --warning: #FFC107;
+            --info: #1B84FF;
+            --dark: #1D2A3A;
+            --light: #F8F9FA;
+            --white: #ffffff;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-600: #4B5563;
+            --text-main: #202C4B;
+            --text-muted: #6B7280;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --radius-lg: 12px;
+            --radius-md: 8px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F4F7FE;
+            color: var(--text-main);
+            font-size: 14px;
+            overflow-x: hidden;
+        }
+
+        /* Layout Structure */
+        #main-wrapper {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Sidebar Mockup (Simplified for self-containment) */
+        .sidebar {
+            width: 250px;
+            background: var(--white);
+            height: 100vh;
+            position: fixed;
+            border-right: 1px solid var(--gray-200);
+            z-index: 1000;
+        }
+
+        .page-wrapper {
+            flex: 1;
+            margin-left: 250px;
+            padding: 24px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 991.98px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: 0.3s;
+            }
+
+            .page-wrapper {
+                margin-left: 0;
+            }
+        }
+
+        /* Common Elements */
+        .card {
+            border: none;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-header {
+            background: transparent;
+            border-bottom: 1px solid var(--gray-100);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0;
+        }
+
+        /* KPI Cards */
+        .kpi-card {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .kpi-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .kpi-info h6 {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .kpi-info h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 0;
+            color: var(--text-main);
+        }
+
+        .bg-info-soft {
+            background: #E8F2FF;
+            color: var(--info);
+        }
+
+        .bg-warning-soft {
+            background: #FFF8E6;
+            color: var(--warning);
+        }
+
+        .bg-success-soft {
+            background: #E6F9EF;
+            color: var(--success);
+        }
+
+        .bg-danger-soft {
+            background: #FEE7E7;
+            color: var(--danger);
+        }
+
+        .bg-purple-soft {
+            background: #F3E8FF;
+            color: #8B5CF6;
+        }
+
+        /* Tables */
+        .custom-table thead th {
+            background-color: var(--gray-100);
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            border: none;
+            padding: 12px 20px;
+        }
+
+        .custom-table tbody td {
+            padding: 14px 20px;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .badge-soft {
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .badge-soft-pending {
+            background: #FFF8E6;
+            color: #D97706;
+        }
+
+        .badge-soft-approved {
+            background: #E6F9EF;
+            color: #059669;
+        }
+
+        .badge-soft-rejected {
+            background: #FEE7E7;
+            color: #DC2626;
+        }
+
+        /* Alerts Panel */
+        .alert-item {
+            padding: 12px 15px;
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border-left: 4px solid transparent;
+        }
+
+        .alert-warning {
+            background: #FFFBEB;
+            border-left-color: var(--warning);
+            color: #92400E;
+        }
+
+        .alert-danger {
+            background: #FEF2F2;
+            border-left-color: var(--danger);
+            color: #991B1B;
+        }
+
+        .alert-info {
+            background: #EFF6FF;
+            border-left-color: var(--info);
+            color: #1E40AF;
+        }
+
+        .alert-icon {
+            font-size: 18px;
+            margin-top: 2px;
+        }
+
+        .alert-content h6 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .alert-content p {
+            font-size: 12px;
+            margin-bottom: 0;
+            opacity: 0.8;
+        }
+
+        /* Activity Feed */
+        .activity-list {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .activity-list::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gray-200);
+        }
+
+        .activity-item {
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .activity-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--white);
+        }
+
+        .activity-item h6 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .activity-item span {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Utility */
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--text-main);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar d-none d-lg-block">
+            <div class="p-4 text-center border-bottom">
+                <img src="probus%20logo%20new%20white.png" alt="Logo" style="max-height: 40px; filter: invert(0.8);">
+            </div>
+            <div class="sidebar-menu p-3">
+                <h6 class="text-muted text-uppercase fs-11 fw-bold mb-3">Main Menu</h6>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-1">
+                        <a href="dashboard.html" class="nav-link text-dark p-2 rounded d-flex align-items-center gap-2">
+                            <i class="ti ti-smart-home fs-18"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item mb-1">
+                        <a href="employee.html" class="nav-link text-dark p-2 rounded d-flex align-items-center gap-2">
+                            <i class="ti ti-users fs-18"></i> Employees
+                        </a>
+                    </li>
+                    <li class="nav-item mb-1">
+                        <a href="#"
+                            class="nav-link active bg-primary text-white p-2 rounded d-flex align-items-center gap-2">
+                            <i class="ti ti-file-invoice fs-18"></i> Claims
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Page Wrapper -->
+        <main class="page-wrapper">
+            <!-- Header -->
+            <header class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h4 class="fw-bold mb-0">Claim Management Dashboard</h4>
+                    <p class="text-muted mb-0">Overview of employee reimbursements and expenses</p>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-white shadow-sm border-0 rounded-pill px-3">
+                        <i class="ti ti-calendar me-1"></i> Today: 10 Mar 2026
+                    </button>
+                    <div class="avatar bg-primary text-white">AD</div>
+                </div>
+            </header>
+
+            <!-- 1ï¸ âƒ£ Top KPI Cards -->
+            <div class="row g-3">
+                <div class="col-xl-2 col-md-4 col-sm-6">
+                    <div class="card kpi-card">
+                        <div class="kpi-icon bg-info-soft"><i class="ti ti-clipboard-list"></i></div>
+                        <div class="kpi-info">
+                            <h6>Total Claims</h6>
+                            <h3>142</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-sm-6">
+                    <div class="card kpi-card">
+                        <div class="kpi-icon bg-warning-soft"><i class="ti ti-clock-pause"></i></div>
+                        <div class="kpi-info">
+                            <h6>Pending Cases</h6>
+                            <h3>28</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-sm-6">
+                    <div class="card kpi-card">
+                        <div class="kpi-icon bg-success-soft"><i class="ti ti-check"></i></div>
+                        <div class="kpi-info">
+                            <h6>Approved</h6>
+                            <h3>105</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-sm-6">
+                    <div class="card kpi-card">
+                        <div class="kpi-icon bg-danger-soft"><i class="ti ti-x"></i></div>
+                        <div class="kpi-info">
+                            <h6>Rejected</h6>
+                            <h3>9</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-8">
+                    <div class="card kpi-card">
+                        <div class="kpi-icon bg-purple-soft"><i class="ti ti-receipt-2"></i></div>
+                        <div class="kpi-info flex-grow-1">
+                            <h6>Total Claim Amount</h6>
+                            <div class="d-flex justify-content-between align-items-baseline">
+                                <h3>â‚¹ 4,25,800</h3>
+                                <span class="text-success fs-12 fw-bold"><i class="ti ti-arrow-up-right"></i> 12%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row 1 -->
+            <div class="row">
+                <div class="col-xl-4 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Claims by Category</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="categoryChart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Claim Status Distribution</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <div id="statusDonutChart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Monthly Claim Trend</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="trendChart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2ï¸ âƒ£ Pending Claims Table -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Pending Claims Approval Queue</h5>
+                            <button class="btn btn-sm btn-outline-primary">View All Pending</button>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table custom-table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Employee</th>
+                                            <th>Claim Type</th>
+                                            <th>Amount</th>
+                                            <th>Date Submitted</th>
+                                            <th>Status</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar bg-primary-light text-primary">RK</div>
+                                                    <div>
+                                                        <div class="fw-bold">Rahul Kapoor</div>
+                                                        <div class="text-muted fs-12">IT Dept</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Travel Reimbursement</td>
+                                            <td><span class="fw-bold">â‚¹ 1,500</span></td>
+                                            <td>10 Mar 2026</td>
+                                            <td><span class="badge-soft badge-soft-pending">Pending</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-success rounded-pill px-3 me-1"><i
+                                                        class="ti ti-check"></i></button>
+                                                <button class="btn btn-sm btn-danger rounded-pill px-3"><i
+                                                        class="ti ti-x"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar bg-info-soft text-info">PV</div>
+                                                    <div>
+                                                        <div class="fw-bold">Priya Verma</div>
+                                                        <div class="text-muted fs-12">Marketing</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Accommodation</td>
+                                            <td><span class="fw-bold">â‚¹ 4,200</span></td>
+                                            <td>09 Mar 2026</td>
+                                            <td><span class="badge-soft badge-soft-pending">Pending</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-success rounded-pill px-3 me-1"><i
+                                                        class="ti ti-check"></i></button>
+                                                <button class="btn btn-sm btn-danger rounded-pill px-3"><i
+                                                        class="ti ti-x"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar bg-success-soft text-success">AS</div>
+                                                    <div>
+                                                        <div class="fw-bold">Amit Singh</div>
+                                                        <div class="text-muted fs-12">Sales</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Office Supplies</td>
+                                            <td><span class="fw-bold">â‚¹ 900</span></td>
+                                            <td>09 Mar 2026</td>
+                                            <td><span class="badge-soft badge-soft-pending">Pending</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-success rounded-pill px-3 me-1"><i
+                                                        class="ti ti-check"></i></button>
+                                                <button class="btn btn-sm btn-danger rounded-pill px-3"><i
+                                                        class="ti ti-x"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row 2 + Dept Bar -->
+            <div class="row">
+                <div class="col-xl-8 col-lg-7">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Department-wise Claim Expenses</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="deptBarChart" style="height: 350px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Claim Alerts</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert-item alert-danger">
+                                <i class="ti ti-alert-triangle alert-icon"></i>
+                                <div class="alert-content">
+                                    <h6>High Value Claim</h6>
+                                    <p>Rahul submitted travel claim â‚¹15,000 needing senior approval.</p>
+                                </div>
+                            </div>
+                            <div class="alert-item alert-warning">
+                                <i class="ti ti-clock alert-icon"></i>
+                                <div class="alert-content">
+                                    <h6>Approvals Pending</h6>
+                                    <p>5 claims are pending approval for more than 48 hours.</p>
+                                </div>
+                            </div>
+                            <div class="alert-item alert-info">
+                                <i class="ti ti-info-circle alert-icon"></i>
+                                <div class="alert-content">
+                                    <h6>Daily Summary</h6>
+                                    <p>3 claims submitted today totaling â‚¹6,600.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row: High Value & Frequent Submitters -->
+            <div class="row">
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">High Value Claims</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table custom-table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Employee</th>
+                                            <th>Category</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Sameer Khurana</td>
+                                            <td>Travel</td>
+                                            <td><span class="text-danger fw-bold">â‚¹ 25,000</span></td>
+                                            <td><span class="badge-soft badge-soft-pending">Pending</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Neha Gupta</td>
+                                            <td>Accommodation</td>
+                                            <td><span class="text-danger fw-bold">â‚¹ 18,500</span></td>
+                                            <td><span class="badge-soft badge-soft-approved">Approved</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Frequent Claim Submitters</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table custom-table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Employee</th>
+                                            <th>Claims Count</th>
+                                            <th>Total Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Vikram Singh</td>
+                                            <td>12</td>
+                                            <td>â‚¹ 32,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Anjali Rao</td>
+                                            <td>8</td>
+                                            <td>â‚¹ 15,400</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Recent Claims Activity</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <h6>Rahul submitted travel claim â‚¹1500</h6>
+                                    <span>2 hours ago</span>
+                                </div>
+                                <div class="activity-item">
+                                    <h6>Priya's accommodation claim approved â‚¹2200</h6>
+                                    <span>5 hours ago</span>
+                                </div>
+                                <div class="activity-item">
+                                    <h6>Amit's office supplies claim rejected â‚¹900</h6>
+                                    <span>Yesterday</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <!-- Highcharts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@12.5.0/highcharts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@12.5.0/modules/exporting.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Highcharts.setOptions({
+                colors: ['#F26522', '#1B84FF', '#03C95A', '#FFC107', '#8B5CF6', '#F43F5E'],
+                chart: {
+                    style: { fontFamily: "'Roboto', sans-serif" },
+                    backgroundColor: 'transparent'
+                },
+                title: { text: null },
+                credits: { enabled: false }
+            });
+
+            // 3ï¸ âƒ£ Claims by Category (Pie Chart)
+            Highcharts.chart('categoryChart', {
+                chart: { type: 'pie' },
+                tooltip: { pointFormat: '{series.name}: <b>{point.y}</b> (â‚¹)' },
+                plotOptions: {
+                    pie: {
+                        innerSize: '0%',
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: { enabled: false },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Amount',
+                    data: [
+                        { name: 'Travel', y: 35000 },
+                        { name: 'Food', y: 12000 },
+                        { name: 'Accommodation', y: 42000 },
+                        { name: 'Medical', y: 15000 },
+                        { name: 'Office', y: 8000 },
+                        { name: 'Other', y: 5000 }
+                    ]
+                }]
+            });
+
+            // 8ï¸ âƒ£ Claim Status Distribution (Donut Chart)
+            Highcharts.chart('statusDonutChart', {
+                chart: { type: 'pie' },
+                plotOptions: {
+                    pie: {
+                        innerSize: '70%',
+                        dataLabels: { enabled: true, format: '{point.name}: {point.percentage:.0f}%' }
+                    }
+                },
+                series: [{
+                    name: 'Status',
+                    data: [
+                        { name: 'Approved', y: 105, color: '#03C95A' },
+                        { name: 'Pending', y: 28, color: '#FFC107' },
+                        { name: 'Rejected', y: 9, color: '#E70D0D' }
+                    ]
+                }]
+            });
+
+            // 4ï¸ âƒ£ Monthly Claim Trend (Line Chart)
+            Highcharts.chart('trendChart', {
+                chart: { type: 'areaspline' },
+                xAxis: { categories: ['Jan', 'Feb', 'Mar'] },
+                yAxis: { title: { text: 'Amount (â‚¹)' } },
+                series: [{
+                    name: 'Expense',
+                    data: [35000, 42000, 38000],
+                    fillColor: {
+                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                        stops: [[0, '#F265224D'], [1, '#F2652200']]
+                    }
+                }]
+            });
+
+            // 5ï¸ âƒ£ Department-wise Claim Expenses (Bar Chart)
+            Highcharts.chart('deptBarChart', {
+                chart: { type: 'column' },
+                xAxis: { categories: ['Sales', 'Development', 'HR', 'Support'] },
+                yAxis: { title: { text: 'Amount (â‚¹)' } },
+                series: [{
+                    name: 'Department Expenses',
+                    data: [25000, 10000, 5000, 8000]
+                }]
+            });
+        });
+    </script>
+</body>
+
+</html>
