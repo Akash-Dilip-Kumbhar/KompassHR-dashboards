@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <meta name="description" content="Kompass HR - Employee Management Dashboard">
+  <meta name="keywords" content="hr, dashboard, leads, employee, management">
+  <meta name="author" content="Kompass HR">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Leads Dashboard - Kompass HR</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon.png">
+  <!-- Google Fonts: Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <!-- Feather CSS -->
+  <link rel="stylesheet" href="../assets/plugins/icons/feather/feather.css">
+  <!-- Tabler Icon CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+  <!-- Select2 CSS -->
+  <link rel="stylesheet" href="../assets/plugins/select2/css/select2.min.css">
+  <!-- Fontawesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Datetimepicker CSS -->
+  <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+  <!-- Daterangepikcer CSS -->
+  <link rel="stylesheet" href="../assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- Color Picker Css -->
+  <link rel="stylesheet" href="../assets/plugins/flatpickr/flatpickr.min.css">
+  <link rel="stylesheet" href="../assets/plugins/@simonwep/pickr/themes/nano.min.css">
+  <link rel="stylesheet" href="../assets/css/style2.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- SmartHR Theme CSS -->
+
+  <!-- KompassHR Internal Styles -->
+  <style>
+    .company-bx {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 15px;
+    }
+
+    .company-bx img {
+      max-height: 35px;
+      width: auto;
+    }
+
+    .company-name {
+      font-weight: 700;
+      font-size: 16px;
+      color: #202C4B;
+      white-space: nowrap;
+    }
+
+    /* ── Header Nav Icons ────────────────────────────── */
+    .navbar-icons {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #637381;
+      background: transparent;
+      border: none;
+      transition: all .2s;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .nav-icon:hover {
+      background: #F3F4F6;
+      color: #F26522;
+    }
+
+    .nav-icon i {
+      font-size: 18px;
+    }
+
+    .notification-bell {
+      position: relative;
+    }
+
+    .notification-bell .badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      font-size: 9px;
+      min-width: 16px;
+      height: 16px;
+      line-height: 16px;
+      padding: 0 4px;
+      border-radius: 50%;
+    }
+
+    .header-user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    /* ── Header Left ─────────────────────────────────── */
+    .header .header-left {
+      display: flex !important;
+      align-items: center;
+      width: 252px;
+      padding: 0;
+      float: left;
+      height: 50px;
+      z-index: 1;
+    }
+
+    .mini-sidebar .header .header-left {
+      width: 80px;
+      justify-content: center;
+    }
+
+    .mini-sidebar .header .header-left .company-name {
+      display: none;
+    }
+
+    .mini-sidebar .header .header-left .company-bx img {
+      max-height: 28px;
+    }
+
+    /* ── Sidebar Base ────────────────────────────────── */
+    .sidebar {
+      background: #fff;
+      border-right: 1px solid #EDEDED;
+    }
+
+    .sidebar .sidebar-logo {
+      display: none;
+    }
+
+    /* hide duplicate logo — logo shown in header */
+    /* ── Profile Section ─────────────────────────────── */
+    .menu-profile2 {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+      padding: 20px 0px 14px;
+
+    }
+
+    .menu-profile2 .menu-profile-image {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #E8E9EA;
+      outline: 2px solid #1D2A3A;
+      outline-offset: 2px;
+      margin-bottom: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .menu-profile2 .profile-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1D2A3A;
+      line-height: 1.4;
+      margin-bottom: 3px;
+    }
+
+    .menu-profile2 .profile-name .accent {
+      color: #1D2A3A;
+    }
+
+    .menu-profile2 .profile-role {
+      font-size: 11px;
+      color: #6B7280;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* ── Sidebar Tabs ────────────────────────────────── */
+    #myTab {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+    }
+
+    #myTab .nav-item {
+      margin-inline-end: 0;
+      width: -webkit-fill-available;
+    }
+
+
+    #myTab .nav-item .nav-link:hover {
+      background: #F3F4F6;
+      color: #1D2A3A;
+    }
+
+    #myTab .nav-item .nav-link.active {
+      border: 1px solid var(--color-light-gray);
+      border-bottom: none;
+      background: #1D2A3A;
+      color: #fff;
+    }
+
+    #myTab .nav-link i {
+      font-size: 15px;
+    }
+
+    #myTab .nav-link span {
+      display: none;
+    }
+
+    /* ── Menu Items ──────────────────────────────────── */
+    .sidebar-menu ul>li>a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 14px;
+      text-decoration: none;
+      color: #344054;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 0;
+      transition: all .2s;
+      position: relative;
+    }
+
+    .sidebar-menu ul>li>a:hover,
+    .sidebar-menu ul>li.active>a {
+      color: #F26522;
+      background: #FFF4EE;
+    }
+
+    /* Icon circle */
+    .sidebar-menu ul>li>a>i:first-child,
+    .sidebar-menu ul>li>a>.ti:first-child {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F3F4F6;
+      border-radius: 50%;
+      font-size: 15px;
+      color: #6B7280;
+      transition: all .2s;
+    }
+
+    .sidebar-menu ul>li>a:hover>i:first-child,
+    .sidebar-menu ul>li>a:hover>.ti:first-child,
+    .sidebar-menu ul>li.active>a>i:first-child,
+    .sidebar-menu ul>li.active>a>.ti:first-child {
+      background: #F26522;
+      color: #fff;
+    }
+
+    /* Submenu arrow */
+    .sidebar-menu ul>li>a .menu-arrow {
+      margin-left: auto;
+      transition: transform .2s;
+    }
+
+    .sidebar-menu ul>li.subdrop>a .menu-arrow {
+      transform: rotate(90deg);
+    }
+
+    /* Sub-menu indented links */
+    .sidebar-menu ul>li ul>li>a {
+      padding: 6px 14px 6px 54px;
+      color: #6B7280;
+      font-size: 12px;
+      font-weight: 400;
+      gap: 0;
+    }
+
+    .sidebar-menu ul>li ul>li>a:hover,
+    .sidebar-menu ul>li ul>li.active>a {
+      color: #F26522;
+      background: #FFF4EE;
+    }
+
+    .sidebar-menu ul>li ul>li>a>i {
+      background: transparent !important;
+      color: #CBD5E0 !important;
+      font-size: 8px !important;
+      width: auto !important;
+      height: auto !important;
+    }
+
+    /* ── Minify Button ───────────────────────────────── */
+    #toggle_btn {
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      background: #1D2A3A;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      font-size: 14px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    #toggle_btn:hover {
+      background: #F26522;
+    }
+
+    #toggle_btn i {
+      line-height: 1;
+    }
+  </style>
+</head>
+
+
+<body>
+  <style>
+    .recruitment-db {
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+
+    .recruitment-db h1,
+    .recruitment-db h2,
+    .recruitment-db h3,
+    .recruitment-db h4,
+    .recruitment-db h5,
+    .recruitment-db h6 {
+      color: #1e293b;
+      font-weight: 700;
+    }
+
+    .recruitment-db .card {
+      background-color: #ffffff;
+      border: 1px solid #eef0f3;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+      padding: 24px;
+    }
+
+    .recruitment-db .card-header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .recruitment-db .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .recruitment-db .btn-primary-custom {
+      background-color: #f46228;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .recruitment-db .btn-primary-custom:hover {
+      background-color: #e0531b;
+      color: white;
+    }
+
+    .recruitment-db .btn-outline-custom {
+      border: 1px solid #eef0f3;
+      background: white;
+      color: #6c757d;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-weight: 500;
+    }
+
+    /* Custom Table */
+    .recruitment-db .table {
+      margin-bottom: 0;
+    }
+
+    .recruitment-db .table th {
+      font-weight: 600;
+      color: #6c757d;
+      border-bottom: 2px solid #eef0f3;
+      border-top: none;
+      padding: 12px 16px;
+
+    }
+
+    .recruitment-db .table td {
+      vertical-align: middle;
+      padding: 16px;
+      border-bottom: 1px solid #eef0f3;
+      font-size: 14px;
+    }
+
+
+
+    /* Solid Pills */
+    .recruitment-db .pill-solid {
+      padding: 5px 30px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      display: inline-block;
+      min-width: 45px;
+      text-align: center;
+    }
+
+    .recruitment-db .pill-solid.orange {
+      background-color: #f46228;
+    }
+
+    .recruitment-db .pill-solid.teal {
+      background-color: #1e8784;
+    }
+
+    .recruitment-db .pill-solid.dark {
+      background-color: #1c2b36;
+    }
+
+    .recruitment-db .pill-solid.blue {
+      background-color: #0b7af0;
+    }
+
+    .recruitment-db .pill-solid.light {
+      background-color: #F5F5F5;
+      color: transparent;
+    }
+
+    /* Semi Donut Chart via CSS */
+    .recruitment-db .donut-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin: 20px 0;
+      position: relative;
+      height: 120px;
+    }
+
+    .recruitment-db .semi-donut {
+      width: 200px;
+      height: 100px;
+      border-radius: 100px 100px 0 0;
+      border: 25px solid #f4662d;
+      border-bottom: 0;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .recruitment-db .semi-donut::before {
+      content: "";
+      position: absolute;
+      top: -25px;
+      left: -25px;
+      width: 200px;
+      height: 100px;
+      border-radius: 100px 100px 0 0;
+      border: 25px solid #f8f9fa;
+      border-bottom: 0;
+      box-sizing: border-box;
+      transform-origin: bottom center;
+      transform: rotate(45deg);
+    }
+
+    .recruitment-db .donut-text {
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    .recruitment-db .donut-text h3 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .recruitment-db .donut-text p {
+      margin: 0;
+      font-size: 12px;
+      color: #6c757d;
+    }
+
+    /* Quick Reminder Card */
+    .recruitment-db .reminder-card {
+      background: linear-gradient(135deg, #123e47, #0d282e);
+      border-radius: 12px;
+      padding: 24px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      height: calc(100% - 24px);
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .recruitment-db .reminder-card h5 {
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .recruitment-db .reminder-card p {
+      color: #8faab0;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .recruitment-db .btn-reminder {
+      background-color: #f46228;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      align-self: flex-start;
+    }
+
+    /* Highlight Cards (Row 2) */
+    .recruitment-db .highlight-card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .recruitment-db .highlight-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .recruitment-db .hi-orange {
+      background-color: #fff0eb;
+      color: #f46228;
+    }
+
+    .recruitment-db .hi-teal {
+      background-color: #eaf6f6;
+      color: #1e8784;
+    }
+
+    .recruitment-db .hi-dark {
+      background-color: #f4f6f8;
+      color: #1c2b36;
+    }
+
+    .recruitment-db .hi-blue {
+      background-color: #eaf3fe;
+      color: #0b7af0;
+    }
+
+    /* AI Assistant */
+    .recruitment-db .ai-assistant-icon {
+      width: 70px;
+      height: 70px;
+      background-color: #f46228;
+      color: white;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 20px;
+    }
+
+    .recruitment-db .ai-title {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .recruitment-db .ai-subtitle {
+      text-align: center;
+      color: #1e8784;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .recruitment-db .ai-prompt {
+      border: 1px solid #eef0f3;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 13px;
+      color: #6c757d;
+      margin-bottom: 10px;
+      display: inline-block;
+      background: white;
+      text-align: center;
+      width: 100%;
+    }
+
+    .recruitment-db .ai-chat-box {
+      background-color: #f8f9fa;
+      border-radius: 12px;
+      padding: 16px;
+      position: relative;
+      margin-top: 10px;
+    }
+
+    .recruitment-db .ai-chat-box::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 24px;
+      border-width: 0 8px 8px 8px;
+      border-style: solid;
+      border-color: transparent transparent #f8f9fa transparent;
+    }
+
+    /* Bar Chart Styling */
+    .recruitment-db .css-bar-chart {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 140px;
+      margin-bottom: 20px;
+    }
+
+    .recruitment-db .css-bar-col {
+      width: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+
+    .recruitment-db .css-bar-segment {
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .recruitment-db .cbs-light {
+      background-color: #b0c2c5;
+    }
+
+    .recruitment-db .cbs-dark {
+      background-color: #123e47;
+    }
+
+    .recruitment-db .bar-labels {
+      display: flex;
+      justify-content: space-around;
+      color: #6c757d;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    /* Stat rows in time to hire */
+    .recruitment-db .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      font-size: 13px;
+      color: #495057;
+      border-bottom: 1px solid #f4f6f8;
+    }
+
+    .recruitment-db .stat-row:last-child {
+      border-bottom: none;
+    }
+
+    .recruitment-db .stat-row.bold-val span:last-child {
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .recruitment-db .faster-badge {
+      background-color: #eaf6f6;
+      color: #1e8784;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 13px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* Upcoming Schedules */
+    .recruitment-db .schedule-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #f4f6f8;
+    }
+
+    .recruitment-db .schedule-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .recruitment-db .schedule-date {
+      text-align: center;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 8px;
+      width: 50px;
+      flex-shrink: 0;
+    }
+
+    .recruitment-db .schedule-date span {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #6c757d;
+    }
+
+    .recruitment-db .schedule-date strong {
+      font-size: 16px;
+      color: #1e293b;
+      display: block;
+    }
+
+    .recruitment-db .schedule-info {
+      flex-grow: 1;
+      margin: 0 16px;
+    }
+
+    .recruitment-db .schedule-info h6 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .recruitment-db .schedule-info p {
+      margin: 0;
+      font-size: 12px;
+      color: #6c757d;
+    }
+
+    /* Stage Performance Cards */
+    .recruitment-db .stage-card {
+      position: relative;
+      padding: 20px;
+    }
+
+    .recruitment-db .stage-icon-tr {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+    }
+
+    .recruitment-db .stage-card h6 {
+
+      font-size: 15px;
+      font-weight: 600;
+      text-transform: sentence;
+      margin-bottom: 12px;
+    }
+
+    .recruitment-db .stage-card h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .recruitment-db .stage-card p {
+      font-size: 12px;
+      color: #adb5bd;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .recruitment-db .progress-thin {
+      height: 4px;
+      border-radius: 2px;
+      background-color: #eef0f3;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .recruitment-db .progress-thin .bar {
+      height: 100%;
+      border-radius: 2px;
+    }
+
+    .recruitment-db .bg-orange {
+      background-color: #f46228;
+    }
+
+    .recruitment-db .bg-teal {
+      background-color: #1e8784;
+    }
+
+    .recruitment-db .bg-dark {
+      background-color: #1c2b36;
+    }
+
+    .recruitment-db .bg-blue {
+      background-color: #0b7af0;
+    }
+
+    .recruitment-db .bg-green {
+      background-color: #20c997;
+    }
+
+    /* Recent Applications */
+    .recruitment-db .recent-app-card {
+      border: 1px solid #ededed;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .recruitment-db .ra-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .recruitment-db .ra-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 12px;
+    }
+
+    .recruitment-db .ra-info h6 {
+      margin: 0 0 4px 0;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .recruitment-db .ra-info p {
+      margin: 0;
+      font-size: 12px;
+      color: #6c757d;
+    }
+
+    .recruitment-db .ra-badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      height: fit-content;
+    }
+
+    .recruitment-db .ra-badge.interview {
+      background-color: #fff0f6;
+      color: #d63384;
+    }
+
+    .recruitment-db .ra-badge.shortlisted {
+      background-color: #eaf6f6;
+      color: #1e8784;
+    }
+
+    .recruitment-db .ra-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #adb5bd;
+      border-top: 1px dashed #eef0f3;
+      padding-top: 12px;
+    }
+
+    /* Active Jobs tags */
+    .recruitment-db .priority-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .recruitment-db .priority-tag.high {
+      background-color: #fff0eb;
+      color: #f46228;
+    }
+
+    .recruitment-db .priority-tag.medium {
+      background-color: #eaf3fe;
+      color: #0b7af0;
+    }
+  </style>
+
+  <div id="global-loader">
+    <div class="page-loader"></div>
+  </div>
+  <!-- Main Wrapper -->
+  <div class="main-wrapper">
+    <!-- Header -->
+    <div class="header">
+      <div class="main-header d-flex justify-content-between align-items-center">
+        <div class="header-left">
+          <a href="javascript:void(0)" class="company-bx">
+            <img src="../assets/img/KompassHR.png" alt="Kompass HR Logo">
+            <span class="company-name">Kompass HR</span>
+          </a>
+        </div>
+
+        <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+          <span class="bar-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </a>
+        <!-- Search Bar -->
+        <div class="input-group d-none d-lg-flex ms-3">
+          <input type="text" class="form-control" placeholder="Search...">
+          <span class="input-group-text"><i class="ti ti-search"></i></span>
+        </div>
+        <!-- Right Side Icons -->
+        <div class="d-flex align-items-center ms-auto">
+          <div class="navbar-icons">
+            <button class="nav-icon" title="Chat">
+              <i class="ti ti-message-dots"></i>
+            </button>
+            <button class="nav-icon btnFullscreen" title="Fullscreen">
+              <i class="ti ti-arrows-maximize"></i>
+            </button>
+            <button class="nav-icon" title="Apps">
+              <i class="ti ti-layout-grid"></i>
+            </button>
+            <button class="nav-icon" title="Mail">
+              <i class="ti ti-mail"></i>
+            </button>
+            <button class="nav-icon notification-bell" title="Notifications">
+              <i class="ti ti-bell"></i>
+              <span class="badge bg-danger">3</span>
+            </button>
+          </div>
+          <!-- User Dropdown -->
+          <div class="dropdown ms-2">
+            <a href="javascript:void(0);" class="d-flex align-items-center" data-bs-toggle="dropdown">
+              <img src="../assets/img/avatar-01.jpg" alt="User" class="header-user-avatar">
+            </a>
+            <div class="dropdown-menu dropdown-menu-end p-2" style="min-width: 180px;">
+              <a class="dropdown-item rounded-1" href="javascript:void(0);"><i class="ti ti-user me-2"></i>My
+                Profile</a>
+              <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                  class="ti ti-settings me-2"></i>Settings</a>
+              <hr class="dropdown-divider my-1">
+              <a class="dropdown-item rounded-1" href="javascript:void(0);"><i class="ti ti-logout me-2"></i>Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Header -->
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <!-- Profile Section -->
+          <div class="menu-profile2">
+            <div class="profile-img">
+              <img src="../assets/img/avatar-02.jpg" alt="User" class="menu-profile-image">
+            </div>
+            <div class="profile-details">
+              <div class="profile-name">
+                DHEERENDRA <br><span class="accent">KUMAR JOSHI</span>
+              </div>
+              <p class="profile-role">Manager</p>
+            </div>
+          </div>
+
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="Menu-tab" data-bs-toggle="tab" data-bs-target="#Menu-tab-pane"
+                type="button" role="tab" aria-controls="Menu-tab-pane" aria-selected="true"><i
+                  class="fa-solid fa-list"></i> <span>Menu</span> </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><i
+                  class="fa-solid fa-table-cells-large"></i> <span>Dashboard</span></button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
+                type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><i
+                  class="fa-solid fa-cubes"></i>
+                <span>others</span></button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
+                type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false"><i
+                  class="fa-solid fa-gear"></i>
+                <span>Setting</span></button>
+            </li>
+          </ul>
+
+          <ul>
+            <li class="submenu">
+              <a href="javascript:void(0);">
+                <i class="ti ti-layout-dashboard"></i>
+                <span>Dashboard</span>
+                <span class="menu-arrow"></span>
+              </a>
+              <ul>
+                <li><a href="leads-dashboard.html" class="active"><i class="ti ti-point"></i><span>Leads
+                      Dashboard</span></a></li>
+                <li><a href="dashboard.html"><i class="ti ti-point"></i><span>HR Dashboard</span></a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-user-search"></i>
+                <span>Recruitment</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-settings-automation"></i>
+                <span>Operation</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-user-plus"></i>
+                <span>Onboarding</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-building"></i>
+                <span>HR Space</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-calculator"></i>
+                <span>Account</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-clock-check"></i>
+                <span>Attendance</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-calendar-event"></i>
+                <span>Leave</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-receipt"></i>
+                <span>Claim</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-file-invoice"></i>
+                <span>Income Tax</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-wallet"></i>
+                <span>Payroll</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-device-desktop"></i>
+                <span>VMS</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /Sidebar -->
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
+      <!-- ===== MAIN CONTENT ===== -->
+      <div class="content recruitment-db">
+
+
+        <!-- ===== PAGE TITLE & BREADCRUMB ===== -->
+        <div class="d-flex justify-content-between align-items-center mb-4 px-3 px-md-4 py-3">
+          <!-- LEFT SIDE -->
+          <div>
+            <h2 class="fw-bold mb-1">Recruitment Dashboard</h2>
+            <div class="d-flex align-items-center text-muted" style="font-size:14px;">
+              <span class="me-2"><i class="ti ti-home"></i></span>
+              <span>Dashboard</span>
+              <span class="mx-2">/</span>
+              <span class="fw-semibold text-dark">Recruitment Dashboard</span>
+            </div>
+          </div>
+          
+          <!-- RIGHT SIDE -->
+          <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-outline-custom">
+              <i class="ti ti-calendar me-2"></i> Dec 2025
+            </button>
+            <button class="btn btn-outline-custom">
+              <i class="ti ti-download me-2"></i> Download Report
+            </button>
+            <button class="btn btn-primary-custom">
+              <i class="ti ti-plus me-1"></i> Add New Job
+            </button>
+          </div>
+        </div>
+
+        <div class="container-fluid px-3 px-md-4 mb-4">
+
+          <!-- Row 4 Stage Performance Header -->
+          <div class=" mb-3 mt-2">
+            <h4 class="fw-bold m-0" style="color: #1e293b;">Stage Performance</h4>
+          </div>
+
+          <!-- Row 4 Stage Performance Cards -->
+          <div class="row g-4 mb-4">
+            <div class="col-12 col-md-4 col-xl" style="min-width: 200px;">
+              <div class="card stage-card mb-0">
+                <div class="stage-icon-tr bg-orange"><i class="ti ti-folder"></i></div>
+                <h6>Applied</h6>
+                <h2 class="fw-bold">1,848</h2>
+                <p><span>Overall Progress</span> <span>36.3%</span></p>
+                <div class="progress-thin">
+                  <div class="bar bg-orange" style="width: 36.3%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 col-xl" style="min-width: 200px;">
+              <div class="card stage-card mb-0">
+                <div class="stage-icon-tr bg-teal"><i class="ti ti-hourglass"></i></div>
+                <h6>Shortlisted</h6>
+                <h2 class="fw-bold">2,384</h2>
+                <p><span>Conversion rate</span> <span>37.4%</span></p>
+                <div class="progress-thin">
+                  <div class="bar bg-teal" style="width: 37.4%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 col-xl" style="min-width: 200px;">
+              <div class="card stage-card mb-0">
+                <div class="stage-icon-tr bg-dark"><i class="ti ti-calendar-event"></i></div>
+                <h6>Interviewed</h6>
+                <h2 class="fw-bold">892</h2>
+                <p><span>Conversion rate</span> <span>36.3%</span></p>
+                <div class="progress-thin">
+                  <div class="bar bg-dark" style="width: 36.3%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl" style="min-width: 200px;">
+              <div class="card stage-card mb-0">
+                <div class="stage-icon-tr bg-blue"><i class="ti ti-file-text"></i></div>
+                <h6>Offered</h6>
+                <h2 class="fw-bold">324</h2>
+                <p><span>Conversion rate</span> <span>26.6%</span></p>
+                <div class="progress-thin">
+                  <div class="bar bg-blue" style="width: 26.6%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl" style="min-width: 200px;">
+              <div class="card stage-card mb-0">
+                <div class="stage-icon-tr bg-green"><i class="ti ti-user-check"></i></div>
+                <h6>Hired</h6>
+                <h2 class="fw-bold">64</h2>
+                <p><span>Conversion rate</span> <span>41.2%</span></p>
+                <div class="progress-thin">
+                  <div class="bar bg-green" style="width: 41.2%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 1 -->
+          <div class="row g-4 mb-3" style="display: flex; flex-wrap: wrap;">
+            <div class="col-lg-8 d-flex">
+              <div class="card w-100">
+                <div class="card-header-flex">
+                  <h3 class="card-title">Candidates Hiring Analysis</h3>
+
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-borderless align-middle w-100">
+                    <thead>
+                      <tr>
+                        <th style="width: 28%">Department</th>
+                        <th class="text-center">Applicants</th>
+                        <th class="text-center">Shortlisted</th>
+                        <th class="text-center">Interviewed</th>
+                        <th class="text-center">Offered</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <strong class="text-dark">Marketing</strong><br>
+                          <small>Product Manager</small>
+                        </td>
+                        <td class="text-center"><span class="pill-solid orange">14</span></td>
+                        <td class="text-center"><span class="pill-solid teal">04</span></td>
+                        <td class="text-center"><span class="pill-solid light">-</span></td>
+                        <td class="text-center"><span class="pill-solid light">-</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <strong class="text-dark">Data Analyst</strong><br>
+                          <small>Jr Data Analyst</small>
+                        </td>
+                        <td class="text-center"><span class="pill-solid orange">16</span></td>
+                        <td class="text-center"><span class="pill-solid teal">12</span></td>
+                        <td class="text-center"><span class="pill-solid light">-</span></td>
+                        <td class="text-center"><span class="pill-solid light">-</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <strong class="text-dark">Project Coordinator</strong><br>
+                          <small>Jr Level</small>
+                        </td>
+                        <td class="text-center"><span class="pill-solid orange">24</span></td>
+                        <td class="text-center"><span class="pill-solid teal">06</span></td>
+                        <td class="text-center"><span class="pill-solid light">-</span></td>
+                        <td class="text-center"><span class="pill-solid light">-</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <strong class="text-dark">Design Lead</strong><br>
+                          <small>UI Designer</small>
+                        </td>
+                        <td class="text-center"><span class="pill-solid orange">12</span></td>
+                        <td class="text-center"><span class="pill-solid teal">08</span></td>
+                        <td class="text-center"><span class="pill-solid dark">06</span></td>
+                        <td class="text-center"><span class="pill-solid blue">05</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <strong class="text-dark">Project Manager</strong><br>
+                          <small>Senior Manager</small>
+                        </td>
+                        <td class="text-center"><span class="pill-solid orange">22</span></td>
+                        <td class="text-center"><span class="pill-solid teal">20</span></td>
+                        <td class="text-center"><span class="pill-solid dark">16</span></td>
+                        <td class="text-center"><span class="pill-solid blue">12</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 d-flex flex-column">
+              <div class="card mb-0 flex-grow-1" style="height: auto;">
+                <div class="card-header-flex">
+                  <h3 class="card-title">Recruitment Overview</h3>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                  <div>
+                    <p class="text-muted mb-1" style="font-size: 13px;">Offer Acceptance</p>
+                    <h4 class="fw-bold fs-3" style="color: #1e293b;">74.4%</h4>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-muted mb-1" style="font-size: 13px;">Overall Hire Rate</p>
+                    <h4 class="fw-bold fs-3" style="color: #1e293b;">2.7%</h4>
+                  </div>
+                </div>
+
+                <div id="recruitmentOverviewChart"
+                  style="width: 100%; min-height: 140px; height: 15vh; margin: 10px 0;"></div>
+              </div>
+
+              <div class="reminder-card mb-3 flex-grow-1">
+                <span class="d-block mb-2"
+                  style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #8faab0; font-weight: 600;">Quick
+                  Reminder</span>
+                <h5 class="fw-bold mb-2">You have 21 Interview Schedule Today!</h5>
+                <p>Don't forget to schedule interviews</p>
+                <div class="mt-auto">
+                  <button class="btn-reminder">Schedule Now <i class="ti ti-arrow-right fs-5 text-white ms-1"
+                      style="vertical-align: middle;"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 (Summary Highlights) -->
+          <div class="row g-4 mb-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="card highlight-card h-100">
+                <div class="highlight-icon hi-orange">
+                  <i class="ti ti-briefcase"></i>
+                </div>
+                <h2 class="fw-bold mb-1" style="font-size: 28px;">47</h2>
+                <p class="text-muted mb-0" style="font-size: 14px;">Open Positions</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card highlight-card h-100">
+                <div class="highlight-icon hi-teal">
+                  <i class="ti ti-users"></i>
+                </div>
+                <h2 class="fw-bold mb-1" style="font-size: 28px;">2,384</h2>
+                <p class="text-muted mb-0" style="font-size: 14px;">Total Candidates</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card highlight-card h-100">
+                <div class="highlight-icon hi-dark">
+                  <i class="ti ti-calendar-event"></i>
+                </div>
+                <h2 class="fw-bold mb-1" style="font-size: 28px;">12</h2>
+                <p class="text-muted mb-0" style="font-size: 14px;">Interviews Today</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="card highlight-card h-100">
+                <div class="highlight-icon hi-blue">
+                  <i class="ti ti-file-text"></i>
+                </div>
+                <h2 class="fw-bold mb-1" style="font-size: 28px;">28</h2>
+                <p class="text-muted mb-0" style="font-size: 14px;">Offers Released</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 (AI, Bar Chart, Schedules) -->
+          <div class="row g-4 mb-4">
+            <div class="col-lg-4 d-flex">
+              <div class="card w-100 d-flex flex-column">
+                <div class="ai-assistant-icon">
+                  <i class="ti ti-robot"></i>
+                </div>
+                <h4 class="ai-title fs-5">How can i help you today</h4>
+                <p class="ai-subtitle d-flex align-items-center justify-content-center">
+                  AI Payroll Assistant <span class="badge bg-success ms-2 rounded-pill" style="font-weight: 500;"><i
+                      class="ti ti-point-filled me-1" style="font-size: 12px; vertical-align: middle;"></i>
+                    Online</span>
+                </p>
+
+                <div class="d-flex flex-column gap-2 mb-4 mt-3">
+                  <span class="ai-prompt text-center">Analyze top candidates for Senior Developer role</span>
+                  <span class="ai-prompt text-center" style="width: auto; align-self: center;">Generate hiring
+                    report</span>
+                </div>
+
+                <div class="ai-chat-box">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="ti ti-sparkles text-warning me-2 fs-5"></i>
+                    <strong>AI Assistant</strong>
+                  </div>
+                  <p class="mb-0" style="font-size: 13px; color: #495057;">👋 Welcome to your AI Recruitment
+                    Assistant! I'm here to help you.</p>
+                </div>
+
+                <div class="input-group mt-auto pt-4 relative">
+                  <input type="text" class="form-control bg-light" placeholder="Ask me anything about Req..."
+                    style="border-radius: 20px 0 0 20px; border: 1px solid #eef0f3; border-right: none;"
+                    aria-label="Ask me anything">
+                  <button class="btn"
+                    style="border-radius: 0 20px 20px 0; background: #fff4ee; color: #f46228; border: 1px solid #fdf0eb; display: flex; align-items: center; padding: 0 16px;">
+                    <i class="ti ti-send"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 d-flex">
+              <div class="card w-100">
+                <div class="card-header-flex">
+                  <h3 class="card-title">Average Time To Hire</h3>
+
+                </div>
+
+                <div id="averageTimeChart" style="width: 100%; min-height: 180px; height: 20vh; margin-bottom: 20px;">
+                </div>
+
+                <div class="mt-4">
+                  <div class="stat-row bold-val">
+                    <span><i class="ti ti-point-filled text-muted me-2"
+                        style="font-size:14px; vertical-align: middle;"></i> Applied to Shortlisted</span>
+                    <span>05</span>
+                  </div>
+                  <div class="stat-row bold-val">
+                    <span><i class="ti ti-point-filled text-muted me-2"
+                        style="font-size:14px; vertical-align: middle;"></i> Shortlisted</span>
+                    <span>07</span>
+                  </div>
+                  <div class="stat-row bold-val">
+                    <span><i class="ti ti-point-filled text-muted me-2"
+                        style="font-size:14px; vertical-align: middle;"></i> Interview to Offer</span>
+                    <span>10</span>
+                  </div>
+                  <div class="stat-row bold-val border-bottom-0">
+                    <span><i class="ti ti-point-filled text-muted me-2"
+                        style="font-size:14px; vertical-align: middle;"></i> Acceptance</span>
+                    <span>03</span>
+                  </div>
+                </div>
+
+                <div class="faster-badge">
+                  <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center"
+                    style="width:24px; height:24px;">
+                    <i class="ti ti-arrow-up-right fs-6"></i>
+                  </div>
+                  12% faster than industry avg
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 d-flex">
+              <div class="card w-100 d-flex flex-column">
+                <div class="card-header-flex">
+                  <h3 class="card-title">Upcoming Schedules</h3>
+                  <span class="btn btn-outline-custom btn-sm text-muted"><i class="ti ti-calendar-event"></i> Last
+                    30 Days</span>
+                </div>
+
+                <div class="flex-grow-1">
+                  <div class="schedule-item">
+                    <div class="schedule-date">
+                      <span>Mar</span>
+                      <strong>02</strong>
+                    </div>
+                    <div class="schedule-info">
+                      <h6 class="text-dark">Product Designer</h6>
+                      <p><i class="ti ti-clock me-1"></i> 09:00 AM - 10:30 AM</p>
+                    </div>
+                    <img src="../assets/img/avatar-01.jpg" class="rounded-circle" width="36" height="36" alt="">
+                  </div>
+
+                  <div class="schedule-item">
+                    <div class="schedule-date">
+                      <span>Apr</span>
+                      <strong>22</strong>
+                    </div>
+                    <div class="schedule-info">
+                      <h6 class="text-dark">Marketing Manager</h6>
+                      <p><i class="ti ti-clock me-1"></i> 01:00 PM - 02:00 PM</p>
+                    </div>
+                    <img src="../assets/img/avatar-02.jpg" class="rounded-circle" width="36" height="36" alt="">
+                  </div>
+
+                  <div class="schedule-item">
+                    <div class="schedule-date">
+                      <span>May</span>
+                      <strong>11</strong>
+                    </div>
+                    <div class="schedule-info">
+                      <h6 class="text-dark">Sr. Data Science</h6>
+                      <p><i class="ti ti-clock me-1"></i> 11:00 AM - 12:30 PM</p>
+                    </div>
+                    <img src="../assets/img/avatar-03.jpg" class="rounded-circle" width="36" height="36" alt="">
+                  </div>
+
+                  <div class="schedule-item">
+                    <div class="schedule-date">
+                      <span>Jun</span>
+                      <strong>07</strong>
+                    </div>
+                    <div class="schedule-info">
+                      <h6 class="text-dark">Software Engineer</h6>
+                      <p><i class="ti ti-clock me-1"></i> 02:00 PM - 03:30 PM</p>
+                    </div>
+                    <img src="../assets/img/avatar-04.jpg" class="rounded-circle" width="36" height="36" alt="">
+                  </div>
+
+                  <div class="schedule-item mb-4 border-0">
+                    <div class="schedule-date">
+                      <span>Aug</span>
+                      <strong>18</strong>
+                    </div>
+                    <div class="schedule-info">
+                      <h6 class="text-dark">Financial Analyst</h6>
+                      <p><i class="ti ti-clock me-1"></i> 03:00 PM - 04:00 PM</p>
+                    </div>
+                    <img src="../assets/img/avatar-05.jpg" class="rounded-circle" width="36" height="36" alt="">
+                  </div>
+                </div>
+
+                <button class="btn btn-primary-custom w-100 mt-auto">View All Schedule</button>
+              </div>
+            </div>
+          </div>
+
+          
+
+          <!-- Row 5 Recent Applications Header -->
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card flex-fill" style="height: fit-content">
+
+                <h4 class="fw-bold mb-3" style="color: #1e293b;">Recent Applications</h4>
+
+                <!-- Row 5 Recent Applications & Active Job Openings -->
+                <div class="row">
+                  <div class="col-lg-12 d-flex flex-column gap-3 mb-4">
+
+                    <div class="recent-app-card bg-light h-100 mb-0">
+                      <div class="ra-header">
+                        <div class="d-flex align-items-center">
+                          <img src="../assets/img/avatar-01.jpg" alt="">
+                          <div class="ra-info">
+                            <h6 class="text-dark">Andrew Stuart</h6>
+                            <p>Frontend Developer</p>
+                          </div>
+                        </div>
+                        <span class="ra-badge interview"><i class="ti ti-point-filled"></i> Interview</span>
+                      </div>
+                      <div class="ra-footer">
+                        <span><i class="ti ti-user me-1"></i> 7 years exp</span>
+                        <span><i class="ti ti-calendar me-1"></i> Applied: Dec 27, 2025</span>
+                      </div>
+                    </div>
+
+                    <div class="recent-app-card bg-light h-100 mb-0">
+                      <div class="ra-header">
+                        <div class="d-flex align-items-center">
+                          <img src="../assets/img/avatar-02.jpg" alt="">
+                          <div class="ra-info">
+                            <h6 class="text-dark">Jessica Brown</h6>
+                            <p>UI/UX Designer</p>
+                          </div>
+                        </div>
+                        <span class="ra-badge shortlisted"><i class="ti ti-point-filled"></i> Shortlisted</span>
+                      </div>
+                      <div class="ra-footer">
+                        <span><i class="ti ti-user me-1"></i> 7 years exp</span>
+                        <span><i class="ti ti-calendar me-1"></i> Applied: Dec 27, 2025</span>
+                      </div>
+                    </div>
+
+                    <button class="btn btn-primary-custom w-100 py-2">View All Schedule</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-8">
+              <div class="card" style="height: fit-content;">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="fw-bold " style="color: #1e293b;">Active Job Openings</h4>
+                  <button class="btn btn-outline-custom btn-sm fw-bold">View All</button>
+                </div>
+
+
+
+                <div class="table-responsive">
+                  <table class="table table-borderless align-middle w-100 m-0">
+                    <thead style="background-color: #f8f9fa;">
+                      <tr class="bg-light">
+                        <th class="ps-4">Job ID</th>
+                        <th>Date</th>
+                        <th>Job Title</th>
+                        <th>Location</th>
+                        <th>Department</th>
+                        <th class="pe-4">Applicants</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="text-muted ps-4">JOB-001</td>
+                        <td><i class="ti ti-calendar me-2 text-muted"></i> Jan 03, 2026</td>
+                        <td>
+                          <strong class="text-dark">Frontend Developer</strong><br>
+                          <span class="priority-tag high">High Priority</span>
+                        </td>
+                        <td><i class="ti ti-map-pin me-2 text-muted"></i> Remote</td>
+                        <td class="text-muted">Engineering</td>
+                        <td class="pe-4"><i class="ti ti-users me-2 text-muted"></i> 1452</td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted ps-4">JOB-002</td>
+                        <td><i class="ti ti-calendar me-2 text-muted"></i> Jan 02, 2026</td>
+                        <td>
+                          <strong class="text-dark">Product Manager</strong><br>
+                          <span class="priority-tag high">High Priority</span>
+                        </td>
+                        <td><i class="ti ti-building ms-1 me-2 text-muted"></i> Office</td>
+                        <td class="text-muted">Product</td>
+                        <td class="pe-4"><i class="ti ti-users me-2 text-muted"></i> 1342</td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted ps-4">JOB-003</td>
+                        <td><i class="ti ti-calendar me-2 text-muted"></i> Jan 02, 2026</td>
+                        <td>
+                          <strong class="text-dark">UX Designer</strong><br>
+                          <span class="priority-tag high">High Priority</span>
+                        </td>
+                        <td><i class="ti ti-devices me-2 text-muted"></i> Hybrid</td>
+                        <td class="text-muted">Design</td>
+                        <td class="pe-4"><i class="ti ti-users me-2 text-muted"></i> 1287</td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted ps-4">JOB-004</td>
+                        <td><i class="ti ti-calendar me-2 text-muted"></i> Jan 01, 2026</td>
+                        <td>
+                          <strong class="text-dark">Sales Executive</strong><br>
+                          <span class="priority-tag medium">Medium</span>
+                        </td>
+                        <td><i class="ti ti-building ms-1 me-2 text-muted"></i> Office</td>
+                        <td class="text-muted">Sales</td>
+                        <td class="pe-4"><i class="ti ti-users me-2 text-muted"></i> 1198</td>
+                      </tr>
+                      <tr class="border-transparent border-0">
+                        <td class="text-muted ps-4 border-0">JOB-005</td>
+                        <td class="border-0"><i class="ti ti-calendar me-2 text-muted"></i> Jan 01, 2026
+                        </td>
+                        <td class="border-0">
+                          <strong class="text-dark">DevOps Engineer</strong><br>
+                          <span class="priority-tag medium">Medium</span>
+                        </td>
+                        <td class="border-0"><i class="ti ti-building ms-1 me-2 text-muted"></i> Office</td>
+                        <td class="text-muted border-0">Engineering</td>
+                        <td class="pe-4 border-0"><i class="ti ti-users me-2 text-muted"></i> 1134</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- /Page Wrapper -->
+  </div>
+  <!-- /Main Wrapper -->
+  <!-- jQuery -->
+  <script src="../assets/js/jquery-3.7.1.min.js"></script>
+
+
+  <!-- Highcharts JS -->
+  <script src="https://cdn.jsdelivr.net/npm/highcharts@12.5.0/highcharts.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/12.4.0/css/highcharts.css"
+    integrity="sha512-AK+uoqT8+mBIDSg8X82PlPLtProHlfKagadiSPEqYJiGTQxKnSVoiGgE8IhgRxKre0JWw7teyJc7Mzr/4opudA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Bootstrap Core JS -->
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <!-- Feather Icon JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"
+    integrity="sha512-zMm7+ZQ8AZr1r3W8Z8lDATkH05QG5Gm2xc6MlsCdBz9l6oE8Y7IXByMgSm/rdRQrhuHt99HAYfMljBOEZ68q5A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> <!-- Slimscroll JS -->
+  <script src="../assets/js/jquery.slimscroll.min.js"></script>
+  <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Chart JS -->
+  <script src="../assets/plugins/apexchart/apexcharts.min.js"></script>
+  <script src="../assets/plugins/apexchart/chart-data.js"></script>
+  <!-- Chart JS -->
+  <script src="../assets/plugins/peity/jquery.peity.min.js"></script>
+  <script src="../assets/plugins/peity/chart-data.js"></script>
+  <!-- Datetimepicker JS -->
+  <script src="../assets/js/moment.min.js"></script>
+  <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+  <!-- Daterangepikcer JS -->
+  <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Color Picker JS -->
+  <script src="../assets/plugins/@simonwep/pickr/pickr.es5.min.js"></script>
+
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      Highcharts.chart('recruitmentOverviewChart', {
+        chart: {
+          type: 'pie',
+          backgroundColor: 'transparent',
+          margin: [0, 0, 0, 0],
+          events: {
+            load: function () { this.reflow(); }
+          }
+        },
+        title: {
+          text: '<span style="font-size:24px;font-weight:bold;color:#1e293b">2,384</span><br/><span style="font-size:12px;color:#6c757d">Total Applications</span>',
+          align: 'center',
+          verticalAlign: 'middle',
+          y: 35
+        },
+        tooltip: { enabled: false },
+        plotOptions: {
+          pie: {
+            dataLabels: { enabled: false },
+            startAngle: -90,
+            endAngle: 90,
+            center: ['50%', '85%'],
+            size: '140%',
+            innerSize: '75%',
+            borderWidth: 0,
+            states: { hover: { enabled: false } }
+          }
+        },
+        series: [{
+          name: 'Applications',
+          data: [
+            { name: 'Filled', y: 100, color: '#f46228' }
+          ]
+        }],
+        credits: { enabled: false }
+      });
+
+      // Highcharts configuration for Average Time To Hire Stacked Bar
+      Highcharts.chart('averageTimeChart', {
+        chart: {
+          type: 'column',
+          backgroundColor: 'transparent',
+          spacing: [10, 0, 0, 0],
+          marginLeft: 0,
+          marginRight: 0,
+          events: {
+            load: function () { this.reflow(); }
+          }
+        },
+        title: { text: null },
+        xAxis: {
+          categories: ['Jan', 'Feb', 'Mar'],
+          lineWidth: 0,
+          tickWidth: 0,
+          labels: { style: { color: '#6c757d', fontSize: '12px' } }
+        },
+        yAxis: {
+          min: 0,
+          title: { text: null },
+          gridLineWidth: 0,
+          labels: { enabled: false }
+        },
+        tooltip: { enabled: false },
+        plotOptions: {
+          column: {
+            stacking: 'percent',
+            borderWidth: 0,
+            pointPadding: 0.25,
+            groupPadding: 0.1,
+            borderRadius: 4
+          }
+        },
+        series: [{
+          data: [1, 2, 1],
+          color: '#123e47'
+        }, {
+          data: [3, 3.5, 2],
+          color: '#1c2b36'
+        }, {
+          data: [4, 5, 3],
+          color: '#b0c2c5'
+        }],
+        legend: { enabled: false },
+        credits: { enabled: false }
+      });
+    });
+  </script>
+  <!-- Custom JS -->
+  <script src="../assets/js/theme-colorpicker.js"></script>
+  <script src="../assets/js/script.js"></script>
+  <!-- Loader fallback: force-hide if window.load doesn't fire (e.g. missing assets) -->
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('global-loader');
+      if (loader) loader.style.display = 'none';
+    });
+    setTimeout(function () {
+      var loader = document.getElementById('global-loader');
+      if (loader) loader.style.display = 'none';
+    }, 1500);
+  </script>
+</body>
+
+</html>

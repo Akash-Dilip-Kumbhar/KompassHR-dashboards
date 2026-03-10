@@ -1,0 +1,1522 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<meta name="description" content="Kompass HR - Employee Management Dashboard">
+	<meta name="keywords" content="hr, dashboard, leads, employee, management">
+	<meta name="author" content="Kompass HR">
+	<meta name="robots" content="noindex, nofollow">
+	<title>Leads Dashboard - Kompass HR</title>
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
+	<!-- Apple Touch Icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon.png">
+	<!-- Google Fonts: Roboto -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<!-- Feather CSS -->
+	<link rel="stylesheet" href="../assets/plugins/icons/feather/feather.css">
+	<!-- Tabler Icon CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" href="../assets/plugins/select2/css/select2.min.css">
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<!-- Datetimepicker CSS -->
+	<link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+	<!-- Daterangepikcer CSS -->
+	<link rel="stylesheet" href="../assets/plugins/daterangepicker/daterangepicker.css">
+	<!-- Color Picker Css -->
+	<link rel="stylesheet" href="../assets/plugins/flatpickr/flatpickr.min.css">
+	<link rel="stylesheet" href="../assets/plugins/@simonwep/pickr/themes/nano.min.css">
+	<!-- SmartHR Theme CSS -->
+	<link rel="stylesheet" href="../assets/css/style.css">
+	<link rel="stylesheet" href="../assets/css/style2.css">
+	<!-- KompassHR Internal Styles -->
+	<style>
+		/* ── Company Header ─────────────────────────────── */
+		.company-bx {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 0 15px;
+		}
+
+		.company-bx img {
+			max-height: 35px;
+			width: auto;
+		}
+
+		.company-name {
+			font-weight: 700;
+			font-size: 16px;
+			color: #202C4B;
+			white-space: nowrap;
+		}
+
+		/* ── Header Nav Icons ────────────────────────────── */
+		.navbar-icons {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+		}
+
+		.nav-icon {
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #637381;
+			background: transparent;
+			border: none;
+			transition: all .2s;
+			position: relative;
+			cursor: pointer;
+		}
+
+		.nav-icon:hover {
+			background: #F3F4F6;
+			color: #F26522;
+		}
+
+		.nav-icon i {
+			font-size: 18px;
+		}
+
+		.notification-bell {
+			position: relative;
+		}
+
+		.notification-bell .badge {
+			position: absolute;
+			top: 2px;
+			right: 2px;
+			font-size: 9px;
+			min-width: 16px;
+			height: 16px;
+			line-height: 16px;
+			padding: 0 4px;
+			border-radius: 50%;
+		}
+
+		.header-user-avatar {
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			object-fit: cover;
+			cursor: pointer;
+		}
+
+		/* ── Header Left ─────────────────────────────────── */
+		.header .header-left {
+			display: flex !important;
+			align-items: center;
+			width: 252px;
+			padding: 0;
+			float: left;
+			height: 50px;
+			z-index: 1;
+		}
+
+		.mini-sidebar .header .header-left {
+			width: 80px;
+			justify-content: center;
+		}
+
+		.mini-sidebar .header .header-left .company-name {
+			display: none;
+		}
+
+		.mini-sidebar .header .header-left .company-bx img {
+			max-height: 28px;
+		}
+
+		/* ── Sidebar Base ────────────────────────────────── */
+		.sidebar {
+			background: #fff;
+			border-right: 1px solid #EDEDED;
+		}
+
+		.sidebar .sidebar-logo {
+			display: none;
+		}
+
+		/* hide duplicate logo — logo shown in header */
+		/* ── Profile Section ─────────────────────────────── */
+		.menu-profile2 {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			text-align: center;
+			padding: 20px 0px 14px;
+
+		}
+
+		.menu-profile2 .menu-profile-image {
+			width: 72px;
+			height: 72px;
+			border-radius: 50%;
+			object-fit: cover;
+			border: 3px solid #E8E9EA;
+			outline: 2px solid #1D2A3A;
+			outline-offset: 2px;
+			margin-bottom: 10px;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.menu-profile2 .profile-name {
+			font-size: 13px;
+			font-weight: 700;
+			color: #1D2A3A;
+			line-height: 1.4;
+			margin-bottom: 3px;
+		}
+
+		.menu-profile2 .profile-name .accent {
+			color: #1D2A3A;
+		}
+
+		.menu-profile2 .profile-role {
+			font-size: 11px;
+			color: #6B7280;
+			margin: 0;
+			text-align: center;
+		}
+
+		/* ── Sidebar Tabs ────────────────────────────────── */
+		#myTab {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: nowrap;
+		}
+
+		#myTab .nav-item {
+			margin-inline-end: 0;
+			width: -webkit-fill-available;
+		}
+
+
+		#myTab .nav-item .nav-link:hover {
+			background: #F3F4F6;
+			color: #1D2A3A;
+		}
+
+		#myTab .nav-item .nav-link.active {
+			border: 1px solid var(--color-light-gray);
+			border-bottom: none;
+			background: #1D2A3A;
+			color: #fff;
+		}
+
+		#myTab .nav-link i {
+			font-size: 15px;
+		}
+
+		#myTab .nav-link span {
+			display: none;
+		}
+
+		/* ── Menu Items ──────────────────────────────────── */
+		.sidebar-menu ul>li>a {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 8px 14px;
+			text-decoration: none;
+			color: #344054;
+			font-size: 13px;
+			font-weight: 500;
+			border-radius: 0;
+			transition: all .2s;
+			position: relative;
+		}
+
+		.sidebar-menu ul>li>a:hover,
+		.sidebar-menu ul>li.active>a {
+			color: #F26522;
+			background: #FFF4EE;
+		}
+
+		/* Icon circle */
+		.sidebar-menu ul>li>a>i:first-child,
+		.sidebar-menu ul>li>a>.ti:first-child {
+			width: 30px;
+			height: 30px;
+			flex-shrink: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #F3F4F6;
+			border-radius: 50%;
+			font-size: 15px;
+			color: #6B7280;
+			transition: all .2s;
+		}
+
+		.sidebar-menu ul>li>a:hover>i:first-child,
+		.sidebar-menu ul>li>a:hover>.ti:first-child,
+		.sidebar-menu ul>li.active>a>i:first-child,
+		.sidebar-menu ul>li.active>a>.ti:first-child {
+			background: #F26522;
+			color: #fff;
+		}
+
+		/* Submenu arrow */
+		.sidebar-menu ul>li>a .menu-arrow {
+			margin-left: auto;
+			transition: transform .2s;
+		}
+
+		.sidebar-menu ul>li.subdrop>a .menu-arrow {
+			transform: rotate(90deg);
+		}
+
+		/* Sub-menu indented links */
+		.sidebar-menu ul>li ul>li>a {
+			padding: 6px 14px 6px 54px;
+			color: #6B7280;
+			font-size: 12px;
+			font-weight: 400;
+			gap: 0;
+		}
+
+		.sidebar-menu ul>li ul>li>a:hover,
+		.sidebar-menu ul>li ul>li.active>a {
+			color: #F26522;
+			background: #FFF4EE;
+		}
+
+		.sidebar-menu ul>li ul>li>a>i {
+			background: transparent !important;
+			color: #CBD5E0 !important;
+			font-size: 8px !important;
+			width: auto !important;
+			height: auto !important;
+		}
+
+		/* ── Minify Button ───────────────────────────────── */
+		#toggle_btn {
+			position: absolute;
+			right: -14px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 28px;
+			height: 28px;
+			background: #1D2A3A;
+			color: #fff;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 999;
+			font-size: 14px;
+			text-decoration: none;
+			transition: background .2s;
+		}
+
+		#toggle_btn:hover {
+			background: #F26522;
+		}
+
+		#toggle_btn i {
+			line-height: 1;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="global-loader">
+		<div class="page-loader"></div>
+	</div>
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+		<!-- Header -->
+		<div class="header">
+			<div class="main-header d-flex justify-content-between align-items-center">
+				<div class="header-left">
+					<a href="javascript:void(0)" class="company-bx">
+						<img src="../assets/img/KompassHR.png" alt="Kompass HR Logo">
+						<span class="company-name">Kompass HR</span>
+					</a>
+				</div>
+
+				<a id="mobile_btn" class="mobile_btn" href="#sidebar">
+					<span class="bar-icon">
+						<span></span>
+						<span></span>
+						<span></span>
+					</span>
+				</a>
+				<!-- Search Bar -->
+				<div class="input-group d-none d-lg-flex ms-3">
+					<input type="text" class="form-control" placeholder="Search...">
+					<span class="input-group-text"><i class="ti ti-search"></i></span>
+				</div>
+				<!-- Right Side Icons -->
+				<div class="d-flex align-items-center ms-auto">
+					<div class="navbar-icons">
+						<button class="nav-icon" title="Chat">
+							<i class="ti ti-message-dots"></i>
+						</button>
+						<button class="nav-icon btnFullscreen" title="Fullscreen">
+							<i class="ti ti-arrows-maximize"></i>
+						</button>
+						<button class="nav-icon" title="Apps">
+							<i class="ti ti-layout-grid"></i>
+						</button>
+						<button class="nav-icon" title="Mail">
+							<i class="ti ti-mail"></i>
+						</button>
+						<button class="nav-icon notification-bell" title="Notifications">
+							<i class="ti ti-bell"></i>
+							<span class="badge bg-danger">3</span>
+						</button>
+					</div>
+					<!-- User Dropdown -->
+					<div class="dropdown ms-2">
+						<a href="javascript:void(0);" class="d-flex align-items-center" data-bs-toggle="dropdown">
+							<img src="../assets/img/avatar-01.jpg" alt="User" class="header-user-avatar">
+						</a>
+						<div class="dropdown-menu dropdown-menu-end p-2" style="min-width: 180px;">
+							<a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+									class="ti ti-user me-2"></i>My Profile</a>
+							<a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+									class="ti ti-settings me-2"></i>Settings</a>
+							<hr class="dropdown-divider my-1">
+							<a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+									class="ti ti-logout me-2"></i>Logout</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Header -->
+		<!-- Sidebar -->
+		<div class="sidebar" id="sidebar">
+			<div class="sidebar-inner slimscroll">
+				<div id="sidebar-menu" class="sidebar-menu">
+					<!-- Profile Section -->
+					<div class="menu-profile2">
+						<div class="profile-img">
+							<img src="../assets/img/avatar-02.jpg" alt="User" class="menu-profile-image">
+						</div>
+						<div class="profile-details">
+							<div class="profile-name">
+								DHEERENDRA <br><span class="accent">KUMAR JOSHI</span>
+							</div>
+							<p class="profile-role">Manager</p>
+						</div>
+					</div>
+
+
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="Menu-tab" data-bs-toggle="tab"
+								data-bs-target="#Menu-tab-pane" type="button" role="tab" aria-controls="Menu-tab-pane"
+								aria-selected="true"><i class="fa-solid fa-list"></i> <span>Menu</span> </button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+								data-bs-target="#profile-tab-pane" type="button" role="tab"
+								aria-controls="profile-tab-pane" aria-selected="false"><i
+									class="fa-solid fa-table-cells-large"></i> <span>Dashboard</span></button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+								data-bs-target="#contact-tab-pane" type="button" role="tab"
+								aria-controls="contact-tab-pane" aria-selected="false"><i class="fa-solid fa-cubes"></i>
+								<span>others</span></button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
+								data-bs-target="#disabled-tab-pane" type="button" role="tab"
+								aria-controls="disabled-tab-pane" aria-selected="false"><i class="fa-solid fa-gear"></i>
+								<span>Setting</span></button>
+						</li>
+					</ul>
+
+					<ul>
+						<li class="submenu">
+							<a href="javascript:void(0);">
+								<i class="ti ti-layout-dashboard"></i>
+								<span>Dashboard</span>
+								<span class="menu-arrow"></span>
+							</a>
+							<ul>
+								<li><a href="leads-dashboard.html" class="active"><i class="ti ti-point"></i><span>Leads
+											Dashboard</span></a></li>
+								<li><a href="dashboard.html"><i class="ti ti-point"></i><span>HR Dashboard</span></a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-user-search"></i>
+								<span>Recruitment</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-settings-automation"></i>
+								<span>Operation</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-user-plus"></i>
+								<span>Onboarding</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-building"></i>
+								<span>HR Space</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-calculator"></i>
+								<span>Account</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-clock-check"></i>
+								<span>Attendance</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-calendar-event"></i>
+								<span>Leave</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-receipt"></i>
+								<span>Claim</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-file-invoice"></i>
+								<span>Income Tax</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-wallet"></i>
+								<span>Payroll</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);">
+								<i class="ti ti-device-desktop"></i>
+								<span>VMS</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- /Sidebar -->
+		<!-- Page Wrapper -->
+		<div class="page-wrapper">
+			<div class="content">
+				<!-- Breadcrumb -->
+				<div class="d-md-flex d-block align-items-center justify-content-between mb-3">
+					<div class="my-auto mb-2">
+						<h2 class="mb-1">Leads Dashboard</h2>
+						<nav>
+							<ol class="breadcrumb mb-0">
+								<li class="breadcrumb-item">
+									<a href="index.html"><i class="ti ti-smart-home"></i></a>
+								</li>
+								<li class="breadcrumb-item">
+									Dashboard
+								</li>
+								<li class="breadcrumb-item active" aria-current="page">Leads Dashboard</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
+						<div class="me-2 mb-2">
+							<div class="dropdown">
+								<a href="javascript:void(0);"
+									class="dropdown-toggle btn btn-white d-inline-flex align-items-center"
+									data-bs-toggle="dropdown">
+									<i class="ti ti-file-export me-1"></i>Export
+								</a>
+								<ul class="dropdown-menu  dropdown-menu-end p-3">
+									<li>
+										<a href="javascript:void(0);" class="dropdown-item rounded-1"><i
+												class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="dropdown-item rounded-1"><i
+												class="ti ti-file-type-xls me-1"></i>Export as Excel </a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="input-icon mb-2 position-relative">
+							<span class="input-icon-addon">
+								<i class="ti ti-calendar text-gray-9"></i>
+							</span>
+							<input type="text" class="form-control date-range bookingrange"
+								placeholder="dd/mm/yyyy - dd/mm/yyyy">
+						</div>
+						<div class="ms-2 mb-2 head-icons">
+							<a href="javascript:void(0);" class="" data-bs-toggle="tooltip" data-bs-placement="top"
+								data-bs-original-title="Collapse" id="collapse-header">
+								<i class="ti ti-chevrons-up"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /Breadcrumb -->
+				<div class="row">
+					<div class="col-xl-3 col-md-6">
+						<div class="card position-relative">
+							<div class="card-body">
+								<div class="d-flex align-items-center mb-3">
+									<div class="avatar avatar-md br-10 icon-rotate bg-primary flex-shrink-0">
+										<span class="d-flex align-items-center"><i
+												class="ti ti-delta text-white fs-16"></i></span>
+									</div>
+									<div class="ms-3">
+										<p class="fw-medium text-truncate mb-1">Total No of Leads</p>
+										<h5>6000</h5>
+									</div>
+								</div>
+								<div class="progress progress-xs mb-2">
+									<div class="progress-bar bg-primary" role="progressbar" style="width: 40%"></div>
+								</div>
+								<p class="fw-medium fs-13 mb-0"><span class="text-danger fs-12"><i
+											class="ti ti-arrow-wave-right-up me-1"></i>-4.01% </span> from last week</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card position-relative">
+							<div class="card-body">
+								<div class="d-flex align-items-center mb-3">
+									<div class="avatar avatar-md br-10 icon-rotate bg-secondary flex-shrink-0">
+										<span class="d-flex align-items-center"><i
+												class="ti ti-currency text-white fs-16"></i></span>
+									</div>
+									<div class="ms-3">
+										<p class="fw-medium text-truncate mb-1">No of New Leads</p>
+										<h5>120</h5>
+									</div>
+								</div>
+								<div class="progress progress-xs mb-2">
+									<div class="progress-bar bg-secondary" role="progressbar" style="width: 40%"></div>
+								</div>
+								<p class="fw-medium fs-13 mb-0"><span class="text-success fs-12"><i
+											class="ti ti-arrow-wave-right-up me-1"></i>+20.01% </span> from last week
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card position-relative">
+							<div class="card-body">
+								<div class="d-flex align-items-center mb-3">
+									<div class="avatar avatar-md br-10 icon-rotate bg-danger flex-shrink-0">
+										<span class="d-flex align-items-center"><i
+												class="ti ti-stairs-up text-white fs-16"></i></span>
+									</div>
+									<div class="ms-3">
+										<p class="fw-medium text-truncate mb-1">No of Lost Leads</p>
+										<h5>30</h5>
+									</div>
+								</div>
+								<div class="progress progress-xs mb-2">
+									<div class="progress-bar bg-pink" role="progressbar" style="width: 40%"></div>
+								</div>
+								<p class="fw-medium fs-13 mb-0"><span class="text-success fs-12"><i
+											class="ti ti-arrow-wave-right-up me-1"></i>+55% </span> from last week</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-md-6">
+						<div class="card position-relative">
+							<div class="card-body">
+								<div class="d-flex align-items-center mb-3">
+									<div class="avatar avatar-md br-10 icon-rotate bg-purple flex-shrink-0">
+										<span class="d-flex align-items-center"><i
+												class="ti ti-users-group text-white fs-16"></i></span>
+									</div>
+									<div class="ms-3">
+										<p class="fw-medium text-truncate mb-1">No of Total Customers</p>
+										<h5>9895</h5>
+									</div>
+								</div>
+								<div class="progress progress-xs mb-2">
+									<div class="progress-bar bg-purple" role="progressbar" style="width: 40%"></div>
+								</div>
+								<p class="fw-medium fs-13 mb-0"><span class="text-success fs-12"><i
+											class="ti ti-arrow-wave-right-up me-1"></i>+55% </span> from last week</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-8 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Pipeline Stages</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);"
+											class="btn btn-white border btn-md d-inline-flex align-items-center"
+											data-bs-toggle="dropdown">
+											<i class="ti ti-calendar me-1 fs-14"></i>2023 - 2024
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2023 -
+													2024</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2022 -
+													2023</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2021 -
+													2023</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body pb-0">
+								<div class="row g-2 justify-content-center mb-3">
+									<div class="col-md col-sm-4 col-6">
+										<div class="border rounded p-2">
+											<p class="mb-1 d-flex align-items-center gap-1"><i
+													class="ti ti-square-rounded-filled text-primary fs-13"></i>Contacted
+											</p>
+											<h6>50000</h6>
+										</div>
+									</div>
+									<div class="col-md col-sm-4 col-6">
+										<div class="border rounded p-2">
+											<p class="mb-1 d-flex align-items-center gap-1"><i
+													class="ti ti-square-rounded-filled text-secondary fs-13"></i>Oppurtunity
+											</p>
+											<h6>25985</h6>
+										</div>
+									</div>
+									<div class="col-md col-sm-4 col-6">
+										<div class="border rounded p-2">
+											<p class="mb-1 d-flex align-items-center gap-1"><i
+													class="ti ti-square-rounded-filled text-info fs-13"></i>Not
+												Contacted</p>
+											<h6>12566</h6>
+										</div>
+									</div>
+								</div>
+								<div id="revenue-income"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>New Leads</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);"
+											class="btn btn-white border btn-md d-inline-flex align-items-center"
+											data-bs-toggle="dropdown">
+											<i class="ti ti-calendar me-1 fs-14"></i>This Week
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This
+													Week</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This
+													Month</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This
+													Year</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body pb-0">
+								<div id="heat_chart"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Lost Leads </h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);"
+											class="btn btn-white border-0 dropdown-toggle dropdown-sm btn-sm d-inline-flex align-items-center"
+											data-bs-toggle="dropdown" aria-expanded="false">
+											Sales Pipeline
+										</a>
+										<ul class="dropdown-menu dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This
+													Month</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This
+													Week</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">Last
+													Week</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body py-0">
+								<div>
+									<div id="leads_stage"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Leads By Companies</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);"
+											class="btn btn-white border btn-md d-inline-flex align-items-center"
+											data-bs-toggle="dropdown">
+											<i class="ti ti-calendar me-1 fs-14"></i>This Week
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This
+													Month</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This
+													Week</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">Last
+													Week</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div>
+									<div class="border border-dashed bg-transparent-light rounded p-2 mb-2">
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<a href="javascript:void(0);"
+													class="avatar rounded-circle bg-white border flex-shrink-0 me-2">
+													<img src="../assets/img/company/company-24.svg"
+														class="w-auto h-auto" alt="Img">
+												</a>
+												<div>
+													<h6 class="fw-medium mb-1">Pitch</h6>
+													<p class="text-truncate">Value : $45,985</p>
+												</div>
+											</div>
+											<span class="badge badge-purple d-inline-flex align-items-center">
+												<i class="ti ti-point-filled me-1"></i> Not Contacted
+											</span>
+										</div>
+									</div>
+									<div class="border border-dashed bg-transparent-light rounded p-2 mb-2">
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<a href="javascript:void(0);"
+													class="avatar rounded-circle bg-white border flex-shrink-0 me-2">
+													<img src="../assets/img/company/company-25.svg"
+														class="w-auto h-auto" alt="Img">
+												</a>
+												<div>
+													<h6 class="fw-medium mb-1">Initech</h6>
+													<p class="text-truncate">Value : $21,145</p>
+												</div>
+											</div>
+											<span class="badge badge-success d-inline-flex align-items-center">
+												<i class="ti ti-point-filled me-1"></i>Closed
+											</span>
+										</div>
+									</div>
+									<div class="border border-dashed bg-transparent-light rounded p-2 mb-2">
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<a href="javascript:void(0);"
+													class="avatar rounded-circle bg-white border flex-shrink-0 me-2">
+													<img src="../assets/img/company/company-26.svg"
+														class="w-auto h-auto" alt="Img">
+												</a>
+												<div>
+													<h6 class="fw-medium mb-1">Umbrella Corp</h6>
+													<p class="text-truncate">Value : $15,685</p>
+												</div>
+											</div>
+											<span class="badge badge-secondary d-inline-flex align-items-center">
+												<i class="ti ti-point-filled me-1"></i>Contacted
+											</span>
+										</div>
+									</div>
+									<div class="border border-dashed bg-transparent-light rounded p-2 mb-2">
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<a href="javascript:void(0);"
+													class="avatar rounded-circle bg-white border flex-shrink-0 me-2">
+													<img src="../assets/img/company/company-27.svg"
+														class="w-auto h-auto" alt="Img">
+												</a>
+												<div>
+													<h6 class="fw-medium mb-1">Capital Partners</h6>
+													<p class="text-truncate">Value : $12,105</p>
+												</div>
+											</div>
+											<span class="badge badge-secondary d-inline-flex align-items-center">
+												<i class="ti ti-point-filled me-1"></i>Contacted
+											</span>
+										</div>
+									</div>
+									<div class="border border-dashed bg-transparent-light rounded p-2">
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<a href="javascript:void(0);"
+													class="avatar rounded-circle bg-white border flex-shrink-0 me-2">
+													<img src="../assets/img/company/company-28.svg"
+														class="w-auto h-auto" alt="Img">
+												</a>
+												<div>
+													<h6 class="fw-medium mb-1">Massive Dynamic</h6>
+													<p class="text-truncate">Value : $2,546</p>
+												</div>
+											</div>
+											<span class="badge badge-danger d-inline-flex align-items-center">
+												<i class="ti ti-point-filled me-1"></i>Lost
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Leads by Source</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);"
+											class="btn btn-white border btn-md d-inline-flex align-items-center"
+											data-bs-toggle="dropdown">
+											<i class="ti ti-calendar me-1 fs-14"></i>This Week
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This
+													Month</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This
+													Week</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">Last
+													Week</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div id="donut-chart-2"></div>
+								<div>
+									<h6 class="mb-3">Status</h6>
+									<div class="d-flex align-items-center justify-content-between mb-2">
+										<p class="f-13 mb-0"><i
+												class="ti ti-circle-filled text-secondary me-1"></i>Google</p>
+										<p class="f-13 fw-medium text-gray-9">40%</p>
+									</div>
+									<div class="d-flex align-items-center justify-content-between mb-2">
+										<p class="f-13 mb-0"><i class="ti ti-circle-filled text-warning me-1"></i>Paid
+										</p>
+										<p class="f-13 fw-medium text-gray-9">35%</p>
+									</div>
+									<div class="d-flex align-items-center justify-content-between mb-2">
+										<p class="f-13 mb-0"><i class="ti ti-circle-filled text-pink me-1"></i>Campaigns
+										</p>
+										<p class="f-13 fw-medium text-gray-9">15%</p>
+									</div>
+									<div class="d-flex align-items-center justify-content-between">
+										<p class="f-13 mb-0"><i
+												class="ti ti-circle-filled text-purple me-1"></i>Referals</p>
+										<p class="f-13 fw-medium text-gray-9">10%</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Recent Follow Up</h5>
+									<div>
+										<a href="#" class="btn btn-light btn-md">View All</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between mb-4">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="../assets/img/users/user-27.jpg"
+												class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Alexander
+													Jermai</a></h6>
+											<p class="fs-13">UI/UX Designer</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="#"
+											class="btn btn-light btn-icon btn-sm d-flex justify-content-center align-items-center border-0 p-2"><i
+												class="ti ti-mail-bolt fs-16"></i></a>
+									</div>
+								</div>
+								<div class="d-flex align-items-center justify-content-between mb-4">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="../assets/img/users/user-42.jpg"
+												class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Doglas
+													Martini</a></h6>
+											<p class="fs-13">Product Designer</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center"><a href="#"
+											class="btn btn-light btn-icon btn-sm d-flex justify-content-center align-items-center border-0 p-2"><i
+												class="ti ti-phone-x fs-16"></i></a>
+									</div>
+								</div>
+								<div class="d-flex align-items-center justify-content-between mb-4">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="../assets/img/users/user-43.jpg"
+												class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Daniel
+													Esbella</a></h6>
+											<p class="fs-13">Project Manager</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="#"
+											class="btn btn-light btn-icon btn-sm d-flex justify-content-center align-items-center border-0 p-2"><i
+												class="ti ti-mail-bolt fs-16"></i></a>
+									</div>
+								</div>
+								<div class="d-flex align-items-center justify-content-between mb-4">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="../assets/img/users/user-11.jpg"
+												class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Daniel
+													Esbella</a></h6>
+											<p class="fs-13">Team Lead</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="#"
+											class="btn btn-light btn-icon btn-sm d-flex justify-content-center align-items-center border-0 p-2"><i
+												class="ti ti-brand-hipchat fs-16"></i></a>
+									</div>
+								</div>
+								<div class="d-flex align-items-center justify-content-between">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="../assets/img/users/user-45.jpg"
+												class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Doglas
+													Martini</a></h6>
+											<p class="fs-13">Team Lead</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="#"
+											class="btn btn-light btn-icon btn-sm d-flex justify-content-center align-items-center border-0 p-2"><i
+												class="ti ti-brand-hipchat fs-16"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Recent Activities</h5>
+									<div>
+										<a href="activity.html" class="btn btn-light btn-md">View All</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-body schedule-timeline activity-timeline">
+								<div class="d-flex align-items-start">
+									<div class="avatar avatar-md avatar-rounded bg-success flex-shrink-0">
+										<i class="ti ti-phone fs-20"></i>
+									</div>
+									<div class="flex-fill ps-3 pb-4 timeline-flow">
+										<p class="fw-medium text-gray-9 mb-1"><a href="activity.html">Drain responded to
+												your appointment schedule question.</a></p>
+										<span>09:25 PM</span>
+									</div>
+								</div>
+								<div class="d-flex align-items-start">
+									<div class="avatar avatar-md avatar-rounded bg-info flex-shrink-0">
+										<i class="ti ti-message-circle-2 fs-20"></i>
+									</div>
+									<div class="flex-fill ps-3 pb-4 timeline-flow">
+										<p class="fw-medium text-gray-9 mb-1"><a href="activity.html">You sent 1 Message
+												to the James.</a></p>
+										<span>10:25 PM</span>
+									</div>
+								</div>
+								<div class="d-flex align-items-start">
+									<div class="avatar avatar-md avatar-rounded bg-success flex-shrink-0">
+										<i class="ti ti-phone fs-20"></i>
+									</div>
+									<div class="flex-fill ps-3 pb-4 timeline-flow">
+										<p class="fw-medium text-gray-9 mb-1"><a href="activity.html">Denwar responded
+												to your appointment on 25 Jan 2025, 08:15 PM</a></p>
+										<span>09:25 PM</span>
+									</div>
+								</div>
+								<div class="d-flex align-items-start">
+									<div class="avatar avatar-md avatar-rounded bg-purple flex-shrink-0">
+										<i class="ti ti-user-circle fs-20"></i>
+									</div>
+									<div class="flex-fill ps-3 timeline-flow">
+										<p class="fw-medium text-gray-9 mb-1"><a href="activity.html"
+												class="d-flex align-items-center">Meeting With <img
+													src="../assets/img/users/user-58.jpg"
+													class="avatar avatar-sm rounded-circle mx-2" alt="Img">Abraham</a>
+										</p>
+										<span>09:25 PM</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap">
+									<h5>Notifications</h5>
+									<div>
+										<a href="#" class="btn btn-light btn-md">View All</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="d-flex align-items-start mb-4">
+									<a href="javascript:void(0);" class="avatar flex-shrink-0">
+										<img src="../assets/img/users/user-27.jpg"
+											class="rounded-circle border border-2" alt="img">
+									</a>
+									<div class="ms-2">
+										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to
+											UNIX </h6>
+										<p class="fs-13 mb-2">Today at 9:42 AM</p>
+										<div class="d-flex align-items-center">
+											<a href="#" class="avatar avatar-sm border flex-shrink-0 me-2"><img
+													src="../assets/img/social/pdf-icon.svg" class="w-auto h-auto"
+													alt="Img"></a>
+											<h6 class="fw-normal"><a href="#">EY_review.pdf</a></h6>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex align-items-start mb-4">
+									<a href="javascript:void(0);" class="avatar flex-shrink-0">
+										<img src="../assets/img/users/user-28.jpg"
+											class="rounded-circle border border-2" alt="img">
+									</a>
+									<div class="ms-2">
+										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to
+											UNIX </h6>
+										<p class="fs-13 mb-0">Today at 10:00 AM</p>
+									</div>
+								</div>
+								<div class="d-flex align-items-start mb-4">
+									<a href="javascript:void(0);" class="avatar flex-shrink-0">
+										<img src="../assets/img/users/user-29.jpg"
+											class="rounded-circle border border-2" alt="img">
+									</a>
+									<div class="ms-2">
+										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to
+											UNIX </h6>
+										<p class="fs-13 mb-2">Today at 10:50 AM</p>
+										<div class="d-flex align-items-center">
+											<a href="#" class="btn btn-primary btn-sm me-2">Approve</a>
+											<a href="#" class="btn btn-outline-primary btn-sm">Decline</a>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex align-items-start">
+									<a href="javascript:void(0);" class="avatar flex-shrink-0">
+										<img src="../assets/img/users/user-33.jpg"
+											class="rounded-circle border border-2" alt="img">
+									</a>
+									<div class="ms-2">
+										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to
+											UNIX </h6>
+										<p class="fs-13 mb-0">Today at 05:00 PM</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-5 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Top Countries</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);"
+											class="btn btn-white border-0 dropdown-toggle dropdown-sm btn-sm d-inline-flex align-items-center"
+											data-bs-toggle="dropdown" aria-expanded="false">
+											Referrals
+										</a>
+										<ul class="dropdown-menu dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);"
+													class="dropdown-item rounded-1">Referrals</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">Sales
+													Pipeline</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col-xxl-5 col-sm-6">
+										<div class="pe-3 border-end">
+											<div class="d-flex align-items-center mb-4">
+												<span class="me-2"><i
+														class="ti ti-point-filled text-primary fs-16"></i></span>
+												<a href="countries.html"
+													class="avatar rounded-circle flex-shrink-0 border border-2">
+													<img src="../assets/img/payment-gateway/country-03.svg"
+														class="img-fluid rounded-circle" alt="img">
+												</a>
+												<div class="ms-2">
+													<h6 class="fw-medium text-truncate mb-1"><a
+															href="countries.html">Singapore</a></h6>
+													<span class="fs-13 text-truncate">Leads : 236</span>
+												</div>
+											</div>
+											<div class="d-flex align-items-center mb-4">
+												<span class="me-2"><i
+														class="ti ti-point-filled text-secondary fs-16"></i></span>
+												<a href="countries.html"
+													class="avatar rounded-circle flex-shrink-0 border border-2">
+													<img src="../assets/img/payment-gateway/country-04.svg"
+														class="img-fluid rounded-circle" alt="img">
+												</a>
+												<div class="ms-2">
+													<h6 class="fw-medium text-truncate mb-1"><a
+															href="countries.html">France</a></h6>
+													<span class="fs-13 text-truncate">Leads : 589</span>
+												</div>
+											</div>
+											<div class="d-flex align-items-center mb-4">
+												<span class="me-2"><i
+														class="ti ti-point-filled text-info fs-16"></i></span>
+												<a href="countries.html"
+													class="avatar rounded-circle flex-shrink-0 border border-2">
+													<img src="../assets/img/payment-gateway/country-05.svg"
+														class="img-fluid rounded-circle" alt="img">
+												</a>
+												<div class="ms-2">
+													<h6 class="fw-medium text-truncate mb-1"><a
+															href="countries.html">Norway</a></h6>
+													<span class="fs-13 text-truncate">Leads : 221</span>
+												</div>
+											</div>
+											<div class="d-flex align-items-center mb-4">
+												<span class="me-2"><i
+														class="ti ti-point-filled text-danger fs-16"></i></span>
+												<a href="countries.html"
+													class="avatar rounded-circle flex-shrink-0 border border-2">
+													<img src="../assets/img/payment-gateway/country-01.svg"
+														class="img-fluid rounded-circle" alt="img">
+												</a>
+												<div class="ms-2">
+													<h6 class="fw-medium text-truncate mb-1"><a
+															href="countries.html">USA</a></h6>
+													<span class="fs-13 text-truncate">Leads : 350</span>
+												</div>
+											</div>
+											<div class="d-flex align-items-center">
+												<span class="me-2"><i
+														class="ti ti-point-filled text-warning fs-16"></i></span>
+												<a href="countries.html"
+													class="avatar rounded-circle flex-shrink-0 border border-2">
+													<img src="../assets/img/payment-gateway/country-02.svg"
+														class="img-fluid rounded-circle" alt="img">
+												</a>
+												<div class="ms-2">
+													<h6 class="fw-medium text-truncate mb-1"><a
+															href="countries.html">UAE</a></h6>
+													<span class="fs-13 text-truncate">Leads : 221</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-xxl-7 col-sm-6">
+										<div id="donut-chart-3"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-7 d-flex">
+						<div class="card flex-fill">
+							<div
+								class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+								<h5>Recent Leads</h5>
+								<div class="d-flex align-items-center">
+									<div>
+										<a href="leads.html" class="btn btn-light btn-md">View All</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-body p-0">
+								<div class="table-responsive">
+									<table class="table table-nowrap dashboard-table mb-0">
+										<thead>
+											<tr>
+												<th>Company Name</th>
+												<th>Stage</th>
+												<th>Created Date</th>
+												<th>Lead Owner</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<div class="d-flex align-items-center file-name-icon">
+														<a href="company-details.html"
+															class="avatar border rounded-circle">
+															<img src="../assets/img/company/company-01.svg"
+																class="img-fluid" alt="img">
+														</a>
+														<div class="ms-2">
+															<h6 class="fw-medium"><a
+																	href="company-details.html">BrightWave</a></h6>
+														</div>
+													</div>
+												</td>
+												<td>
+													<span
+														class="badge badge-secondary d-inline-flex align-items-center">
+														<i class="ti ti-point-filled me-1"></i>
+														Contacted
+													</span>
+												</td>
+												<td>
+													14 Jan 2024
+												</td>
+												<td>William Parsons</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="d-flex align-items-center file-name-icon">
+														<a href="company-details.html"
+															class="avatar border rounded-circle">
+															<img src="../assets/img/company/company-02.svg"
+																class="img-fluid" alt="img">
+														</a>
+														<div class="ms-2">
+															<h6 class="fw-medium"><a
+																	href="company-details.html">Stellar</a></h6>
+														</div>
+													</div>
+												</td>
+												<td>
+													<span class="badge badge-success d-inline-flex align-items-center">
+														<i class="ti ti-point-filled me-1"></i>
+														Closed
+													</span>
+												</td>
+												<td>
+													21 Jan 2024
+												</td>
+												<td>Lucille Tomberlin</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="d-flex align-items-center file-name-icon">
+														<a href="company-details.html"
+															class="avatar border rounded-circle">
+															<img src="../assets/img/company/company-03.svg"
+																class="img-fluid" alt="img">
+														</a>
+														<div class="ms-2">
+															<h6 class="fw-medium"><a
+																	href="company-details.html">Quantum</a></h6>
+														</div>
+													</div>
+												</td>
+												<td>
+													<span class="badge badge-danger d-inline-flex align-items-center">
+														<i class="ti ti-point-filled me-1"></i>
+														Lost
+													</span>
+												</td>
+												<td>
+													20 Feb 2024
+												</td>
+												<td>Frederick Johnson</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="d-flex align-items-center file-name-icon">
+														<a href="company-details.html"
+															class="avatar border rounded-circle">
+															<img src="../assets/img/company/company-04.svg"
+																class="img-fluid" alt="img">
+														</a>
+														<div class="ms-2">
+															<h6 class="fw-medium"><a
+																	href="company-details.html">EcoVision</a></h6>
+														</div>
+													</div>
+												</td>
+												<td>
+													<span class="badge badge-purple d-inline-flex align-items-center">
+														<i class="ti ti-point-filled me-1"></i>
+														Not Contacted
+													</span>
+												</td>
+												<td>
+													15 Mar 2024
+												</td>
+												<td>Sarah Henry</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="d-flex align-items-center file-name-icon">
+														<a href="company-details.html"
+															class="avatar border rounded-circle">
+															<img src="../assets/img/company/company-05.svg"
+																class="img-fluid" alt="img">
+														</a>
+														<div class="ms-2">
+															<h6 class="fw-medium"><a
+																	href="company-details.html">Aurora</a></h6>
+														</div>
+													</div>
+												</td>
+												<td>
+													<span class="badge badge-success d-inline-flex align-items-center">
+														<i class="ti ti-point-filled me-1"></i>
+														Closed
+													</span>
+												</td>
+												<td>
+													12 Apr 2024
+												</td>
+												<td>Thomas Miller</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Page Wrapper -->
+	</div>
+	<!-- /Main Wrapper -->
+	<!-- jQuery -->
+	<script src="../assets/js/jquery-3.7.1.min.js"></script>
+	<!-- Bootstrap Core JS -->
+	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<!-- Feather Icon JS -->
+	<script src="../assets/js/feather.min.js"></script>
+	<!-- Slimscroll JS -->
+	<script src="../assets/js/jquery.slimscroll.min.js"></script>
+	<script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
+	<!-- Chart JS -->
+	<script src="../assets/plugins/apexchart/apexcharts.min.js"></script>
+	<script src="../assets/plugins/apexchart/chart-data.js"></script>
+	<!-- Chart JS -->
+	<script src="../assets/plugins/peity/jquery.peity.min.js"></script>
+	<script src="../assets/plugins/peity/chart-data.js"></script>
+	<!-- Datetimepicker JS -->
+	<script src="../assets/js/moment.min.js"></script>
+	<script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+	<!-- Daterangepikcer JS -->
+	<script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
+	<!-- Color Picker JS -->
+	<script src="../assets/plugins/@simonwep/pickr/pickr.es5.min.js"></script>
+	<!-- Custom JS -->
+	<script src="../assets/js/theme-colorpicker.js"></script>
+	<script src="../assets/js/script.js"></script>
+	<!-- Loader fallback: force-hide if window.load doesn't fire (e.g. missing assets) -->
+	<script>
+		window.addEventListener('load', function () {
+			var loader = document.getElementById('global-loader');
+			if (loader) loader.style.display = 'none';
+		});
+		setTimeout(function () {
+			var loader = document.getElementById('global-loader');
+			if (loader) loader.style.display = 'none';
+		}, 1500);
+	</script>
+</body>
+
+</html>

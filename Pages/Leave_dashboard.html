@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="Kompass HR - Employee Management Dashboard">
+    <meta name="keywords" content="hr, dashboard, attendance, employee, management, leave">
+    <meta name="author" content="Kompass HR">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Leave Dashboard - Kompass HR</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon.png">
+    <!-- Google Fonts: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <!-- Feather CSS -->
+    <link rel="stylesheet" href="../assets/plugins/icons/feather/feather.css">
+    <!-- Tabler Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="../assets/plugins/select2/css/select2.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+    <!-- Daterangepikcer CSS -->
+    <link rel="stylesheet" href="../assets/plugins/daterangepicker/daterangepicker.css">
+    <!-- Color Picker Css -->
+    <link rel="stylesheet" href="../assets/plugins/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" href="../assets/plugins/@simonwep/pickr/themes/nano.min.css">
+    <link rel="stylesheet" href="../assets/css/style2.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!-- KompassHR Internal Styles from onboard dashboard -->
+    <style>
+        .company-bx {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+        }
+
+        .company-bx img {
+            max-height: 35px;
+            width: auto;
+        }
+
+        .company-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #202C4B;
+            white-space: nowrap;
+        }
+
+        /* ── Header Nav Icons ────────────────────────────── */
+        .navbar-icons {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #637381;
+            background: transparent;
+            border: none;
+            transition: all .2s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-icon:hover {
+            background: #F3F4F6;
+            color: #F26522;
+        }
+
+        .nav-icon i {
+            font-size: 18px;
+        }
+
+        .notification-bell {
+            position: relative;
+        }
+
+        .notification-bell .badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 9px;
+            min-width: 16px;
+            height: 16px;
+            line-height: 16px;
+            padding: 0 4px;
+            border-radius: 50%;
+        }
+
+        .header-user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* ── Header Left ─────────────────────────────────── */
+        .header .header-left {
+            display: flex !important;
+            align-items: center;
+            width: 252px;
+            padding: 0;
+            float: left;
+            height: 50px;
+            z-index: 1;
+        }
+
+        .mini-sidebar .header .header-left {
+            width: 80px;
+            justify-content: center;
+        }
+
+        .mini-sidebar .header .header-left .company-name {
+            display: none;
+        }
+
+        .mini-sidebar .header .header-left .company-bx img {
+            max-height: 28px;
+        }
+
+        /* ── Sidebar Base ────────────────────────────────── */
+        .sidebar {
+            background: #fff;
+            border-right: 1px solid #EDEDED;
+        }
+
+        .sidebar .sidebar-logo {
+            display: none;
+        }
+
+        /* ── Profile Section ─────────────────────────────── */
+        .menu-profile2 {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            padding: 20px 0px 14px;
+        }
+
+        .menu-profile2 .menu-profile-image {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #E8E9EA;
+            outline: 2px solid #1D2A3A;
+            outline-offset: 2px;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .menu-profile2 .profile-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1D2A3A;
+            line-height: 1.4;
+            margin-bottom: 3px;
+        }
+
+        .menu-profile2 .profile-name .accent {
+            color: #1D2A3A;
+        }
+
+        .menu-profile2 .profile-role {
+            font-size: 11px;
+            color: #6B7280;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ── Sidebar Tabs ────────────────────────────────── */
+        #myTab {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+
+        #myTab .nav-item {
+            margin-inline-end: 0;
+            width: -webkit-fill-available;
+        }
+
+        #myTab .nav-item .nav-link:hover {
+            background: #F3F4F6;
+            color: #1D2A3A;
+        }
+
+        #myTab .nav-item .nav-link.active {
+            border: 1px solid var(--color-light-gray);
+            border-bottom: none;
+            background: #1D2A3A;
+            color: #fff;
+        }
+
+        #myTab .nav-link i {
+            font-size: 15px;
+        }
+
+        #myTab .nav-link span {
+            display: none;
+        }
+
+        /* ── Menu Items ──────────────────────────────────── */
+        .sidebar-menu ul>li>a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 14px;
+            text-decoration: none;
+            color: #344054;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 0;
+            transition: all .2s;
+            position: relative;
+        }
+
+        .sidebar-menu ul>li>a:hover,
+        .sidebar-menu ul>li.active>a {
+            color: #F26522;
+            background: #FFF4EE;
+        }
+
+        .sidebar-menu ul>li>a>i:first-child,
+        .sidebar-menu ul>li>a>.ti:first-child {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            border-radius: 50%;
+            font-size: 15px;
+            color: #6B7280;
+            transition: all .2s;
+        }
+
+        .sidebar-menu ul>li>a:hover>i:first-child,
+        .sidebar-menu ul>li>a:hover>.ti:first-child,
+        .sidebar-menu ul>li.active>a>i:first-child,
+        .sidebar-menu ul>li.active>a>.ti:first-child {
+            background: #F26522;
+            color: #fff;
+        }
+
+        .sidebar-menu ul>li>a .menu-arrow {
+            margin-left: auto;
+            transition: transform .2s;
+        }
+
+        .sidebar-menu ul>li.subdrop>a .menu-arrow {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-menu ul>li ul>li>a {
+            padding: 6px 14px 6px 54px;
+            color: #6B7280;
+            font-size: 12px;
+            font-weight: 400;
+            gap: 0;
+        }
+
+        .sidebar-menu ul>li ul>li>a:hover,
+        .sidebar-menu ul>li ul>li.active>a {
+            color: #F26522;
+            background: #FFF4EE;
+        }
+
+        .sidebar-menu ul>li ul>li>a>i {
+            background: transparent !important;
+            color: #CBD5E0 !important;
+            font-size: 8px !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+        /* ── Minify Button ───────────────────────────────── */
+        #toggle_btn {
+            position: absolute;
+            right: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: #1D2A3A;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background .2s;
+        }
+
+        #toggle_btn:hover {
+            background: #F26522;
+        }
+
+        #toggle_btn i {
+            line-height: 1;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <!-- Header -->
+        <div class="header">
+            <div class="main-header d-flex justify-content-between align-items-center">
+                <div class="header-left">
+                    <a href="javascript:void(0)" class="company-bx">
+                        <img src="../assets/img/KompassHR.png" alt="Kompass HR Logo">
+                        <span class="company-name">Kompass HR</span>
+                    </a>
+                </div>
+
+                <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+                    <span class="bar-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
+                <!-- Search Bar -->
+                <div class="input-group d-none d-lg-flex ms-3">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-text"><i class="ti ti-search"></i></span>
+                </div>
+                <!-- Right Side Icons -->
+                <div class="d-flex align-items-center ms-auto">
+                    <div class="navbar-icons">
+                        <button class="nav-icon" title="Chat">
+                            <i class="ti ti-message-dots"></i>
+                        </button>
+                        <button class="nav-icon btnFullscreen" title="Fullscreen">
+                            <i class="ti ti-arrows-maximize"></i>
+                        </button>
+                        <button class="nav-icon" title="Apps">
+                            <i class="ti ti-layout-grid"></i>
+                        </button>
+                        <button class="nav-icon" title="Mail">
+                            <i class="ti ti-mail"></i>
+                        </button>
+                        <button class="nav-icon notification-bell" title="Notifications">
+                            <i class="ti ti-bell"></i>
+                            <span class="badge bg-danger">3</span>
+                        </button>
+                    </div>
+                    <!-- User Dropdown -->
+                    <div class="dropdown ms-2">
+                        <a href="javascript:void(0);" class="d-flex align-items-center" data-bs-toggle="dropdown">
+                            <img src="../assets/img/avatar-01.jpg" alt="User" class="header-user-avatar">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end p-2" style="min-width: 180px;">
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-user me-2"></i>My Profile</a>
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-settings me-2"></i>Settings</a>
+                            <hr class="dropdown-divider my-1">
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-logout me-2"></i>Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Header -->
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <!-- Profile Section -->
+                    <div class="menu-profile2">
+                        <div class="profile-img">
+                            <img src="../assets/img/avatar-02.jpg" alt="User" class="menu-profile-image">
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-name">
+                                DHEERENDRA <br><span class="accent">KUMAR JOSHI</span>
+                            </div>
+                            <p class="profile-role">Manager</p>
+                        </div>
+                    </div>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="Menu-tab" data-bs-toggle="tab"
+                                data-bs-target="#Menu-tab-pane" type="button" role="tab" aria-controls="Menu-tab-pane"
+                                aria-selected="true"><i class="fa-solid fa-list"></i> <span>Menu</span> </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                aria-controls="profile-tab-pane" aria-selected="false"><i
+                                    class="fa-solid fa-table-cells-large"></i> <span>Dashboard</span></button>
+                        </li>
+                    </ul>
+
+                    <ul>
+                        <li class="submenu">
+                            <a href="javascript:void(0);">
+                                <i class="ti ti-layout-dashboard"></i>
+                                <span>Dashboard</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul>
+                                <li><a href="leads-dashboard.html"><i class="ti ti-point"></i><span>Leads
+                                            Dashboard</span></a></li>
+                                <li><a href="dashboard.html"><i class="ti ti-point"></i><span>HR Dashboard</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="recuritment.html">
+                                <i class="ti ti-user-search"></i>
+                                <span>Recruitment</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="operation_dashboard.html">
+                                <i class="ti ti-settings-automation"></i>
+                                <span>Operation</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="onboarding-dashboard.html">
+                                <i class="ti ti-user-plus"></i>
+                                <span>Onboarding</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="employee.html">
+                                <i class="ti ti-building"></i>
+                                <span>HR Space</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="attendance.html">
+                                <i class="ti ti-clock-check"></i>
+                                <span>Attendance</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="Leave_dashboard.html">
+                                <i class="ti ti-calendar-event"></i>
+                                <span>Leave</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="payroll.html">
+                                <i class="ti ti-wallet"></i>
+                                <span>Payroll</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="claim.html">
+                                <i class="ti ti-receipt"></i>
+                                <span>Claim</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="vms_dashboard.html">
+                                <i class="ti ti-device-desktop"></i>
+                                <span>VMS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Pms_dashboard.html">
+                                <i class="ti ti-chart-bar"></i>
+                                <span>PMS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ticketdashboard_manager.html">
+                                <i class="ti ti-ticket"></i>
+                                <span>Tickets</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Sidebar -->
+
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <!-- ===== MAIN CONTENT ===== -->
+            <div class="content leave-dashboard">
+                <style>
+                    /* ==========================================
+                       LEAVE DASHBOARD INTERNAL STYLES 
+                       ========================================== */
+                    .leave-dashboard .card {
+                        border-radius: 10px;
+                        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+                        margin-bottom: 24px;
+                        background-color: #fff;
+                        display: flex;
+                        flex-direction: column;
+                        word-wrap: break-word;
+                    }
+
+                    .leave-dashboard .card-header {
+                        background-color: transparent;
+                        padding: 1rem 1.25rem;
+                        border-bottom: 1px solid rgba(0, 0, 0, .05);
+                    }
+
+                    .leave-dashboard .card-title {
+                        font-weight: 600;
+                        font-size: 16px;
+                        color: #1D2A3A;
+                    }
+
+                    .leave-dashboard .card-body {
+                        flex: 1 1 auto;
+                        padding: 1.25rem;
+                    }
+
+                    .leave-dashboard .avatar {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    .leave-dashboard .avatar-sm {
+                        width: 32px;
+                        height: 32px;
+                        font-size: 13px;
+                    }
+
+                    .leave-dashboard .avatar-md {
+                        width: 48px;
+                        height: 48px;
+                        font-size: 20px;
+                    }
+
+                    /* Transparent Backgrounds & Text Colors */
+                    .leave-dashboard .bg-primary-transparent {
+                        background-color: rgba(242, 101, 34, 0.1) !important;
+                        color: #F26522 !important;
+                    }
+
+                    .leave-dashboard .bg-success-transparent {
+                        background-color: rgba(40, 167, 69, 0.1) !important;
+                        color: #28a745 !important;
+                    }
+
+                    .leave-dashboard .bg-info-transparent {
+                        background-color: rgba(23, 162, 184, 0.1) !important;
+                        color: #17a2b8 !important;
+                    }
+
+                    .leave-dashboard .bg-warning-transparent {
+                        background-color: rgba(255, 193, 7, 0.1) !important;
+                        color: #ffc107 !important;
+                    }
+
+                    .leave-dashboard .bg-danger-transparent {
+                        background-color: rgba(220, 53, 69, 0.1) !important;
+                        color: #dc3545 !important;
+                    }
+
+                    .leave-dashboard .bg-secondary-transparent {
+                        background-color: rgba(108, 117, 125, 0.1) !important;
+                        color: #6c757d !important;
+                    }
+
+                    .leave-dashboard .text-primary {
+                        color: #F26522 !important;
+                    }
+
+                    .leave-dashboard .text-success {
+                        color: #28a745 !important;
+                    }
+
+                    .leave-dashboard .text-info {
+                        color: #17a2b8 !important;
+                    }
+
+                    .leave-dashboard .text-warning {
+                        color: #ffc107 !important;
+                    }
+
+                    .leave-dashboard .text-danger {
+                        color: #dc3545 !important;
+                    }
+
+                    .leave-dashboard .border-warning {
+                        border-color: #ffc107 !important;
+                    }
+
+                    .leave-dashboard .border-danger {
+                        border-color: #dc3545 !important;
+                    }
+
+                    .leave-dashboard .border-info {
+                        border-color: #17a2b8 !important;
+                    }
+
+                    /* Tables */
+                    .leave-dashboard .table-responsive {
+                        overflow-x: auto;
+                        -webkit-overflow-scrolling: touch;
+                    }
+
+                    .leave-dashboard .custom-table {
+                        width: 100%;
+                        margin-bottom: 1rem;
+                        color: #212529;
+                    }
+
+                    .leave-dashboard .custom-table th {
+                        background-color: #f8f9fa;
+                        font-weight: 600;
+                        color: #495057;
+                        border-bottom: 1px solid #dee2e6;
+                        font-size: 13px;
+                        white-space: nowrap;
+                        padding: 0.75rem;
+                        vertical-align: bottom;
+                    }
+
+                    .leave-dashboard .custom-table td {
+                        vertical-align: middle;
+                        font-size: 14px;
+                        border-bottom: 1px solid #f1f1f1;
+                        padding: 0.75rem;
+                    }
+
+                    .leave-dashboard .table-hover tbody tr:hover {
+                        background-color: #fcfcfc;
+                    }
+
+                    /* Badges */
+                    .leave-dashboard .badge {
+                        font-weight: 500;
+                        padding: 0.35em 0.65em;
+                        font-size: 0.75em;
+                        border-radius: 4px;
+                        display: inline-block;
+                        line-height: 1;
+                        text-align: center;
+                        white-space: nowrap;
+                    }
+
+                    /* Utilities */
+                    .leave-dashboard .fs-12 {
+                        font-size: 12px !important;
+                    }
+
+                    .leave-dashboard .fs-13 {
+                        font-size: 13px !important;
+                    }
+
+                    .leave-dashboard .fs-14 {
+                        font-size: 14px !important;
+                    }
+
+                    .leave-dashboard .fs-20 {
+                        font-size: 20px !important;
+                    }
+
+                    .leave-dashboard .fs-22 {
+                        font-size: 22px !important;
+                    }
+
+                    .leave-dashboard .border-opacity-25 {
+                        border-color: rgba(0, 0, 0, 0.1) !important;
+                    }
+
+                    .leave-dashboard .border-4 {
+                        border-left-width: 4px !important;
+                    }
+
+                    .action-icons i {
+                        margin-right: 8px;
+                        cursor: pointer;
+                        font-size: 16px;
+                    }
+
+                    .action-icons .approve {
+                        color: #28a745;
+                    }
+
+                    .action-icons .reject {
+                        color: #dc3545;
+                    }
+
+                    .action-icons .view {
+                        color: #17a2b8;
+                    }
+                </style>
+
+                <!-- Page Header -->
+                <div class="d-md-flex d-block align-items-center justify-content-between mb-4 mt-2">
+                    <div class="my-auto mb-2 mb-md-0">
+                        <h3 class="page-title mb-1">Leave Dashboard</h3>
+                        <p class="text-muted mb-0">Overview of employee leaves, pending approvals, and department
+                            trends.</p>
+                    </div>
+                    <div class="d-flex my-xl-auto right-content align-items-center flex-wrap gap-2">
+                        <a href="#" class="btn btn-primary d-flex align-items-center"><i
+                                class="ti ti-plus me-2"></i>Apply Leave for Employee</a>
+                    </div>
+                </div>
+
+                <!-- 1️⃣ Top KPI Cards Data Row 1 -->
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Total
+                                            Employees</span>
+                                        <h4 class="fs-22 fw-bold mb-0">124</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-primary-transparent text-primary rounded-circle"><i
+                                            class="ti ti-users fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">On Leave
+                                            Today</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-info">6</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-info-transparent text-info rounded-circle"><i
+                                            class="ti ti-calendar-off fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Pending
+                                            Requests</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-warning">14</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-warning-transparent text-warning rounded-circle"><i
+                                            class="ti ti-loader fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Upcoming
+                                            Leaves</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-secondary">8</h4>
+                                    </div>
+                                    <span
+                                        class="avatar avatar-md bg-secondary-transparent text-secondary rounded-circle"><i
+                                            class="ti ti-calendar-forward fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1️⃣ Top KPI Cards Row 2 -->
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Approved
+                                            (This Mth)</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-success">45</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-success-transparent text-success rounded-circle"><i
+                                            class="ti ti-circle-check fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Rejected
+                                            (This Mth)</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-danger">3</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-danger-transparent text-danger rounded-circle"><i
+                                            class="ti ti-circle-x fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Sick Leaves
+                                            (Today)</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-danger">4</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-danger-transparent text-danger rounded-circle"><i
+                                            class="ti ti-stethoscope fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Casual
+                                            Leaves (Today)</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-primary">2</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-primary-transparent text-primary rounded-circle"><i
+                                            class="ti ti-beach fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row: Leave Type Chart | Department Leave Chart -->
+                <div class="row">
+                    <div class="col-md-5 mb-3 d-flex">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-0 pb-0 d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Leave Type Distribution</h5>
+                                <select class="form-select form-select-sm w-auto">
+                                    <option>This Month</option>
+                                    <option>This Year</option>
+                                </select>
+                            </div>
+                            <div class="card-body">
+                                <div id="leaveTypeChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-3 d-flex">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-0 pb-0 d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Department-wise Leave Today</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="departmentLeaveChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2️⃣ Pending Leave Requests Table -->
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                                <h5 class="card-title mb-0">Pending Leave Requests</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center custom-table mb-0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Leave Type</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Days</th>
+                                                <th>Reason</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span
+                                                            class="avatar avatar-sm rounded-circle bg-primary-transparent text-primary me-2 fw-bold">JD</span>
+                                                        <span class="fs-14 fw-medium text-dark">John Doe</span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-secondary-transparent text-dark border">Casual
+                                                        Leave</span></td>
+                                                <td>12 Mar 2026</td>
+                                                <td>14 Mar 2026</td>
+                                                <td>3</td>
+                                                <td class="text-truncate" style="max-width: 150px;"
+                                                    title="Family Function">Family Function</td>
+                                                <td><span
+                                                        class="badge bg-warning-transparent text-warning border border-warning border-opacity-25">Pending</span>
+                                                </td>
+                                                <td class="action-icons">
+                                                    <i class="ti ti-check approve" title="Approve"></i>
+                                                    <i class="ti ti-x reject" title="Reject"></i>
+                                                    <i class="ti ti-eye view" title="View Details"></i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span
+                                                            class="avatar avatar-sm rounded-circle bg-info-transparent text-info me-2 fw-bold">SM</span>
+                                                        <span class="fs-14 fw-medium text-dark">Sarah Mitchell</span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-danger-transparent text-danger border">Sick
+                                                        Leave</span></td>
+                                                <td>15 Mar 2026</td>
+                                                <td>15 Mar 2026</td>
+                                                <td>1</td>
+                                                <td class="text-truncate" style="max-width: 150px;" title="Viral Fever">
+                                                    Viral Fever</td>
+                                                <td><span
+                                                        class="badge bg-warning-transparent text-warning border border-warning border-opacity-25">Pending</span>
+                                                </td>
+                                                <td class="action-icons">
+                                                    <i class="ti ti-check approve" title="Approve"></i>
+                                                    <i class="ti ti-x reject" title="Reject"></i>
+                                                    <i class="ti ti-eye view" title="View Details"></i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="../assets/img/avatar-03.jpg"
+                                                            class="avatar avatar-sm rounded-circle me-2" alt="img">
+                                                        <span class="fs-14 fw-medium text-dark">Robert Fox</span>
+                                                    </div>
+                                                </td>
+                                                <td><span
+                                                        class="badge bg-primary-transparent text-primary border">Earned
+                                                        Leave</span></td>
+                                                <td>20 Mar 2026</td>
+                                                <td>25 Mar 2026</td>
+                                                <td>6</td>
+                                                <td class="text-truncate" style="max-width: 150px;" title="Vacation">
+                                                    Vacation</td>
+                                                <td><span
+                                                        class="badge bg-warning-transparent text-warning border border-warning border-opacity-25">Pending</span>
+                                                </td>
+                                                <td class="action-icons">
+                                                    <i class="ti ti-check approve" title="Approve"></i>
+                                                    <i class="ti ti-x reject" title="Reject"></i>
+                                                    <i class="ti ti-eye view" title="View Details"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3️⃣ Employees on Leave Today | 4️⃣ Upcoming Leaves -->
+                <div class="row">
+                    <div class="col-md-6 mb-3 d-flex">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                                <h5 class="card-title mb-0">Employees on Leave Today</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center custom-table mb-0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Department</th>
+                                                <th>Leave Type</th>
+                                                <th>Duration</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="fs-14 fw-medium text-dark">Rahul Sharma</div>
+                                                    <div class="fs-12 text-muted">#EMP-0125</div>
+                                                </td>
+                                                <td>Development</td>
+                                                <td><span class="badge bg-danger-transparent text-danger border">Sick
+                                                        Leave</span></td>
+                                                <td>1 Day</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="fs-14 fw-medium text-dark">Priya Gupta</div>
+                                                    <div class="fs-12 text-muted">#EMP-0130</div>
+                                                </td>
+                                                <td>Design</td>
+                                                <td><span class="badge bg-secondary-transparent text-dark border">Casual
+                                                        Leave</span></td>
+                                                <td>2 Days</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="fs-14 fw-medium text-dark">Amit Kumar</div>
+                                                    <div class="fs-12 text-muted">#EMP-0144</div>
+                                                </td>
+                                                <td>QA</td>
+                                                <td><span class="badge bg-danger-transparent text-danger border">Sick
+                                                        Leave</span></td>
+                                                <td>1 Day</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3 d-flex">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                                <h5 class="card-title mb-0">Upcoming Leaves</h5>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Calendar</a>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center custom-table mb-0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Department</th>
+                                                <th>Leave Type</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="fs-14 fw-medium text-dark">Sanjay Verma</span></td>
+                                                <td>HR</td>
+                                                <td><span
+                                                        class="badge bg-primary-transparent text-primary border">Earned
+                                                        Leave</span></td>
+                                                <td>14 Mar 2026</td>
+                                                <td>18 Mar 2026</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="fs-14 fw-medium text-dark">Anita Das</span></td>
+                                                <td>Development</td>
+                                                <td><span class="badge bg-secondary-transparent text-dark border">Casual
+                                                        Leave</span></td>
+                                                <td>16 Mar 2026</td>
+                                                <td>16 Mar 2026</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="fs-14 fw-medium text-dark">Vikram Singh</span></td>
+                                                <td>Marketing</td>
+                                                <td><span
+                                                        class="badge bg-warning-transparent text-warning border">Unpaid
+                                                        Leave</span></td>
+                                                <td>22 Mar 2026</td>
+                                                <td>24 Mar 2026</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7️⃣ Monthly Leave Trend | 1️⃣1️⃣ Leave Alerts Panel -->
+                <div class="row">
+                    <div class="col-md-8 mb-3 d-flex">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-0 pb-0 d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Monthly Leave Trend</h5>
+                                <select class="form-select form-select-sm w-auto">
+                                    <option>2026</option>
+                                    <option>2025</option>
+                                </select>
+                            </div>
+                            <div class="card-body">
+                                <div id="monthlyLeaveChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3 d-flex">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-bottom">
+                                <h5 class="card-title mb-0">Leave Alerts</h5>
+                            </div>
+                            <div class="card-body d-flex flex-column gap-3">
+                                <div
+                                    class="p-3 bg-warning-transparent rounded d-flex align-items-center border-start border-warning border-4">
+                                    <span class="avatar avatar-sm bg-warning text-white rounded-circle me-3"><i
+                                            class="ti ti-loader"></i></span>
+                                    <div>
+                                        <h6 class="mb-1 fs-14 fw-bold">Pending Approvals</h6>
+                                        <p class="mb-0 fs-13 text-muted">14 leave requests pending approval.</p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="p-3 bg-info-transparent rounded d-flex align-items-center border-start border-info border-4">
+                                    <span class="avatar avatar-sm bg-info text-white rounded-circle me-3"><i
+                                            class="ti ti-calendar-event"></i></span>
+                                    <div>
+                                        <h6 class="mb-1 fs-14 fw-bold">Leaves Tomorrow</h6>
+                                        <p class="mb-0 fs-13 text-muted">3 employees will be on leave tomorrow.</p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="p-3 bg-danger-transparent rounded d-flex align-items-center border-start border-danger border-4">
+                                    <span class="avatar avatar-sm bg-danger text-white rounded-circle me-3"><i
+                                            class="ti ti-users"></i></span>
+                                    <div>
+                                        <h6 class="mb-1 fs-14 fw-bold">Team Availability Risk</h6>
+                                        <p class="mb-0 fs-13 text-muted">Development team has 2 members on leave today.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="p-3 bg-primary-transparent rounded d-flex align-items-center border-start border-primary border-4 mb-0">
+                                    <span class="avatar avatar-sm bg-primary text-white rounded-circle me-3"><i
+                                            class="ti ti-alert-triangle"></i></span>
+                                    <div>
+                                        <h6 class="mb-1 fs-14 fw-bold">Excessive Leaves</h6>
+                                        <p class="mb-0 fs-13 text-muted">2 employees exceeded leave limits.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    // Highcharts Initialization Script for Leave Dashboard
+                    document.addEventListener('DOMContentLoaded', function () {
+                        if (typeof Highcharts !== 'undefined') {
+                            Highcharts.setOptions({
+                                colors: ['#F26522', '#17a2b8', '#dc3545', '#ffc107', '#28a745', '#1D2A3A'],
+                                chart: { style: { fontFamily: 'Roboto, sans-serif' } },
+                                title: { text: null },
+                                credits: { enabled: false }
+                            });
+
+                            // 1. Leave Type Distribution (Pie Chart)
+                            Highcharts.chart('leaveTypeChart', {
+                                chart: { type: 'pie' },
+                                tooltip: { pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' },
+                                plotOptions: {
+                                    pie: {
+                                        allowPointSelect: true,
+                                        cursor: 'pointer',
+                                        dataLabels: { enabled: true, format: '<b>{point.name}</b>: {point.percentage:.1f} %' }
+                                    }
+                                },
+                                series: [{
+                                    name: 'Leaves',
+                                    colorByPoint: true,
+                                    data: [
+                                        { name: 'Casual Leave', y: 40, color: '#6c757d' },
+                                        { name: 'Sick Leave', y: 25, color: '#dc3545' },
+                                        { name: 'Earned Leave', y: 30, color: '#F26522' },
+                                        { name: 'Unpaid Leave', y: 5, color: '#ffc107' }
+                                    ]
+                                }]
+                            });
+
+                            // 2. Department-wise Leave (Bar Chart)
+                            Highcharts.chart('departmentLeaveChart', {
+                                chart: { type: 'column' },
+                                xAxis: { categories: ['Development', 'QA', 'Design', 'HR', 'Marketing', 'Sales'] },
+                                yAxis: { min: 0, title: { text: 'Number of Employees on Leave' }, tickInterval: 1 },
+                                tooltip: { valueSuffix: ' Employees' },
+                                series: [{
+                                    name: 'On Leave Today',
+                                    data: [3, 1, 2, 0, 1, 0],
+                                    color: '#17a2b8'
+                                }]
+                            });
+
+                            // 3. Monthly Leave Trend (Line Chart)
+                            Highcharts.chart('monthlyLeaveChart', {
+                                chart: { type: 'spline' },
+                                xAxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] },
+                                yAxis: { title: { text: 'Total Leaves Taken' } },
+                                tooltip: { crosshairs: true, shared: true },
+                                plotOptions: { spline: { marker: { radius: 4, lineColor: '#666666', lineWidth: 1 } } },
+                                series: [{
+                                    name: 'Leaves',
+                                    marker: { symbol: 'circle' },
+                                    data: [12, 18, 14, 20, 25, 22, 18, 15, 12, 16, 20, 30],
+                                    color: '#F26522'
+                                }]
+                            });
+                        }
+                    });
+                </script>
+
+            </div>
+            <!-- /Page Wrapper -->
+        </div>
+        <!-- /Main Wrapper -->
+    </div>
+
+    <!-- jQuery -->
+    <script src="../assets/js/jquery-3.7.1.min.js"></script>
+
+    <!-- Highcharts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@12.5.0/highcharts.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/12.4.0/css/highcharts.css"
+        integrity="sha512-AK+uoqT8+mBIDSg8X82PlPLtProHlfKagadiSPEqYJiGTQxKnSVoiGgE8IhgRxKre0JWw7teyJc7Mzr/4opudA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Bootstrap Core JS -->
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Feather Icon JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"
+        integrity="sha512-zMm7+ZQ8AZr1r3W8Z8lDATkH05QG5Gm2xc6MlsCdBz9l6oE8Y7IXByMgSm/rdRQrhuHt99HAYfMljBOEZ68q5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Slimscroll JS -->
+    <script src="../assets/js/jquery.slimscroll.min.js"></script>
+    <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Chart JS -->
+    <script src="../assets/plugins/apexchart/apexcharts.min.js"></script>
+    <script src="../assets/plugins/apexchart/chart-data.js"></script>
+    <!-- Chart JS -->
+    <script src="../assets/plugins/peity/jquery.peity.min.js"></script>
+    <script src="../assets/plugins/peity/chart-data.js"></script>
+    <!-- Datetimepicker JS -->
+    <script src="../assets/js/moment.min.js"></script>
+    <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Daterangepikcer JS -->
+    <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Color Picker JS -->
+    <script src="../assets/plugins/@simonwep/pickr/pickr.es5.min.js"></script>
+
+    <script src="../assets/js/attendance.js"></script>
+</body>
+
+</html>

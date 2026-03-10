@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <meta name="description" content="Kompass HR - Employee Management Dashboard">
+  <meta name="keywords" content="hr, dashboard, attendance, employee, management">
+  <meta name="author" content="Kompass HR">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Attendance Dashboard - Kompass HR</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon.png">
+  <!-- Google Fonts: Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <!-- Feather CSS -->
+  <link rel="stylesheet" href="../assets/plugins/icons/feather/feather.css">
+  <!-- Tabler Icon CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+  <!-- Select2 CSS -->
+  <link rel="stylesheet" href="../assets/plugins/select2/css/select2.min.css">
+  <!-- Fontawesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Datetimepicker CSS -->
+  <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+  <!-- Daterangepikcer CSS -->
+  <link rel="stylesheet" href="../assets/plugins/daterangepicker/daterangepicker.css">
+  <!-- Color Picker Css -->
+  <link rel="stylesheet" href="../assets/plugins/flatpickr/flatpickr.min.css">
+  <link rel="stylesheet" href="../assets/plugins/@simonwep/pickr/themes/nano.min.css">
+  <link rel="stylesheet" href="../assets/css/style2.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- SmartHR Theme CSS -->
+
+  <!-- KompassHR Internal Styles -->
+  <style>
+    .company-bx {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 15px;
+    }
+
+    .company-bx img {
+      max-height: 35px;
+      width: auto;
+    }
+
+    .company-name {
+      font-weight: 700;
+      font-size: 16px;
+      color: #202C4B;
+      white-space: nowrap;
+    }
+
+    /* ── Header Nav Icons ────────────────────────────── */
+    .navbar-icons {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #637381;
+      background: transparent;
+      border: none;
+      transition: all .2s;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .nav-icon:hover {
+      background: #F3F4F6;
+      color: #F26522;
+    }
+
+    .nav-icon i {
+      font-size: 18px;
+    }
+
+    .notification-bell {
+      position: relative;
+    }
+
+    .notification-bell .badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      font-size: 9px;
+      min-width: 16px;
+      height: 16px;
+      line-height: 16px;
+      padding: 0 4px;
+      border-radius: 50%;
+    }
+
+    .header-user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    /* ── Header Left ─────────────────────────────────── */
+    .header .header-left {
+      display: flex !important;
+      align-items: center;
+      width: 252px;
+      padding: 0;
+      float: left;
+      height: 50px;
+      z-index: 1;
+    }
+
+    .mini-sidebar .header .header-left {
+      width: 80px;
+      justify-content: center;
+    }
+
+    .mini-sidebar .header .header-left .company-name {
+      display: none;
+    }
+
+    .mini-sidebar .header .header-left .company-bx img {
+      max-height: 28px;
+    }
+
+    /* ── Sidebar Base ────────────────────────────────── */
+    .sidebar {
+      background: #fff;
+      border-right: 1px solid #EDEDED;
+    }
+
+    .sidebar .sidebar-logo {
+      display: none;
+    }
+
+    /* hide duplicate logo — logo shown in header */
+    /* ── Profile Section ─────────────────────────────── */
+    .menu-profile2 {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+      padding: 20px 0px 14px;
+
+    }
+
+    .menu-profile2 .menu-profile-image {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #E8E9EA;
+      outline: 2px solid #1D2A3A;
+      outline-offset: 2px;
+      margin-bottom: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .menu-profile2 .profile-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1D2A3A;
+      line-height: 1.4;
+      margin-bottom: 3px;
+    }
+
+    .menu-profile2 .profile-name .accent {
+      color: #1D2A3A;
+    }
+
+    .menu-profile2 .profile-role {
+      font-size: 11px;
+      color: #6B7280;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* ── Sidebar Tabs ────────────────────────────────── */
+    #myTab {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+    }
+
+    #myTab .nav-item {
+      margin-inline-end: 0;
+      width: -webkit-fill-available;
+    }
+
+
+    #myTab .nav-item .nav-link:hover {
+      background: #F3F4F6;
+      color: #1D2A3A;
+    }
+
+    #myTab .nav-item .nav-link.active {
+      border: 1px solid var(--color-light-gray);
+      border-bottom: none;
+      background: #1D2A3A;
+      color: #fff;
+    }
+
+    #myTab .nav-link i {
+      font-size: 15px;
+    }
+
+    #myTab .nav-link span {
+      display: none;
+    }
+
+    /* ── Menu Items ──────────────────────────────────── */
+    .sidebar-menu ul>li>a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 14px;
+      text-decoration: none;
+      color: #344054;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 0;
+      transition: all .2s;
+      position: relative;
+    }
+
+    .sidebar-menu ul>li>a:hover,
+    .sidebar-menu ul>li.active>a {
+      color: #F26522;
+      background: #FFF4EE;
+    }
+
+    /* Icon circle */
+    .sidebar-menu ul>li>a>i:first-child,
+    .sidebar-menu ul>li>a>.ti:first-child {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F3F4F6;
+      border-radius: 50%;
+      font-size: 15px;
+      color: #6B7280;
+      transition: all .2s;
+    }
+
+    .sidebar-menu ul>li>a:hover>i:first-child,
+    .sidebar-menu ul>li>a:hover>.ti:first-child,
+    .sidebar-menu ul>li.active>a>i:first-child,
+    .sidebar-menu ul>li.active>a>.ti:first-child {
+      background: #F26522;
+      color: #fff;
+    }
+
+    /* Submenu arrow */
+    .sidebar-menu ul>li>a .menu-arrow {
+      margin-left: auto;
+      transition: transform .2s;
+    }
+
+    .sidebar-menu ul>li.subdrop>a .menu-arrow {
+      transform: rotate(90deg);
+    }
+
+    /* Sub-menu indented links */
+    .sidebar-menu ul>li ul>li>a {
+      padding: 6px 14px 6px 54px;
+      color: #6B7280;
+      font-size: 12px;
+      font-weight: 400;
+      gap: 0;
+    }
+
+    .sidebar-menu ul>li ul>li>a:hover,
+    .sidebar-menu ul>li ul>li.active>a {
+      color: #F26522;
+      background: #FFF4EE;
+    }
+
+    .sidebar-menu ul>li ul>li>a>i {
+      background: transparent !important;
+      color: #CBD5E0 !important;
+      font-size: 8px !important;
+      width: auto !important;
+      height: auto !important;
+    }
+
+    /* ── Minify Button ───────────────────────────────── */
+    #toggle_btn {
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      background: #1D2A3A;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      font-size: 14px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    #toggle_btn:hover {
+      background: #F26522;
+    }
+
+    #toggle_btn i {
+      line-height: 1;
+    }
+  </style>
+  <style>
+    .day-active-item {
+      background: #F8F9FA;
+      border: 1px solid #ededed;
+      padding: 4px;
+      border-radius: 100px;
+    }
+    .day-active-item button.active {
+    background: #212529;
+    color: #FFF;
+}
+
+    .attendance-db {
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+
+    .attendance-db h1,
+    .attendance-db h2,
+    .attendance-db h3,
+    .attendance-db h4,
+    .attendance-db h5,
+    .attendance-db h6 {
+      color: #1e293b;
+      font-weight: 700;
+    }
+
+    /* Unify Card Styles */
+    .attendance-db .card,
+    .attendance-db .overview-card,
+    .attendance-db .custom-card,
+    .attendance-db .attendance-trends-card,
+    .attendance-db .attendance-status-card {
+      background-color: #ffffff;
+      border: 1px solid #eef0f3;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    }
+
+    /* Fix Image/Avatar Sizes uniformly */
+    .attendance-db .avatar-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .attendance-db .avatar-group img,
+    .attendance-db .avatar-group .avatar-more {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+      margin-left: -10px;
+      z-index: 1;
+    }
+
+    .attendance-db .avatar-group img:first-child {
+      margin-left: 0;
+    }
+
+    .attendance-db .avatar-group .avatar-more {
+      background-color: #f3f4f6;
+      color: #1d2a3a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .attendance-db .late-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px dashed #eef0f3;
+    }
+
+    .attendance-db .late-item:last-child {
+      border-bottom: none;
+    }
+
+    .attendance-db .emp-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 45%;
+    }
+
+    .attendance-db .emp-info img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .attendance-db .check-time {
+      width: 25%;
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .attendance-db .late-bars {
+      display: flex;
+      gap: 4px;
+      width: 30%;
+      justify-content: flex-end;
+    }
+
+    .attendance-db .late-bars span {
+      width: 4px;
+      height: 16px;
+      border-radius: 2px;
+      background-color: #fceceb;
+    }
+
+    .attendance-db .late-bars span.active {
+      background-color: #f26522;
+    }
+
+    .avatar i {
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Main Wrapper -->
+  <div class="main-wrapper">
+    <!-- Header -->
+    <div class="header">
+      <div class="main-header d-flex justify-content-between align-items-center">
+        <div class="header-left">
+          <a href="javascript:void(0)" class="company-bx">
+            <img src="../assets/img/KompassHR.png" alt="Kompass HR Logo">
+            <span class="company-name">Kompass HR</span>
+          </a>
+        </div>
+
+        <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+          <span class="bar-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </a>
+        <!-- Search Bar -->
+        <div class="input-group d-none d-lg-flex ms-3">
+          <input type="text" class="form-control" placeholder="Search...">
+          <span class="input-group-text"><i class="ti ti-search"></i></span>
+        </div>
+        <!-- Right Side Icons -->
+        <div class="d-flex align-items-center ms-auto">
+          <div class="navbar-icons">
+            <button class="nav-icon" title="Chat">
+              <i class="ti ti-message-dots"></i>
+            </button>
+            <button class="nav-icon btnFullscreen" title="Fullscreen">
+              <i class="ti ti-arrows-maximize"></i>
+            </button>
+            <button class="nav-icon" title="Apps">
+              <i class="ti ti-layout-grid"></i>
+            </button>
+            <button class="nav-icon" title="Mail">
+              <i class="ti ti-mail"></i>
+            </button>
+            <button class="nav-icon notification-bell" title="Notifications">
+              <i class="ti ti-bell"></i>
+              <span class="badge bg-danger">3</span>
+            </button>
+          </div>
+          <!-- User Dropdown -->
+          <div class="dropdown ms-2">
+            <a href="javascript:void(0);" class="d-flex align-items-center" data-bs-toggle="dropdown">
+              <img src="../assets/img/avatar-01.jpg" alt="User" class="header-user-avatar">
+            </a>
+            <div class="dropdown-menu dropdown-menu-end p-2" style="min-width: 180px;">
+              <a class="dropdown-item rounded-1" href="javascript:void(0);"><i class="ti ti-user me-2"></i>My
+                Profile</a>
+              <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                  class="ti ti-settings me-2"></i>Settings</a>
+              <hr class="dropdown-divider my-1">
+              <a class="dropdown-item rounded-1" href="javascript:void(0);"><i class="ti ti-logout me-2"></i>Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Header -->
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <!-- Profile Section -->
+          <div class="menu-profile2">
+            <div class="profile-img">
+              <img src="../assets/img/avatar-02.jpg" alt="User" class="menu-profile-image">
+            </div>
+            <div class="profile-details">
+              <div class="profile-name">
+                DHEERENDRA <br><span class="accent">KUMAR JOSHI</span>
+              </div>
+              <p class="profile-role">Manager</p>
+            </div>
+          </div>
+
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="Menu-tab" data-bs-toggle="tab" data-bs-target="#Menu-tab-pane"
+                type="button" role="tab" aria-controls="Menu-tab-pane" aria-selected="true"><i
+                  class="fa-solid fa-list"></i> <span>Menu</span> </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><i
+                  class="fa-solid fa-table-cells-large"></i> <span>Dashboard</span></button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
+                type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><i
+                  class="fa-solid fa-cubes"></i>
+                <span>others</span></button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane"
+                type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false"><i
+                  class="fa-solid fa-gear"></i>
+                <span>Setting</span></button>
+            </li>
+          </ul>
+
+          <ul>
+            <li class="submenu">
+              <a href="javascript:void(0);">
+                <i class="ti ti-layout-dashboard"></i>
+                <span>Dashboard</span>
+                <span class="menu-arrow"></span>
+              </a>
+              <ul>
+                <li><a href="leads-dashboard.html" class="active"><i class="ti ti-point"></i><span>Leads
+                      Dashboard</span></a></li>
+                <li><a href="dashboard.html"><i class="ti ti-point"></i><span>HR Dashboard</span></a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-user-search"></i>
+                <span>Recruitment</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-settings-automation"></i>
+                <span>Operation</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-user-plus"></i>
+                <span>Onboarding</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-building"></i>
+                <span>HR Space</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-calculator"></i>
+                <span>Account</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-clock-check"></i>
+                <span>Attendance</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-calendar-event"></i>
+                <span>Leave</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-receipt"></i>
+                <span>Claim</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-file-invoice"></i>
+                <span>Income Tax</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-wallet"></i>
+                <span>Payroll</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0);">
+                <i class="ti ti-device-desktop"></i>
+                <span>VMS</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /Sidebar -->
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
+      <!-- ===== MAIN CONTENT ===== -->
+      <div class="content attendance-db">
+
+
+        <!-- ===== PAGE TITLE & BREADCRUMB ===== -->
+        <div class="d-flex justify-content-between align-items-center mb-4 px-3 px-md-4 py-3">
+          <!-- LEFT SIDE -->
+          <div>
+            <h2 class="fw-bold mb-1">Attendance Dashboard</h2>
+            <div class="d-flex align-items-center text-muted" style="font-size:14px;">
+              <span class="me-2"><i class="ti ti-smart-home"></i></span>
+              <span>Dashboard</span>
+              <span class="mx-2">/</span>
+              <span class="fw-semibold text-dark">Attendance Dashboard</span>
+            </div>
+          </div>
+
+          <!-- RIGHT SIDE -->
+          <div class="d-flex gap-2 flex-wrap">
+
+            <!-- Year Button -->
+            <button class="btn btn-light border">
+              <i class="ti ti-calendar me-1"></i> Dec 2025
+            </button>
+            <a href="#" class="btn btn-primary-gradient apply-leave-btn">
+              <span class="btn-icon"><i class="ti ti-plus"></i></span>
+              Apply Leave
+            </a>
+          </div>
+        </div>
+
+        <div class="container-fluid mt-4">
+          <div class="card">
+            <div class="card-body">
+
+
+              <div class="mb-1 d-flex align-items-center justify-content-between gap-2 flex-wrap mb-4">
+                <h2 class="card-title fw-bold mb-0">Overview Statistics</h2>
+                <div class="dropdown">
+                  <a href="javascript:void(0);"
+                    class="btn btn-light fw-normal d-inline-flex align-items-center justify-content-center rounded-pill gap-1 fw-medium"
+                    data-bs-toggle="dropdown">
+                    <i class="ti ti-calendar fs-14"></i> Today
+                  </a>
+                  <ul class="dropdown-menu mt-2 p-3">
+                    <li>
+                      <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                        Today
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                        Weekly
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:void(0);" class="dropdown-item rounded-1">
+                        Monthly
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- start row -->
+              <div class="row row-gap-4 mb-4">
+
+                <!-- Item 1 -->
+                <div class="col-xxl-4 col-xl-6 col-lg-6 col-sm-6">
+                  <div class="card bg-light stat-card border shadow-none h-100">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                        <div>
+                          <p class="fs-14 fw-medium mb-2 text-muted">Total Employees</p>
+                          <div class="d-flex align-items-center gap-2">
+                            <h3 class="fs-24 fw-bold mb-0">2,847</h3>
+                            <div class="d-flex align-items-center gap-1 text-muted" style="font-size: 13px;">
+                              <span class="badge bg-success d-inline-flex align-items-center gap-1 rounded fs-12">
+                                <i class="ti ti-arrow-up-right"></i> 12%</span> vs yesterday
+                            </div>
+                          </div>
+                        </div>
+                        <div class="avatar avatar-lg rounded-circle d-flex align-items-center justify-content-center"
+                          style="width: 50px; height: 50px; background-color: #fff0eb;">
+                          <i class="ti ti-users " style="color: #f46228;"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="col-xxl-4 col-xl-6 col-lg-6 col-sm-6">
+                  <div class="card bg-light stat-card border shadow-none h-100">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                        <div>
+                          <p class="fs-14 fw-medium mb-2 text-muted">Present Today</p>
+                          <div class="d-flex align-items-center gap-2">
+                            <h3 class="fs-24 fw-bold mb-0">2,458</h3>
+                            <div class="d-flex align-items-center gap-1 text-muted" style="font-size: 13px;"> <span
+                                class="badge bg-danger d-inline-flex align-items-center gap-1 rounded fs-12">
+                                <i class="ti ti-arrow-down-right"></i> 3.2%</span> vs yesterday </div>
+                          </div>
+                        </div>
+                        <div class="avatar avatar-lg rounded-circle d-flex align-items-center justify-content-center"
+                          style="width: 50px; height: 50px; background-color: #eaf6f6;">
+                          <i class="ti ti-user-check " style="color: #1e8784;"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="col-xxl-4 col-xl-6 col-lg-6 col-sm-6">
+                  <div class="card bg-light stat-card border shadow-none h-100">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                        <div>
+                          <p class="fs-14 fw-medium mb-2 text-muted">Absent Today</p>
+                          <div class="d-flex align-items-center gap-2">
+                            <h3 class="fs-24 fw-bold mb-0">124</h3>
+                            <div class="d-flex align-items-center gap-1 text-muted" style="font-size: 13px;"> <span
+                                class="badge bg-danger d-inline-flex align-items-center gap-1 rounded fs-12">
+                                <i class="ti ti-arrow-up-right"></i> 1.4%</span> vs yesterday </div>
+                          </div>
+                        </div>
+                        <div class="avatar avatar-lg rounded-circle d-flex align-items-center justify-content-center"
+                          style="width: 50px; height: 50px; background-color: #fff4d2;">
+                          <i class="ti ti-user-off " style="color: #ffb800;"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="col-xxl-4 col-xl-6 col-lg-6 col-sm-6">
+                  <div class="card bg-light stat-card border shadow-none h-100">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                        <div>
+                          <p class="fs-14 fw-medium mb-2 text-muted">Late Arrivals</p>
+                          <div class="d-flex align-items-center gap-2">
+                            <h3 class="fs-24 fw-bold mb-0">89</h3>
+                            <div class="d-flex align-items-center gap-1 text-muted" style="font-size: 13px;"> <span
+                                class="badge bg-danger d-inline-flex align-items-center gap-1 rounded fs-12">
+                                <i class="ti ti-arrow-up-right"></i> 12%</span> vs yesterday </div>
+                          </div>
+                        </div>
+                        <div class="avatar avatar-lg rounded-circle d-flex align-items-center justify-content-center"
+                          style="width: 50px; height: 50px; background-color: #eaf3fe;">
+                          <i class="ti ti-clock " style="color: #0b7af0;"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="col-xxl-4 col-xl-6 col-lg-6 col-sm-6">
+                  <div class="card bg-light stat-card border shadow-none h-100">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                        <div>
+                          <p class="fs-14 fw-medium mb-2 text-muted">Attendance Rate</p>
+                          <div class="d-flex align-items-center gap-2">
+                            <h3 class="fs-24 fw-bold mb-0">86.3%</h3>
+                            <div class="d-flex align-items-center gap-1 text-muted" style="font-size: 13px;"> <span
+                                class="badge bg-success d-inline-flex align-items-center gap-1 rounded fs-12">
+                                <i class="ti ti-arrow-up-right"></i> 2.5%</span> vs yesterday </div>
+                          </div>
+                        </div>
+                        <div class="avatar avatar-lg rounded-circle d-flex align-items-center justify-content-center"
+                          style="width: 50px; height: 50px; background-color: #f2ebfb;">
+                          <i class="ti ti-calendar " style="color: #6c2bd9;"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="col-xxl-4 col-xl-6 col-lg-6 col-sm-6">
+                  <div class="card bg-light stat-card border shadow-none h-100">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                        <div>
+                          <p class="fs-14 fw-medium mb-2 text-muted">Pending Regularizations</p>
+                          <div class="d-flex align-items-center gap-2">
+                            <h3 class="fs-24 fw-bold mb-0">42</h3>
+                            <div class="d-flex align-items-center gap-1 text-muted" style="font-size: 13px;"> <span
+                                class="badge bg-danger d-inline-flex align-items-center gap-1 rounded fs-12">
+                                <i class="ti ti-arrow-down-right"></i> 7%</span> vs yesterday </div>
+                          </div>
+                        </div>
+                        <div class="avatar avatar-lg rounded-circle d-flex align-items-center justify-content-center"
+                          style="width: 50px; height: 50px; background-color: #ffedf6;">
+                          <i class="ti ti-alert-circle " style="color: #e91e63;"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Attendance Trends + Status -->
+        <div class="container-fluid mt-4">
+          <div class="row row-gap-4 mb-4">
+            <div class="col-xxl-8">
+              <div class="card mb-0">
+                <div class="card-body pb-2">
+                  <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-2">
+                    <h2 class="card-title fw-bold mb-0">Attendance Trends</h2>
+                    <div class="day-active-item d-inline-flex align-items-center gap-2">
+                      <button class="day btn btn-light btn-sm">1D</button>
+                      <button class="day btn btn-light btn-sm">7D</button>
+                      <button class="day btn btn-light btn-sm">1M</button>
+                      <button class="day btn btn-primary-custom btn-sm active">1Y</button>
+                    </div>
+                  </div>
+                  <div id="attendanceChart" style="min-height: 390px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-4">
+              <div class="card bg-dark position-relative mb-0 h-100">
+                <div class="card-body position-relative z-1">
+                  <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-4">
+                    <h2 class="card-title mb-0 text-white fw-bold">Attendance Status</h2>
+                    <div class="input-icon rounded-circle position-relative mb-2 custom-datepicker">
+                      <span class="input-icon-addon">
+                        <i class="ti ti-calendar text-gray-9 text-white"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <p class="mb-1 text-white">Total Working Days</p>
+                    <h3 class="main-title mb-0 text-white fw-bold">300</h3>
+                  </div>
+
+                  <div class="progress working-progress bg-soft-light mb-1 py-1 px-1 px-1 mb-3"
+                    style="height: 12px; background: rgba(255,255,255,0.1); border-radius: 6px;">
+                    <div class="progress-bar bg-success me-1" role="progressbar" style="width: 40%;"></div>
+                    <div class="progress-bar bg-info me-1" role="progressbar" style="width: 20%;"></div>
+                    <div class="progress-bar bg-warning me-1" role="progressbar" style="width: 10%;"></div>
+                    <div class="progress-bar bg-orange me-1" role="progressbar" style="width: 10%;"></div>
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%;"></div>
+                  </div>
+
+                  <ul class="list-unstyled mt-4 text-white">
+                    <li class="d-flex justify-content-between mb-3"><span class="d-flex align-items-center"><i
+                          class="ti ti-circle-filled text-success me-2" style="font-size:10px;"></i> Present</span>
+                      <b>2458</b>
+                    </li>
+                    <li class="d-flex justify-content-between mb-3"><span class="d-flex align-items-center"><i
+                          class="ti ti-circle-filled text-info me-2" style="font-size:10px;"></i> WFH</span>
+                      <b>187</b>
+                    </li>
+                    <li class="d-flex justify-content-between mb-3"><span class="d-flex align-items-center"><i
+                          class="ti ti-circle-filled text-warning me-2" style="font-size:10px;"></i> Late</span>
+                      <b>89</b>
+                    </li>
+                    <li class="d-flex justify-content-between mb-3"><span class="d-flex align-items-center"><i
+                          class="ti ti-circle-filled text-orange me-2" style="font-size:10px;"></i> On Leave</span>
+                      <b>78</b>
+                    </li>
+                    <li class="d-flex justify-content-between"><span class="d-flex align-items-center"><i
+                          class="ti ti-circle-filled text-danger me-2" style="font-size:10px;"></i> Absent</span>
+                      <b>124</b>
+                    </li>
+                  </ul>
+                </div>
+                <img src="../assets/img/attendance-bg-2.png" alt="attendance"
+                  class="img-fluid img-1 position-absolute top-0 end-0" style="opacity: 0.1;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid mt-4">
+          <div class="row g-4 mb-4">
+
+            <!-- Office vs Remote -->
+            <div class="col-lg-7 col-12">
+              <div class="card p-3 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-0">
+                  <h6 class="fw-bold mb-0">Office Vs Remote</h6>
+                  <button class="btn btn-light btn-sm fw-medium">📅 Weekly</button>
+                </div>
+
+                <div class="chart-wrapper">
+                  <div id="officeRemoteChart" style="height: 250px; width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Attendance Summary -->
+            <div class="col-lg-5 col-12">
+              <div class="card p-3  text-center d-flex flex-column justify-content-between">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="fw-bold mb-0">Attendance Summary</h6>
+                    <button class="btn btn-light btn-sm fw-medium">📅 Today</button>
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <p class="mb-0 fw-semibold text-muted" style="font-size:13px;">Avg Working Hours</p>
+                    <span class="badge bg-danger">8:43 hr / 9 hr/day</span>
+                  </div>
+
+                  <div class="progress mb-4" style="height: 10px; border-radius: 5px; background-color: #f3f4f6;">
+                    <div class="progress-bar" style="width:90%; background-color: #1c2b36; border-radius: 5px;"></div>
+                  </div>
+                </div>
+
+                <div class="row border-top pt-3 g-3 mt-1 align-items-center">
+                  <div class="col-md-4 col-4 border-end">
+                    <div class="mini-card text-center">
+                      <h4 class="fw-bold mb-1">2,458</h4>
+                      <small class="text-muted" style="font-size: 11px; font-weight: 500;">On-time Arrival</small>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 col-4 border-end">
+                    <div class="mini-card text-center">
+                      <h4 class="fw-bold mb-1">2,201</h4>
+                      <small class="text-muted" style="font-size: 11px; font-weight: 500;">Checkout Count</small>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 col-4">
+                    <div class="mini-card text-center">
+                      <h4 class="fw-bold mb-1">9:12 AM</h4>
+                      <small class="text-muted" style="font-size: 11px; font-weight: 500;">Avg Check-in</small>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row g-4 mb-4">
+
+            <!-- Frequent Late Arrivals -->
+            <div class="col-lg-4 col-md-4 col-12">
+              <div class="card p-3 h-100">
+                <div class="d-flex justify-content-between">
+                  <h6 class="fw-bold">Frequent Late Arrivals</h6>
+                  <button class="btn btn-light btn-sm fw-medium">📅 Today</button>
+                </div>
+
+                <p class="text-muted mb-1 mt-4" style="font-size: 13px;">No of Employees</p>
+                <h3 class="fw-bold display-6 mb-0">22 <span class="badge ms-2   align-middle"
+                    style="background-color: #f2ebfb; color: #6c2bd9; font-size: 10px;">Warnings</span></h3>
+
+                <div class="d-flex align-items-center mt-auto pt-4">
+                  <div class="avatar-group">
+                    <img src="../assets/img/image.png">
+                    <img src="../assets/img/image2.PNG">
+                    <img src="../assets/img/image3.PNG">
+                    <img src="../assets/img/image2.PNG">
+                    <span class="avatar-more">+9</span>
+                  </div>
+
+                  <span class="ms-auto badge rounded-1 text-danger p-2" style="background-color: #f5f5f5;">+15.5% <span
+                      class="p-2 bg-white"><i class="ti ti-arrow-down-right "></i></span></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Missing Punches -->
+            <div class="col-lg-4 col-md-4 col-12">
+              <div class="card p-3 h-100">
+                <div class="d-flex justify-content-between">
+                  <h6 class="fw-bold">Missing Punches</h6>
+                  <button class="btn btn-light btn-sm fw-medium">📅 Today</button>
+                </div>
+
+                <p class="text-muted mb-1 mt-4" style="font-size: 13px;">Total Number of Missing Punches</p>
+                <h3 class="fw-bold display-6 mb-0">09 <span class="badge ms-2  align-middle"
+                    style="background-color: #ffedf6; color: #e91e63; font-size: 10px;">Critical</span></h3>
+
+                <div class="d-flex align-items-center mt-auto pt-4">
+                  <div class="avatar-group">
+                    <img src="../assets/img/image.png">
+                    <img src="../assets/img/image2.PNG">
+                    <img src="../assets/img/image3.PNG">
+                    <span class="avatar-more">+6</span>
+                  </div>
+
+                  <span class="ms-auto badge bg-success-light text-success">+18.5% <i
+                      class="ti ti-arrow-up-right"></i></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-12">
+              <div class="card p-3 h-100 text-center">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h6 class="fw-bold mb-0">Violations Statistics</h6>
+                  <button class="btn btn-light btn-sm fw-medium">📅 May</button>
+                </div>
+                <div id="violationChart" class="mt-auto" style="height: 150px; width: 100%;"></div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row mt-3">
+
+            <!-- LEFT SIDE CARD -->
+            <div class="col-lg-7 col-12">
+              <div class="card late-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h6 class="mb-0 fw-bold">Late Arrivals & Alerts</h6>
+                  <button class="btn btn-light btn-sm">
+                    <i class="bi bi-calendar fw-bold"></i> Today
+                  </button>
+                </div>
+
+                <div class="card-body p-3">
+
+                  <!-- Employee Row -->
+                  <div class="late-item">
+                    <div class="emp-info">
+                      <img src="../assets/img/image3.PNG" />
+                      <div>
+                        <h6 class="fw-bold">Michael Johnson</h6>
+                        <span>Administration Head</span>
+                      </div>
+                    </div>
+
+                    <div class="check-time">
+                      Check-in: <strong>09:45 AM</strong>
+                    </div>
+
+                    <div class="late-bars">
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+
+                  <!-- Duplicate rows -->
+                  <div class="late-item">
+                    <div class="emp-info">
+                      <img src="../assets/img/image.png" />
+                      <div>
+                        <h6 class="fw-bold">Emily Davis</h6>
+                        <span>Frontend Developer</span>
+                      </div>
+                    </div>
+
+                    <div class="check-time">
+                      Check-in: <strong>09:30 AM</strong>
+                    </div>
+
+                    <div class="late-bars">
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+
+                  <div class="late-item">
+                    <div class="emp-info">
+                      <img src="../assets/img/image2.PNG" />
+                      <div>
+                        <h6 class="fw-bold">Robert Martinez</h6>
+                        <span>Finance Manager</span>
+                      </div>
+                    </div>
+
+                    <div class="check-time">
+                      Check-in: <strong>09:25 AM</strong>
+                    </div>
+
+                    <div class="late-bars">
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+                  <div class="late-item">
+                    <div class="emp-info">
+                      <img src="../assets/img/image4.PNG" />
+                      <div>
+                        <h6 class="fw-bold">Megan Walker</h6>
+                        <span>SEO Analyst</span>
+                      </div>
+                    </div>
+
+                    <div class="check-time">
+                      Check-in: <strong>09:10 AM</strong>
+                    </div>
+
+                    <div class="late-bars">
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span class="active"></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-5 col-12">
+              <!-- AI Assistant Start -->
+              <div class="card ai-assistant-card mb-4 border-0"
+                style="background: linear-gradient(135deg, #123e47, #0d282e); color: white;">
+                <div class="d-flex align-items-center p-4 text-white rounded-3">
+                  <div
+                    class="ai-icon rounded-circle bg-white text-dark d-flex align-items-center justify-content-center me-3"
+                    style="height: 50px;width: 50px; background-color: rgba(255,255,255,0.1) !important; color: white !important;">
+                    <i class="ti ti-robot" style="font-size: larger;"></i>
+                  </div>
+                  <div>
+                    <h5 class="mb-0 fw-bold border-0 text-white">AI Assistant</h5>
+                    <small class="text-light" style="opacity: 0.7;">Always out to help</small>
+                  </div>
+                  <span class="badge bg-success ms-auto rounded-pill px-3 py-2">Online</span>
+                </div>
+                <div class="ai-chat p-4 pt-0">
+                  <p class="mb-4 text-light" style="opacity: 0.9;">Hello Kasper! I'm your AI Attendance Assistant. I can
+                    help you
+                    analyze patterns, generate reports, and provided insights. How can I assist you today?</p>
+                  <div class="mb-4">
+                    <span class="text-white-50 d-block mb-3" style="font-size: 13px; color: #8faab0 !important;">Suggested
+                      Questions:</span>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button class="btn btn-sm text-white rounded-pill px-3"
+                        style="border-color: rgba(255,255,255,0.2);">Give me attendance summary</button>
+                      <button class="btn btn-sm text-white  rounded-pill px-3"
+                        style="border-color: rgba(255,255,255,0.2);">Why is attendance low?</button>
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    <input type="text" class="form-control"
+                      style="background-color: rgba(255,255,255,0.1); border: none; height: 45px; color: white;"
+                      placeholder="Ask me anything...">
+                    <button class="btn" style="background-color: #f46228; color: white;" type="button"><i
+                        class="ti ti-send"></i></button>
+                  </div>
+                </div>
+              </div>
+              <!-- AI Assistant End -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /Page Wrapper -->
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="../assets/js/jquery-3.7.1.min.js"></script>
+
+
+    <!-- Highcharts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@12.5.0/highcharts.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/12.4.0/css/highcharts.css"
+      integrity="sha512-AK+uoqT8+mBIDSg8X82PlPLtProHlfKagadiSPEqYJiGTQxKnSVoiGgE8IhgRxKre0JWw7teyJc7Mzr/4opudA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap Core JS -->
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Feather Icon JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"
+      integrity="sha512-zMm7+ZQ8AZr1r3W8Z8lDATkH05QG5Gm2xc6MlsCdBz9l6oE8Y7IXByMgSm/rdRQrhuHt99HAYfMljBOEZ68q5A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script> <!-- Slimscroll JS -->
+    <script src="../assets/js/jquery.slimscroll.min.js"></script>
+    <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Chart JS -->
+    <script src="../assets/plugins/apexchart/apexcharts.min.js"></script>
+    <script src="../assets/plugins/apexchart/chart-data.js"></script>
+    <!-- Chart JS -->
+    <script src="../assets/plugins/peity/jquery.peity.min.js"></script>
+    <script src="../assets/plugins/peity/chart-data.js"></script>
+    <!-- Datetimepicker JS -->
+    <script src="../assets/js/moment.min.js"></script>
+    <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Daterangepikcer JS -->
+    <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Color Picker JS -->
+    <script src="../assets/plugins/@simonwep/pickr/pickr.es5.min.js"></script>
+
+    <!-- Highcharts setup logic -->
+    <script src="../assets/js/attendance.js"></script>
+
+</body>
+
+</html>
