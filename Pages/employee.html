@@ -1,404 +1,1127 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Management - Kampass HR</title>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="Kompass HR - Employee Management Dashboard">
+    <meta name="keywords" content="hr, dashboard, employee, management, hr space">
+    <meta name="author" content="Kompass HR">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Employee Management (HR Space) - Kompass HR</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon.png">
+    <!-- Google Fonts: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <!-- Feather CSS -->
+    <link rel="stylesheet" href="../assets/plugins/icons/feather/feather.css">
+    <!-- Tabler Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="../assets/plugins/select2/css/select2.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+    <!-- Daterangepikcer CSS -->
+    <link rel="stylesheet" href="../assets/plugins/daterangepicker/daterangepicker.css">
+    <!-- Color Picker Css -->
+    <link rel="stylesheet" href="../assets/plugins/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" href="../assets/plugins/@simonwep/pickr/themes/nano.min.css">
+    <link rel="stylesheet" href="../assets/css/style2.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
-    <!-- Your CSS -->
-    <link rel="stylesheet" href="../css/style.css">
+    <!-- KompassHR Internal Styles from onboard dashboard -->
+    <style>
+        .company-bx {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+        }
+
+        .company-bx img {
+            max-height: 35px;
+            width: auto;
+        }
+
+        .company-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #202C4B;
+            white-space: nowrap;
+        }
+
+        /* ── Header Nav Icons ────────────────────────────── */
+        .navbar-icons {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #637381;
+            background: transparent;
+            border: none;
+            transition: all .2s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-icon:hover {
+            background: #F3F4F6;
+            color: #F26522;
+        }
+
+        .nav-icon i {
+            font-size: 18px;
+        }
+
+        .notification-bell {
+            position: relative;
+        }
+
+        .notification-bell .badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 9px;
+            min-width: 16px;
+            height: 16px;
+            line-height: 16px;
+            padding: 0 4px;
+            border-radius: 50%;
+        }
+
+        .header-user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* ── Header Left ─────────────────────────────────── */
+        .header .header-left {
+            display: flex !important;
+            align-items: center;
+            width: 252px;
+            padding: 0;
+            float: left;
+            height: 50px;
+            z-index: 1;
+        }
+
+        .mini-sidebar .header .header-left {
+            width: 80px;
+            justify-content: center;
+        }
+
+        .mini-sidebar .header .header-left .company-name {
+            display: none;
+        }
+
+        .mini-sidebar .header .header-left .company-bx img {
+            max-height: 28px;
+        }
+
+        /* ── Sidebar Base ────────────────────────────────── */
+        .sidebar {
+            background: #fff;
+            border-right: 1px solid #EDEDED;
+        }
+
+        .sidebar .sidebar-logo {
+            display: none;
+        }
+
+        /* ── Profile Section ─────────────────────────────── */
+        .menu-profile2 {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            padding: 20px 0px 14px;
+        }
+
+        .menu-profile2 .menu-profile-image {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #E8E9EA;
+            outline: 2px solid #1D2A3A;
+            outline-offset: 2px;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .menu-profile2 .profile-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1D2A3A;
+            line-height: 1.4;
+            margin-bottom: 3px;
+        }
+
+        .menu-profile2 .profile-name .accent {
+            color: #1D2A3A;
+        }
+
+        .menu-profile2 .profile-role {
+            font-size: 11px;
+            color: #6B7280;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ── Sidebar Tabs ────────────────────────────────── */
+        #myTab {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+
+        #myTab .nav-item {
+            margin-inline-end: 0;
+            width: -webkit-fill-available;
+        }
+
+        #myTab .nav-item .nav-link:hover {
+            background: #F3F4F6;
+            color: #1D2A3A;
+        }
+
+        #myTab .nav-item .nav-link.active {
+            border: 1px solid var(--color-light-gray);
+            border-bottom: none;
+            background: #1D2A3A;
+            color: #fff;
+        }
+
+        #myTab .nav-link i {
+            font-size: 15px;
+        }
+
+        #myTab .nav-link span {
+            display: none;
+        }
+
+        /* ── Menu Items ──────────────────────────────────── */
+        .sidebar-menu ul>li>a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 14px;
+            text-decoration: none;
+            color: #344054;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 0;
+            transition: all .2s;
+            position: relative;
+        }
+
+        .sidebar-menu ul>li>a:hover,
+        .sidebar-menu ul>li.active>a {
+            color: #F26522;
+            background: #FFF4EE;
+        }
+
+        .sidebar-menu ul>li>a>i:first-child,
+        .sidebar-menu ul>li>a>.ti:first-child {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            border-radius: 50%;
+            font-size: 15px;
+            color: #6B7280;
+            transition: all .2s;
+        }
+
+        .sidebar-menu ul>li>a:hover>i:first-child,
+        .sidebar-menu ul>li>a:hover>.ti:first-child,
+        .sidebar-menu ul>li.active>a>i:first-child,
+        .sidebar-menu ul>li.active>a>.ti:first-child {
+            background: #F26522;
+            color: #fff;
+        }
+
+        .sidebar-menu ul>li>a .menu-arrow {
+            margin-left: auto;
+            transition: transform .2s;
+        }
+
+        .sidebar-menu ul>li.subdrop>a .menu-arrow {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-menu ul>li ul>li>a {
+            padding: 6px 14px 6px 54px;
+            color: #6B7280;
+            font-size: 12px;
+            font-weight: 400;
+            gap: 0;
+        }
+
+        .sidebar-menu ul>li ul>li>a:hover,
+        .sidebar-menu ul>li ul>li.active>a {
+            color: #F26522;
+            background: #FFF4EE;
+        }
+
+        .sidebar-menu ul>li ul>li>a>i {
+            background: transparent !important;
+            color: #CBD5E0 !important;
+            font-size: 8px !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+        /* ── Minify Button ───────────────────────────────── */
+        #toggle_btn {
+            position: absolute;
+            right: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: #1D2A3A;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background .2s;
+        }
+
+        #toggle_btn:hover {
+            background: #F26522;
+        }
+
+        #toggle_btn i {
+            line-height: 1;
+        }
+    </style>
+
 </head>
 
 <body>
 
-    <!-- ===== SIDEBAR ===== -->
-    <div class="sidebar">
-        <h2>Kampass HR</h2>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="employee.html" class="active">Employee Management</a>
-        <a href="attendance.html">Attendance Dashboard</a>
-        <a href="leave.html">Leave Management</a>
-        <a href="payroll.html">Payroll</a>
-        <a href="claim.html">Claim Management</a>
-        <a href="Exit Management">Exit Management</a>
-        <a href="TaskManagement.html">Task Management</a>
-    </div>
-
-    <!-- ===== MAIN CONTENT ===== -->
-    <div class="main-content">
-
-        <!-- ===== HEADER ===== -->
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <!-- Header -->
         <div class="header">
-            <h1 class="company-title">
-                <img src="../image/logo.PNG" class="company-logo" alt="Kampass HR Logo">
-                <span class="d-none d-sm-inline">Probus Software Private Limited</span>
-                <span class="d-sm-none">Probus Software</span>
-            </h1>
+            <div class="main-header d-flex justify-content-between align-items-center">
+                <div class="header-left">
+                    <a href="javascript:void(0)" class="company-bx">
+                        <img src="../assets/img/KompassHR.png" alt="Kompass HR Logo">
+                        <span class="company-name">Kompass HR</span>
+                    </a>
+                </div>
 
-            <div class="header-search">
-                <form class="w-100">
-                    <input type="text" placeholder="Search Employee..." id="searchBox">
-                    <button type="submit">🔍</button>
-                    <div class="icon">🔔</div>
-                </form>
-            </div>
-        </div>
-
-        <!-- ===== PAGE TITLE & BREADCRUMB ===== -->
-        <div class="d-flex justify-content-between align-items-center mb-4 px-3 px-md-4 py-3">
-            <!-- LEFT SIDE -->
-            <div>
-                <h2 class="fw-bold mb-1">Employee Management</h2>
-                <div class="d-flex align-items-center text-muted" style="font-size:14px;">
-                    <span class="me-2">🏠</span>
-                    <span>Dashboard</span>
-                    <span class="mx-2">/</span>
-                    <span class="fw-semibold text-dark">Employee Management</span>
+                <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+                    <span class="bar-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
+                <!-- Search Bar -->
+                <div class="input-group d-none d-lg-flex ms-3">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-text"><i class="ti ti-search"></i></span>
+                </div>
+                <!-- Right Side Icons -->
+                <div class="d-flex align-items-center ms-auto">
+                    <div class="navbar-icons">
+                        <button class="nav-icon" title="Chat">
+                            <i class="ti ti-message-dots"></i>
+                        </button>
+                        <button class="nav-icon btnFullscreen" title="Fullscreen">
+                            <i class="ti ti-arrows-maximize"></i>
+                        </button>
+                        <button class="nav-icon" title="Apps">
+                            <i class="ti ti-layout-grid"></i>
+                        </button>
+                        <button class="nav-icon" title="Mail">
+                            <i class="ti ti-mail"></i>
+                        </button>
+                        <button class="nav-icon notification-bell" title="Notifications">
+                            <i class="ti ti-bell"></i>
+                            <span class="badge bg-danger">3</span>
+                        </button>
+                    </div>
+                    <!-- User Dropdown -->
+                    <div class="dropdown ms-2">
+                        <a href="javascript:void(0);" class="d-flex align-items-center" data-bs-toggle="dropdown">
+                            <img src="../assets/img/avatar-01.jpg" alt="User" class="header-user-avatar">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end p-2" style="min-width: 180px;">
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-user me-2"></i>My Profile</a>
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-settings me-2"></i>Settings</a>
+                            <hr class="dropdown-divider my-1">
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-logout me-2"></i>Logout</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <!-- /Header -->
 
-            <!-- RIGHT SIDE -->
-            <div class="d-flex gap-2 flex-wrap">
-                <!-- Export Button -->
-                <div class="dropdown">
-                    <button class="btn btn-light border dropdown-toggle" 
-                            type="button" 
-                            data-bs-toggle="dropdown">
-                        ⬇ Export
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">PDF</a></li>
-                        <li><a class="dropdown-item" href="#">Excel</a></li>
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <!-- Profile Section -->
+                    <div class="menu-profile2">
+                        <div class="profile-img">
+                            <img src="../assets/img/avatar-02.jpg" alt="User" class="menu-profile-image">
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-name">
+                                DHEERENDRA <br><span class="accent">KUMAR JOSHI</span>
+                            </div>
+                            <p class="profile-role">Manager</p>
+                        </div>
+                    </div>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="Menu-tab" data-bs-toggle="tab"
+                                data-bs-target="#Menu-tab-pane" type="button" role="tab" aria-controls="Menu-tab-pane"
+                                aria-selected="true"><i class="fa-solid fa-list"></i> <span>Menu</span> </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                aria-controls="profile-tab-pane" aria-selected="false"><i
+                                    class="fa-solid fa-table-cells-large"></i> <span>Dashboard</span></button>
+                        </li>
+                    </ul>
+
+                    <ul>
+                        <li class="submenu">
+                            <a href="javascript:void(0);">
+                                <i class="ti ti-layout-dashboard"></i>
+                                <span>Dashboard</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul>
+                                <li><a href="leads-dashboard.html"><i class="ti ti-point"></i><span>Leads
+                                            Dashboard</span></a></li>
+                                <li><a href="dashboard.html"><i class="ti ti-point"></i><span>HR Dashboard</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="recuritment.html">
+                                <i class="ti ti-user-search"></i>
+                                <span>Recruitment</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="operation_dashboard.html">
+                                <i class="ti ti-settings-automation"></i>
+                                <span>Operation</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="onboarding-dashboard.html">
+                                <i class="ti ti-user-plus"></i>
+                                <span>Onboarding</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="employee.html">
+                                <i class="ti ti-building"></i>
+                                <span>HR Space</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="attendance.html">
+                                <i class="ti ti-clock-check"></i>
+                                <span>Attendance</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Leave_dashboard.html">
+                                <i class="ti ti-calendar-event"></i>
+                                <span>Leave</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="payroll.html">
+                                <i class="ti ti-wallet"></i>
+                                <span>Payroll</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="claim.html">
+                                <i class="ti ti-receipt"></i>
+                                <span>Claim</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="vms_dashboard.html">
+                                <i class="ti ti-device-desktop"></i>
+                                <span>VMS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Pms_dashboard.html">
+                                <i class="ti ti-chart-bar"></i>
+                                <span>PMS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ticketdashboard_manager.html">
+                                <i class="ti ti-ticket"></i>
+                                <span>Tickets</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
-
-                <!-- Year Button -->
-                <button class="btn btn-light border">
-                    📅 2025
-                </button>
             </div>
         </div>
+        <!-- /Sidebar -->
 
-        <!-- ===== MAIN CONTENT AREA ===== -->
-        <div class="container-fluid px-3 px-md-4 pb-4">
-            <!-- CARDS ROW -->
-            <div class="row g-3 mb-4">
-                <!-- CARD 1: Leave Details with Chart -->
-                <div class="col-12 col-md-6 col-lg-4">
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <!-- ===== MAIN CONTENT ===== -->
+            <div class="content employee-dashboard">
+                <style>
+                    /* ==========================================
+                       EMPLOYEE DASHBOARD INTERNAL STYLES 
+                       ========================================== */
+                    .employee-dashboard .card {
+                        border-radius: 10px;
+                        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+                        margin-bottom: 24px;
+                        background-color: #fff;
+                        display: flex;
+                        flex-direction: column;
+                        word-wrap: break-word;
+                    }
 
-                    <div class="employee-card">
-    <div class="card-header-custom">
-        <h5 class="card-title-custom">Leave Details</h5>
-        <span class="card-year">📅 2024</span>
-    </div>
+                    .employee-dashboard .card-header {
+                        background-color: transparent;
+                        padding: 1rem 1.25rem;
+                        border-bottom: 1px solid rgba(0, 0, 0, .05);
+                    }
 
-    <!-- ADD THIS WRAPPER -->
-    <div class="leave-flex">
+                    .employee-dashboard .card-title {
+                        font-weight: 600;
+                        font-size: 16px;
+                        color: #1D2A3A;
+                    }
 
-        <!-- LEFT SIDE TEXT -->
-        <div class="leave-legend">
-            <div class="legend-item">
-                <span class="legend-dot present"></span>
-                <span><strong>1254</strong> on time</span>
-            </div>
+                    .employee-dashboard .card-body {
+                        flex: 1 1 auto;
+                        padding: 1.25rem;
+                    }
 
-            <div class="legend-item">
-                <span class="legend-dot late"></span>
-                <span><strong>32</strong> Late Attendance</span>
-            </div>
+                    .employee-dashboard .avatar {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
 
-            <div class="legend-item">
-                <span class="legend-dot permission"></span>
-                <span><strong>658</strong> Work From Home</span>
-            </div>
+                    .employee-dashboard .avatar-sm {
+                        width: 32px;
+                        height: 32px;
+                        font-size: 13px;
+                    }
 
-            <div class="legend-item">
-                <span class="legend-dot absent"></span>
-                <span><strong>14</strong> Absent</span>
-            </div>
+                    .employee-dashboard .avatar-md {
+                        width: 48px;
+                        height: 48px;
+                        font-size: 20px;
+                    }
 
-            <div class="legend-item">
-                <span class="legend-dot permission"></span>
-                <span><strong>68</strong> Sick Leave</span>
-            </div>
-        </div>
+                    /* Transparent Backgrounds & Text Colors */
+                    .employee-dashboard .bg-primary-transparent {
+                        background-color: rgba(242, 101, 34, 0.1) !important;
+                        color: #F26522 !important;
+                    }
 
-        <!-- RIGHT SIDE CHART -->
-        <div class="chart-container">
-            <canvas id="leaveChart"></canvas>
-        </div>
-    </div>
-    <div class="comparison-text">
-                            Better than <strong>85%</strong> of Employees
+                    .employee-dashboard .bg-success-transparent {
+                        background-color: rgba(40, 167, 69, 0.1) !important;
+                        color: #28a745 !important;
+                    }
+
+                    .employee-dashboard .bg-info-transparent {
+                        background-color: rgba(23, 162, 184, 0.1) !important;
+                        color: #17a2b8 !important;
+                    }
+
+                    .employee-dashboard .bg-warning-transparent {
+                        background-color: rgba(255, 193, 7, 0.1) !important;
+                        color: #ffc107 !important;
+                    }
+
+                    .employee-dashboard .bg-danger-transparent {
+                        background-color: rgba(220, 53, 69, 0.1) !important;
+                        color: #dc3545 !important;
+                    }
+
+                    .employee-dashboard .bg-secondary-transparent {
+                        background-color: rgba(108, 117, 125, 0.1) !important;
+                        color: #6c757d !important;
+                    }
+
+                    .employee-dashboard .text-primary {
+                        color: #F26522 !important;
+                    }
+
+                    .employee-dashboard .text-success {
+                        color: #28a745 !important;
+                    }
+
+                    .employee-dashboard .text-info {
+                        color: #17a2b8 !important;
+                    }
+
+                    .employee-dashboard .text-warning {
+                        color: #ffc107 !important;
+                    }
+
+                    .employee-dashboard .text-danger {
+                        color: #dc3545 !important;
+                    }
+
+                    .employee-dashboard .border-warning {
+                        border-color: #ffc107 !important;
+                    }
+
+                    .employee-dashboard .border-danger {
+                        border-color: #dc3545 !important;
+                    }
+
+                    .employee-dashboard .border-info {
+                        border-color: #17a2b8 !important;
+                    }
+
+                    /* Tables */
+                    .employee-dashboard .table-responsive {
+                        overflow-x: auto;
+                        -webkit-overflow-scrolling: touch;
+                    }
+
+                    .employee-dashboard .custom-table {
+                        width: 100%;
+                        margin-bottom: 1rem;
+                        color: #212529;
+                    }
+
+                    .employee-dashboard .custom-table th {
+                        background-color: #f8f9fa;
+                        font-weight: 600;
+                        color: #495057;
+                        border-bottom: 1px solid #dee2e6;
+                        font-size: 13px;
+                        white-space: nowrap;
+                        padding: 0.75rem;
+                        vertical-align: bottom;
+                    }
+
+                    .employee-dashboard .custom-table td {
+                        vertical-align: middle;
+                        font-size: 14px;
+                        border-bottom: 1px solid #f1f1f1;
+                        padding: 0.75rem;
+                    }
+
+                    .employee-dashboard .table-hover tbody tr:hover {
+                        background-color: #fcfcfc;
+                    }
+
+                    /* Badges */
+                    .employee-dashboard .badge {
+                        font-weight: 500;
+                        padding: 0.35em 0.65em;
+                        font-size: 0.75em;
+                        border-radius: 4px;
+                        display: inline-block;
+                        line-height: 1;
+                        text-align: center;
+                        white-space: nowrap;
+                    }
+
+                    /* Utilities */
+                    .employee-dashboard .fs-12 {
+                        font-size: 12px !important;
+                    }
+
+                    .employee-dashboard .fs-13 {
+                        font-size: 13px !important;
+                    }
+
+                    .employee-dashboard .fs-14 {
+                        font-size: 14px !important;
+                    }
+
+                    .employee-dashboard .fs-20 {
+                        font-size: 20px !important;
+                    }
+
+                    .employee-dashboard .fs-22 {
+                        font-size: 22px !important;
+                    }
+
+                    .employee-dashboard .border-opacity-25 {
+                        border-color: rgba(0, 0, 0, 0.1) !important;
+                    }
+
+                    .employee-dashboard .border-4 {
+                        border-left-width: 4px !important;
+                    }
+
+                    .action-icons i {
+                        margin-right: 8px;
+                        cursor: pointer;
+                        font-size: 16px;
+                    }
+
+                    .action-icons .edit {
+                        color: #28a745;
+                    }
+
+                    .action-icons .delete {
+                        color: #dc3545;
+                    }
+
+                    .action-icons .view {
+                        color: #17a2b8;
+                    }
+                </style>
+
+                <!-- Page Header -->
+                <div class="d-md-flex d-block align-items-center justify-content-between mb-4 mt-2">
+                    <div class="my-auto mb-2 mb-md-0">
+                        <h3 class="page-title mb-1">HR Space - Employee Management</h3>
+                        <p class="text-muted mb-0">Overview of company workforce, distributions, and directory.</p>
+                    </div>
+                    <div class="d-flex my-xl-auto right-content align-items-center flex-wrap gap-2">
+                        <a href="#" class="btn btn-outline-primary d-flex align-items-center"><i
+                                class="ti ti-download me-2"></i>Export CSV</a>
+                        <a href="#" class="btn btn-primary d-flex align-items-center"><i class="ti ti-plus me-2"></i>Add
+                            Employee Manually</a>
+                    </div>
+                </div>
+
+                <!-- 1️⃣ Top KPI Cards Row 1 -->
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Total
+                                            Employees</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-primary">124</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-primary-transparent text-primary rounded-circle"><i
+                                            class="ti ti-users fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Active
+                                            Employees</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-success">118</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-success-transparent text-success rounded-circle"><i
+                                            class="ti ti-user-check fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">New Hires
+                                            (This Month)</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-info">12</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-info-transparent text-info rounded-circle"><i
+                                            class="ti ti-user-plus fs-20"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Employees on
+                                            Leave</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-warning">6</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-warning-transparent text-warning rounded-circle"><i
+                                            class="ti ti-calendar-off fs-20"></i></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                        
-
-                <!-- CARD 2: Leave Details Metrics -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="employee-card">
-                        <div class="card-header-custom">
-                            <h5 class="card-title-custom">Leave Details</h5>
-                            <span class="card-year">📅 2024</span>
-                        </div>
-                        
-                        <div class="metrics-grid">
-                            <div class="metric-box">
-                                <div class="metric-label">Total Leaves</div>
-                                <div class="metric-value">16</div>
-                            </div>
-                            <div class="metric-box">
-                                <div class="metric-label">Taken</div>
-                                <div class="metric-value">10</div>
-                            </div>
-                            <div class="metric-box">
-                                <div class="metric-label">Absent</div>
-                                <div class="metric-value">2</div>
-                            </div>
-                            <div class="metric-box">
-                                <div class="metric-label">Request</div>
-                                <div class="metric-value">0</div>
-                            </div>
-                            <div class="metric-box">
-                                <div class="metric-label">Worked Days</div>
-                                <div class="metric-value">240</div>
-                            </div>
-                            <div class="metric-box">
-                                <div class="metric-label">Loss of Pay</div>
-                                <div class="metric-value">2</div>
+                <!-- 1️⃣ Top KPI Cards Row 2 -->
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Female /
+                                            Male Ratio</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-secondary">42 / 82</h4>
+                                    </div>
+                                    <span
+                                        class="avatar avatar-md bg-secondary-transparent text-secondary rounded-circle"><i
+                                            class="ti ti-gender-femme-homme fs-20"></i></span>
+                                </div>
                             </div>
                         </div>
-                        
-                        <button class="btn-apply-leave">Apply New Leave</button>
                     </div>
-                </div>
-
-                <!-- CARD 3: Approvals -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="employee-card card-approvals">
-                        <div class="card-header-custom">
-                            <h5 class="card-title-custom">Approvals</h5>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">On
+                                            Probation</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-info">24</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-info-transparent text-info rounded-circle"><i
+                                            class="ti ti-user-shield fs-20"></i></span>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div class="approvals-list">
-                            <div class="approval-row">
-                                <span class="approval-label">Leave Approval</span>
-                                <span class="approval-count">1</span>
-                                <button class="btn-action">⊙</button>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Resignations
+                                            (Mth)</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-danger">3</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-danger-transparent text-danger rounded-circle"><i
+                                            class="ti ti-user-minus fs-20"></i></span>
+                                </div>
                             </div>
-                            <div class="approval-row">
-                                <span class="approval-label">COFF Approval</span>
-                                <span class="approval-count">0</span>
-                                <button class="btn-action">⊙</button>
-                            </div>
-                            <div class="approval-row">
-                                <span class="approval-label">Cancel Approval</span>
-                                <span class="approval-count">0</span>
-                                <button class="btn-action">⊙</button>
-                            </div>
-                            <div class="approval-row">
-                                <span class="approval-label">OT Approval</span>
-                                <span class="approval-count">0</span>
-                                <button class="btn-action">⊙</button>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card flex-fill shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="fs-13 fw-medium text-muted mb-1 text-truncate d-block">Work
+                                            Location: Remote</span>
+                                        <h4 class="fs-22 fw-bold mb-0 text-primary">15%</h4>
+                                    </div>
+                                    <span class="avatar avatar-md bg-primary-transparent text-primary rounded-circle"><i
+                                            class="ti ti-world fs-20"></i></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Charts Row: Department Distribution | Hiring Trend -->
+                <div class="row">
+                    <div class="col-md-7 mb-3 d-flex">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-0 pb-0 d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Department Distribution</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="deptDistributionChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 mb-3 d-flex">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-0 pb-0 d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">Hiring Trend (Last 6 Mths)</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="hiringTrendChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Employee Directory Table -->
+                <div class="row">
+                    <div class="col-md-8 mb-3 d-flex">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                                <h5 class="card-title mb-0">Employee Directory</h5>
+                                <div class="d-flex gap-2">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Search...">
+                                    <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center custom-table mb-0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Designation</th>
+                                                <th>Department</th>
+                                                <th>Joining Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="../assets/img/avatar-03.jpg"
+                                                            class="avatar avatar-sm rounded-circle me-2" alt="img">
+                                                        <div>
+                                                            <span class="fs-14 fw-medium text-dark d-block">Robert
+                                                                Fox</span>
+                                                            <span class="fs-12 text-muted">#EMP-0125</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Senior Developer</td>
+                                                <td>Development</td>
+                                                <td>15 Jan 2024</td>
+                                                <td><span
+                                                        class="badge bg-success-transparent text-success border border-success border-opacity-25">Active</span>
+                                                </td>
+                                                <td class="action-icons">
+                                                    <i class="ti ti-eye view" title="View Profile"></i>
+                                                    <i class="ti ti-edit edit" title="Edit"></i>
+                                                    <i class="ti ti-trash delete" title="Delete"></i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span
+                                                            class="avatar avatar-sm rounded-circle bg-info-transparent text-info me-2 fw-bold">JD</span>
+                                                        <div>
+                                                            <span class="fs-14 fw-medium text-dark d-block">Jane
+                                                                Doe</span>
+                                                            <span class="fs-12 text-muted">#EMP-0145</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Design Lead</td>
+                                                <td>Design</td>
+                                                <td>01 Feb 2024</td>
+                                                <td><span
+                                                        class="badge bg-success-transparent text-success border border-success border-opacity-25">Active</span>
+                                                </td>
+                                                <td class="action-icons">
+                                                    <i class="ti ti-eye view" title="View Profile"></i>
+                                                    <i class="ti ti-edit edit" title="Edit"></i>
+                                                    <i class="ti ti-trash delete" title="Delete"></i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <span
+                                                            class="avatar avatar-sm rounded-circle bg-warning-transparent text-warning me-2 fw-bold">SM</span>
+                                                        <div>
+                                                            <span class="fs-14 fw-medium text-dark d-block">Sarah
+                                                                Mitchell</span>
+                                                            <span class="fs-12 text-muted">#EMP-0210</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>HR Executive</td>
+                                                <td>Human Resources</td>
+                                                <td>12 Feb 2026</td>
+                                                <td><span
+                                                        class="badge bg-info-transparent text-info border border-info border-opacity-25">Probation</span>
+                                                </td>
+                                                <td class="action-icons">
+                                                    <i class="ti ti-eye view" title="View Profile"></i>
+                                                    <i class="ti ti-edit edit" title="Edit"></i>
+                                                    <i class="ti ti-trash delete" title="Delete"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3 d-flex">
+                        <div class="card shadow-sm border-0 flex-fill">
+                            <div class="card-header border-bottom">
+                                <h5 class="card-title mb-0">Recent HR Activity</h5>
+                            </div>
+                            <div class="card-body d-flex flex-column gap-3">
+                                <div
+                                    class="p-3 bg-primary-transparent rounded d-flex align-items-center border-start border-primary border-4">
+                                    <span class="avatar avatar-sm bg-primary text-white rounded-circle me-3"><i
+                                            class="ti ti-user-plus"></i></span>
+                                    <div>
+                                        <h6 class="mb-1 fs-14 fw-bold">New Employee Hired</h6>
+                                        <p class="mb-0 fs-13 text-muted">Sarah Mitchell joined HR Team.</p>
+                                        <small class="text-muted">2 hours ago</small>
+                                    </div>
+                                </div>
+                                <div
+                                    class="p-3 bg-info-transparent rounded d-flex align-items-center border-start border-info border-4">
+                                    <span class="avatar avatar-sm bg-info text-white rounded-circle me-3"><i
+                                            class="ti ti-id"></i></span>
+                                    <div>
+                                        <h6 class="mb-1 fs-14 fw-bold">ID Card Generated</h6>
+                                        <p class="mb-0 fs-13 text-muted">For 5 new pre-boarding hires.</p>
+                                        <small class="text-muted">Yesterday</small>
+                                    </div>
+                                </div>
+                                <div
+                                    class="p-3 bg-warning-transparent rounded d-flex align-items-center border-start border-warning border-4">
+                                    <span class="avatar avatar-sm bg-warning text-white rounded-circle me-3"><i
+                                            class="ti ti-file-certificate"></i></span>
+                                    <div>
+                                        <h6 class="mb-1 fs-14 fw-bold">Probation Review Due</h6>
+                                        <p class="mb-0 fs-13 text-muted">3 employees finishing probation next week.</p>
+                                        <small class="text-muted">Yesterday</small>
+                                    </div>
+                                </div>
+                                <div
+                                    class="p-3 bg-danger-transparent rounded d-flex align-items-center border-start border-danger border-4">
+                                    <span class="avatar avatar-sm bg-danger text-white rounded-circle me-3"><i
+                                            class="ti ti-user-minus"></i></span>
+                                    <div>
+                                        <h6 class="mb-1 fs-14 fw-bold">Resignation Submitted</h6>
+                                        <p class="mb-0 fs-13 text-muted">Michael Scofield (Sales) submitted notice.</p>
+                                        <small class="text-muted">2 days ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    // Highcharts Initialization Script for Employee Dashboard
+                    document.addEventListener('DOMContentLoaded', function () {
+                        if (typeof Highcharts !== 'undefined') {
+                            Highcharts.setOptions({
+                                colors: ['#F26522', '#28a745', '#17a2b8', '#dc3545', '#ffc107', '#1D2A3A'],
+                                chart: { style: { fontFamily: 'Roboto, sans-serif' } },
+                                title: { text: null },
+                                credits: { enabled: false }
+                            });
+
+                            // 1. Department Distribution (Column Chart)
+                            Highcharts.chart('deptDistributionChart', {
+                                chart: { type: 'column' },
+                                xAxis: { categories: ['Dev', 'Sales', 'Design', 'HR', 'Ops', 'QA', 'Admin'] },
+                                yAxis: { title: { text: 'Number of Employees' } },
+                                series: [{
+                                    name: 'Employees',
+                                    data: [42, 28, 15, 8, 12, 14, 5],
+                                    color: '#F26522'
+                                }]
+                            });
+
+                            // 2. Hiring Trend (Spline Chart)
+                            Highcharts.chart('hiringTrendChart', {
+                                chart: { type: 'spline' },
+                                xAxis: { categories: ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'] },
+                                yAxis: { title: { text: 'Monthly Hires' } },
+                                series: [{
+                                    name: 'New Joinees',
+                                    data: [5, 8, 12, 10, 15, 12],
+                                    color: '#17a2b8'
+                                }]
+                            });
+                        }
+                    });
+                </script>
+
             </div>
-
-            <!-- CARD 4: Attendance + Stats Row -->
-            <div class="row g-3 mb-4 ">
-                <!-- Attendance Card (Left) -->
-                <div class="col-12 col-lg-5">
-                    <div class="card attendance-card h-100 p-4">
-                        <div class="card-header-custom">
-                            <h5 class="card-title-custom">Attendance</h5>
-                            <span class="card-year fw-bold">📅 11 Mar 2025 <span class="card-time fw-bold">8:35 AM</span></span>
-                        </div>
-                        
-                        <div class="attendance-content">
-                            <div class="circular-progress">
-                                <canvas id="attendanceChart" width="110" height="120"></canvas>
-                                <div class="progress-text">
-                                    <div class="progress-label">Total Hours</div>
-                                    <div class="progress-value">5:45:32</div>
-                                </div>
-                            </div>
-                            
-                            <div class="attendance-stats">
-                                <div class="stat-badge">Production : 3.45 hrs</div>
-                            </div>
-
-                            <div class="punch-status">
-                                <span class="punch-icon">🔴</span>
-                                <span class="fw-bold">Punch In at 10.00 AM</span>
-                            </div>
-
-                            <button class="btn-punch-out">Punch Out</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Stats Cards (Right) - 4 Cards Always in One Line -->
-                <div class="col-12 col-lg-7">
-                    <div class="row g-3  stat-cards-row">
-                        <!-- Card 1: Total Hours Today -->
-                        <div class="col-12 col-sm-6 col-lg-3 stat-card-col">
-                            <div class="stat-card stat-card-orange">
-                                <div class="stat-card-icon">🕐</div>
-                                <div class="stat-card-header">
-                                    <div class="stat-card-value">8.36 <span class="stat-card-total fw-bold">/ 9</span></div>
-                                    <div class="stat-card-label">Total Hours Today</div>
-                                </div>
-                                <div class="stat-card-change positive">
-                                    <span class="arrow">↑</span> 5% This Week
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card 2: Total Hours Week -->
-                        <div class="col-12 col-sm-6 col-lg-3 stat-card-col">
-                            <div class="stat-card stat-card-dark">
-                                <div class="stat-card-icon">📊</div>
-                                <div class="stat-card-header">
-                                    <div class="stat-card-value">10 <span class="stat-card-total fw-bold">/ 40</span></div>
-                                    <div class="stat-card-label">Total Hours Week</div>
-                                </div>
-                                <div class="stat-card-change positive">
-                                    <span class="arrow">↑</span> 7% Last Week
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card 3: Total Hours Month -->
-                        <div class="col-12 col-sm-6 col-lg-3 stat-card-col">
-                            <div class="stat-card stat-card-blue">
-                                <div class="stat-card-icon">📅</div>
-                                <div class="stat-card-header">
-                                    <div class="stat-card-value">75 <span class="stat-card-total fw-bold">/ 98</span></div>
-                                    <div class="stat-card-label">Total Hours Month</div>
-                                </div>
-                                <div class="stat-card-change negative">
-                                    <span class="arrow">↓</span> 8% Last Month
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card 4: Overtime this Month -->
-                        <div class="col-12 col-sm-6 col-lg-3 stat-card-col">
-                            <div class="stat-card stat-card-pink">
-                                <div class="stat-card-icon">⚡</div>
-                                <div class="stat-card-header">
-                                    <div class="stat-card-value">16 <span class="stat-card-total fw-bold">/ 28</span></div>
-                                    <div class="stat-card-label">Overtime this Month</div>
-                                </div>
-                                <div class="stat-card-change negative">
-                                    <span class="arrow">↓</span> 6% Last Month
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-
-                        <!--New Working Hour Section-->
-                        <div class="card working-hours-card p-4 mt-3">
-                            <!-- Top Stats -->
-                             <div class="row g-3 mb-4 working-top-stats">
-    <div class="row text-center text-md-start g-3 mb-4">
-
-        <div class="col-6 col-md-3">
-            <small><span class="dot total"></span> Total Working hours</small>
-            <h5>12h 36m</h5>
+            <!-- /Page Wrapper -->
         </div>
-
-        <div class="col-6 col-md-3">
-            <small><span class="dot productive"></span> Productive Hours</small>
-            <h5>08h 36m</h5>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <small><span class="dot break"></span> Break hours</small>
-            <h5>22m 15s</h5>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <small><span class="dot overtime"></span> Overtime</small>
-            <h5>02h 15m</h5>
-        </div>
-        </div>
-
+        <!-- /Main Wrapper -->
     </div>
 
-    <!-- Horizontal Timeline Chart -->
-    <div class="chart-wrapper">
-        <canvas id="timelineChart"></canvas>
-    </div>
+    <!-- jQuery -->
+    <script src="../assets/js/jquery-3.7.1.min.js"></script>
 
-</div>
+    <!-- Highcharts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@12.5.0/highcharts.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/12.4.0/css/highcharts.css"
+        integrity="sha512-AK+uoqT8+mBIDSg8X82PlPLtProHlfKagadiSPEqYJiGTQxKnSVoiGgE8IhgRxKre0JWw7teyJc7Mzr/4opudA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Bootstrap Core JS -->
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Feather Icon JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"
+        integrity="sha512-zMm7+ZQ8AZr1r3W8Z8lDATkH05QG5Gm2xc6MlsCdBz9l6oE8Y7IXByMgSm/rdRQrhuHt99HAYfMljBOEZ68q5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Slimscroll JS -->
+    <script src="../assets/js/jquery.slimscroll.min.js"></script>
+    <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Chart JS -->
+    <script src="../assets/plugins/apexchart/apexcharts.min.js"></script>
+    <script src="../assets/plugins/apexchart/chart-data.js"></script>
+    <!-- Chart JS -->
+    <script src="../assets/plugins/peity/jquery.peity.min.js"></script>
+    <script src="../assets/plugins/peity/chart-data.js"></script>
+    <!-- Datetimepicker JS -->
+    <script src="../assets/js/moment.min.js"></script>
+    <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Daterangepikcer JS -->
+    <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Color Picker JS -->
+    <script src="../assets/plugins/@simonwep/pickr/pickr.es5.min.js"></script>
 
-    
-<div class="container my-3 width-100">
-
-  <!-- Team Birthday -->
-  <div class="card birthday-card  text-center p-4 mb-3">
-      <h5 class="mb-4 fw-semibold text-white">Team Birthday</h5>
-
-      <img src="../image/image2.PNG" class="birthday-img mb-3" alt="profile">
-
-      <h6 class="text-white fw-bold mb-1">Andrew Jermia</h6>
-      <p class="text-light mb-3">IOS Developer</p>
-
-      <button class="btn btn-birthday">Send Wishes</button>
-  </div>
-
-
-  <!-- Leave Policy -->
-  <div class="card leave-card p-4 mb-3">
-      <div class="d-flex justify-content-between align-items-center">
-          <div>
-              <h5 class="fw-bold text-white mb-1">Leave Policy</h5>
-              <p class="mb-0 text-white">Last Updated : Today</p>
-          </div>
-          <button class="btn btn-light btn-sm px-4">View All</button>
-      </div>
-  </div>
-
-
-  <!-- Next Holiday -->
-  <div class="card holiday-card  p-4">
-      <div class="d-flex justify-content-between align-items-center">
-          <div>
-              <h5 class="fw-bold mb-1">Next Holiday</h5>
-              <p class="mb-0">Diwali, 15 Sep 2025</p>
-          </div>
-          <button class="btn btn-light btn-sm px-4">View All</button>
-      </div>
-  </div>
-  
-
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Employee JS -->
-    <script src="../JS/employee.js"></script>
+    <script src="../assets/js/attendance.js"></script>
 </body>
 
 </html>
