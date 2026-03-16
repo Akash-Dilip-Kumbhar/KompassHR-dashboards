@@ -4,260 +4,545 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Manager Performance Dashboard</title>
+    <meta name="description" content="Kompass HR - Employee Management Dashboard">
+    <meta name="keywords" content="hr, dashboard, attendance, employee, management">
+    <meta name="author" content="Kompass HR">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Recruitment Dashboard - Kompass HR</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
     <!-- Google Fonts: Roboto -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Material style CSS (Internal) -->
-    /* ── Header Styles ──────────────────────────────── */
-    .header {
-    background: #fff;
-    border-bottom: 1px solid #EDEDED;
-    height: 50px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    z-index: 1001;
-    }
-
-    .header .header-left {
-    display: flex !important;
-    align-items: center;
-    width: 252px;
-    padding: 0 15px;
-    float: left;
-    height: 50px;
-    z-index: 1;
-    background: #fff;
-    }
-
-    .company-bx img {
-    max-height: 35px;
-    width: auto;
-    }
-
-    .company-name {
-    font-weight: 700;
-    font-size: 16px;
-    color: #202C4B;
-    white-space: nowrap;
-    margin-left: 10px;
-    }
-
-    .navbar-icons {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    }
-
-    .nav-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #637381;
-    background: transparent;
-    border: none;
-    transition: all .2s;
-    position: relative;
-    cursor: pointer;
-    }
-
-    .nav-icon:hover {
-    background: #F3F4F6;
-    color: #F26522;
-    }
-
-    .nav-icon i {
-    font-size: 18px;
-    }
-
-    .notification-bell .badge {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    font-size: 9px;
-    min-width: 16px;
-    height: 16px;
-    line-height: 16px;
-    padding: 0 4px;
-    border-radius: 50%;
-    }
-
-    .header-user-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-    cursor: pointer;
-    }
-
-    /* ── Sidebar Styles ──────────────────────────────── */
-    .sidebar {
-    background: #fff;
-    border-right: 1px solid #EDEDED;
-    width: 252px;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    position: fixed;
-    top: 50px;
-    bottom: 0;
-    left: 0;
-    z-index: 1001;
-    transition: all 0.2s ease-in-out;
-    }
-
-    .sidebar-inner {
-    height: 100%;
-    overflow-y: auto;
-    }
-
-    .menu-profile2 {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    padding: 20px 0px 14px;
-    }
-
-    .menu-profile-image {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #E8E9EA;
-    outline: 2px solid #1D2A3A;
-    outline-offset: 2px;
-    margin-bottom: 10px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    }
-
-    .profile-name {
-    font-size: 13px;
-    font-weight: 700;
-    color: #1D2A3A;
-    line-height: 1.4;
-    margin-bottom: 3px;
-    }
-
-    .profile-role {
-    font-size: 11px;
-    color: #6B7280;
-    margin: 0;
-    text-align: center;
-    }
-
-    #myTab {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
-    }
-
-    #myTab .nav-link {
-    padding: 10px;
-    color: #637381;
-    border: none;
-    background: transparent;
-    }
-
-    #myTab .nav-link.active {
-    color: #1D2A3A;
-    border-bottom: 2px solid #1D2A3A;
-    }
-
-    .sidebar-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    }
-
-    .sidebar-menu ul>li>a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #344054;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all .2s;
-    }
-
-    .sidebar-menu ul>li>a:hover,
-    .sidebar-menu ul>li.active>a {
-    color: #F26522;
-    background: #FFF4EE;
-    }
-
-    .sidebar-menu ul>li>a>i:first-child,
-    .sidebar-menu ul>li>a>.ti:first-child {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F3F4F6;
-    border-radius: 50%;
-    font-size: 16px;
-    color: #6B7280;
-    }
-
-    .sidebar-menu ul>li>a:hover>i:first-child,
-    .sidebar-menu ul>li.active>a>i:first-child {
-    background: #F26522;
-    color: #fff;
-    }
-
-    .sidebar-menu ul>li.submenu > a .menu-arrow {
-    margin-left: auto;
-    transition: transform .2s;
-    }
-
-    .sidebar-menu ul>li ul {
-    display: none;
-    background: #fdfdfd;
-    }
-
-    .sidebar-menu ul>li.subdrop ul {
-    display: block;
-    }
-
-    .sidebar-menu ul>li ul li a {
-    padding: 8px 20px 8px 54px;
-    font-size: 13px;
-    color: #637381;
-    }
-
-    /* ── Layout Overrides ────────────────────────────── */
-    .main-wrapper {
-    width: 100%;
-    height: 100vh;
-    }
-
-    .page-wrapper {
-    margin-left: 252px;
-    padding-top: 50px;
-    transition: all 0.2s ease-in-out;
-    }
-
-    /* Hide the old top-app-bar if we are standardizing */
-    .top-app-bar {
-    margin-top: 20px;
-    border-radius: 8px;
-    }
-    </style>
+    <!-- Feather CSS -->
+    <link rel="stylesheet" href="assets/plugins/icons/feather/feather.css">
     <!-- Tabler Icon CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+    <!-- Daterangepikcer CSS -->
+    <link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker.css">
+
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style2.css">
+
+
+    <!-- KompassHR Internal Styles -->
+    <style>
+        .btn.btn-light {
+            background-color: #F8F9FA;
+            color: #111827;
+        }
+
+        .btn-primary-gradient {
+            background: linear-gradient(90deg, #FF6F28 0%, #FF5325 100%) !important;
+            color: #FFF !important;
+        }
+
+        .btn {
+            border-radius: 5px;
+            padding: 0.5rem 0.85rem;
+            font-size: 14px;
+            transition: all 0.5s;
+            font-weight: 500;
+        }
+
+        .btn-primary-gradient {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: none;
+            text-decoration: none;
+            box-shadow: var(--btn-shadow);
+        }
+
+        .company-bx {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+        }
+
+        .company-bx img {
+            max-height: 35px;
+            width: auto;
+        }
+
+        .company-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #202C4B;
+            white-space: nowrap;
+        }
+
+        .navbar-icons {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #637381;
+            background: transparent;
+            border: none;
+            transition: all .2s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-icon:hover {
+            background: #F3F4F6;
+            color: #F26522;
+        }
+
+        .nav-icon i {
+            font-size: 18px;
+        }
+
+        .notification-bell {
+            position: relative;
+        }
+
+        .notification-bell .badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 9px;
+            min-width: 16px;
+            height: 16px;
+            line-height: 16px;
+            padding: 0 4px;
+            border-radius: 50%;
+        }
+
+        .header-user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Header Left */
+        .header .header-left {
+            display: flex !important;
+            align-items: center;
+            width: 252px;
+            padding: 0;
+            float: left;
+            height: 50px;
+            z-index: 1;
+        }
+
+        .mini-sidebar .header .header-left {
+            width: 80px;
+            justify-content: center;
+        }
+
+        .mini-sidebar .header .header-left .company-name {
+            display: none;
+        }
+
+        .mini-sidebar .header .header-left .company-bx img {
+            max-height: 28px;
+        }
+
+        /* Sidebar Base */
+        .sidebar {
+            background: #fff;
+            border-right: 1px solid #EDEDED;
+        }
+
+        .sidebar .sidebar-logo {
+            display: none;
+        }
+
+        /* hide duplicate logo â€” logo shown in header */
+        /* Profile Section */
+        .menu-profile2 {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            padding: 20px 0px 14px;
+
+        }
+
+        .menu-profile2 .menu-profile-image {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #E8E9EA;
+            outline: 2px solid #1D2A3A;
+            outline-offset: 2px;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .menu-profile2 .profile-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1D2A3A;
+            line-height: 1.4;
+            margin-bottom: 3px;
+        }
+
+        .menu-profile2 .profile-name .accent {
+            color: #1D2A3A;
+        }
+
+        .menu-profile2 .profile-role {
+            font-size: 11px;
+            color: #6B7280;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Sidebar Tabs */
+        #myTab {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+
+        #myTab .nav-item {
+            margin-inline-end: 0;
+            width: -webkit-fill-available;
+        }
+
+
+        #myTab .nav-item .nav-link:hover {
+            background: #F3F4F6;
+            color: #1D2A3A;
+        }
+
+        #myTab .nav-item .nav-link.active {
+            border: 1px solid var(--color-light-gray);
+            border-bottom: none;
+            background: #1D2A3A;
+            color: #fff;
+        }
+
+        #myTab .nav-link i {
+            font-size: 15px;
+        }
+
+        #myTab .nav-link span {
+            display: none;
+        }
+
+        /* Menu Items */
+        .sidebar-menu ul>li>a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 14px;
+            text-decoration: none;
+            color: #344054;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 0;
+            transition: all .2s;
+            position: relative;
+        }
+
+        .sidebar-menu ul>li>a:hover,
+        .sidebar-menu ul>li.active>a {
+            color: #F26522;
+            background: #FFF4EE;
+        }
+
+        /* Icon circle */
+        .sidebar-menu ul>li>a>i:first-child,
+        .sidebar-menu ul>li>a>.ti:first-child {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            border-radius: 50%;
+            font-size: 15px;
+            color: #6B7280;
+            transition: all .2s;
+        }
+
+        .sidebar-menu ul>li>a:hover>i:first-child,
+        .sidebar-menu ul>li>a:hover>.ti:first-child,
+        .sidebar-menu ul>li.active>a>i:first-child,
+        .sidebar-menu ul>li.active>a>.ti:first-child {
+            background: #F26522;
+            color: #fff;
+        }
+
+        /* Submenu arrow */
+        .sidebar-menu ul>li>a .menu-arrow {
+            margin-left: auto;
+            transition: transform .2s;
+        }
+
+        .sidebar-menu ul>li.subdrop>a .menu-arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Sub-menu indented links */
+        .sidebar-menu ul>li ul>li>a {
+            padding: 6px 14px 6px 54px;
+            color: #6B7280;
+            font-size: 12px;
+            font-weight: 400;
+            gap: 0;
+        }
+
+        .sidebar-menu ul>li ul>li>a:hover,
+        .sidebar-menu ul>li ul>li.active>a {
+            color: #F26522;
+            background: #FFF4EE;
+        }
+
+        .sidebar-menu ul>li ul>li>a>i {
+            background: transparent !important;
+            color: #CBD5E0 !important;
+            font-size: 8px !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+        /* Minify Button */
+        #toggle_btn {
+            position: absolute;
+            right: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: #1D2A3A;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background .2s;
+        }
+
+        #toggle_btn:hover {
+            background: #F26522;
+        }
+
+        #toggle_btn i {
+            line-height: 1;
+        }
+    </style>
+
 </head>
 
 <body>
+
+
+    <style>
+        /* =========================================
+PMS DASHBOARD STYLES (SCOPED)
+Everything inside .pms-db
+========================================= */
+
+        .pms-db {
+            padding: 24px;
+        }
+
+        /* CARD */
+
+        .pms-db .md-card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+            padding: 20px;
+            margin-bottom: 24px;
+            transition: .3s;
+        }
+
+        .pms-db .md-card:hover {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+        }
+
+        .pms-db .md-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* KPI */
+
+        .pms-db .kpi-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .pms-db .kpi-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .pms-db .kpi-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .pms-db .kpi-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #fff;
+            margin-right: 12px;
+        }
+
+        .kpi-primary {
+            background: #3f51b5
+        }
+
+        .kpi-warning {
+            background: #ff9800
+        }
+
+        .kpi-success {
+            background: #4caf50
+        }
+
+        .kpi-info {
+            background: #2196f3
+        }
+
+        .kpi-accent {
+            background: #9c27b0
+        }
+
+        .pms-db .kpi-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .pms-db .kpi-label {
+            font-size: 13px;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        /* TABLE */
+
+        .pms-db .md-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pms-db .md-table th {
+            font-size: 13px;
+            color: #6c757d;
+            text-transform: uppercase;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pms-db .md-table td {
+            padding: 12px;
+            border-bottom: 1px solid #f3f3f3;
+        }
+
+        /* HEATMAP */
+
+        .pms-db .heatmap-cell {
+            color: #fff;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 4px;
+            padding: 6px;
+        }
+
+        .hm-high {
+            background: #4caf50
+        }
+
+        .hm-med {
+            background: #ff9800
+        }
+
+        .hm-low {
+            background: #f44336
+        }
+
+        /* OBJECTIVE PROGRESS */
+
+        .pms-db .obj-progress {
+            height: 6px;
+            border-radius: 3px;
+            background: #e9ecef;
+            overflow: hidden;
+        }
+
+        .pms-db .progress-bar {
+            height: 100%;
+        }
+
+        /* EMPLOYEE LIST */
+
+        .pms-db .employee-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .pms-db .emp-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+
+        /* IMPROVEMENT LIST */
+
+        .pms-db .improvement-list {
+            padding-left: 18px;
+            margin-top: 4px;
+        }
+
+        .pms-db .improvement-list li {
+            font-size: 12px;
+            color: #f44336;
+        }
+    </style>
 
     <div class="main-wrapper">
         <!-- Header -->
@@ -270,16 +555,33 @@
                     </a>
                 </div>
 
+                <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+                    <span class="bar-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
                 <!-- Search Bar -->
-                <div class="input-group d-none d-lg-flex ms-3" style="max-width: 300px;">
-                    <input type="text" class="form-control border-end-0" placeholder="Search...">
-                    <span class="input-group-text bg-white border-start-0"><i class="ti ti-search"></i></span>
+                <div class="input-group d-none d-lg-flex ms-3">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-text"><i class="ti ti-search"></i></span>
                 </div>
-
                 <!-- Right Side Icons -->
-                <div class="d-flex align-items-center ms-auto me-3">
+                <div class="d-flex align-items-center ms-auto">
                     <div class="navbar-icons">
-                        <button class="nav-icon" title="Chat"><i class="ti ti-message-dots"></i></button>
+                        <button class="nav-icon" title="Chat">
+                            <i class="ti ti-message-dots"></i>
+                        </button>
+                        <button class="nav-icon btnFullscreen" title="Fullscreen">
+                            <i class="ti ti-arrows-maximize"></i>
+                        </button>
+                        <button class="nav-icon" title="Apps">
+                            <i class="ti ti-layout-grid"></i>
+                        </button>
+                        <button class="nav-icon" title="Mail">
+                            <i class="ti ti-mail"></i>
+                        </button>
                         <button class="nav-icon notification-bell" title="Notifications">
                             <i class="ti ti-bell"></i>
                             <span class="badge bg-danger">3</span>
@@ -290,15 +592,24 @@
                         <a href="javascript:void(0);" class="d-flex align-items-center" data-bs-toggle="dropdown">
                             <img src="assets/img/avatar-01.jpg" alt="User" class="header-user-avatar">
                         </a>
+                        <div class="dropdown-menu dropdown-menu-end p-2" style="min-width: 180px;">
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-user me-2"></i>My
+                                Profile</a>
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-settings me-2"></i>Settings</a>
+                            <hr class="dropdown-divider my-1">
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-logout me-2"></i>Logout</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- /Header -->
-
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
-            <div class="sidebar-inner">
+            <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <!-- Profile Section -->
                     <div class="menu-profile2">
@@ -306,24 +617,47 @@
                             <img src="assets/img/avatar-02.jpg" alt="User" class="menu-profile-image">
                         </div>
                         <div class="profile-details">
-                            <div class="profile-name">DHEERENDRA <br>KUMAR JOSHI</div>
+                            <div class="profile-name">
+                                DHEERENDRA <br><span class="accent">KUMAR JOSHI</span>
+                            </div>
                             <p class="profile-role">Manager</p>
                         </div>
                     </div>
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item"><button class="nav-link active"><i class="fa-solid fa-list"></i></button>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="Menu-tab" data-bs-toggle="tab"
+                                data-bs-target="#Menu-tab-pane" type="button" role="tab" aria-controls="Menu-tab-pane"
+                                aria-selected="true"><i class="fa-solid fa-list"></i> <span>Menu</span> </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                aria-controls="profile-tab-pane" aria-selected="false"><i
+                                    class="fa-solid fa-table-cells-large"></i> <span>Dashboard</span></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                data-bs-target="#contact-tab-pane" type="button" role="tab"
+                                aria-controls="contact-tab-pane" aria-selected="false"><i class="fa-solid fa-cubes"></i>
+                                <span>others</span></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
+                                data-bs-target="#disabled-tab-pane" type="button" role="tab"
+                                aria-controls="disabled-tab-pane" aria-selected="false"><i class="fa-solid fa-gear"></i>
+                                <span>Setting</span></button>
                         </li>
                     </ul>
 
                     <ul>
-                         <li class="submenu active">
-							<a href="index.html" class="active">
-								<i class="ti ti-layout-dashboard"></i>
-								<span>Lead</span>
-							</a>
+                        <li>
+                            <a href="index.html">
+                                <i class="ti ti-layout-dashboard"></i>
+                                <span>Lead</span>
+                            </a>
 
-						</li>
+                        </li>
                         <li>
                             <a href="recuritment.html">
                                 <i class="ti ti-user-search"></i>
@@ -379,7 +713,7 @@
                             </a>
                         </li>
                         <li class="active">
-                            <a href="Pms_dashboard.html">
+                            <a href="Pms_dashboard.html" >
                                 <i class="ti ti-chart-bar"></i>
                                 <span>PMS</span>
                             </a>
@@ -396,270 +730,81 @@
         </div>
         <!-- /Sidebar -->
 
+        <!-- Page Wrapper -->
         <div class="page-wrapper">
-            <!-- Top App Bar (Re-purposed as Breadcrumb/Internal Header) -->
-            <div class="top-app-bar p-3 mx-4"
-                style="background-color: var(--md-primary); color: white; border-radius: 8px;">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="m-0" style="font-size: 20px; font-weight: 500;">Performance Management Dashboard</h2>
-                    <select class="year-selector">
-                        <option value="2023">2023 Performance Cycle</option>
-                        <option value="2022">2022 Performance Cycle</option>
-                        <option value="2021">2021 Performance Cycle</option>
-                    </select>
-                </div>
-            </div>
-            /* Material Card */
-            .md-card {
-            background: var(--md-card-bg);
-            border-radius: 8px;
-            box-shadow: var(--md-shadow);
-            padding: 20px;
-            margin-bottom: 24px;
-            border: none;
-            transition: box-shadow 0.3s ease;
-            }
+            <!-- ===== MAIN CONTENT ===== -->
+            <div class="content pms-db">
+                <!-- HEADER -->
 
-            .md-card:hover {
-            box-shadow: var(--md-shadow-hover);
-            }
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold">Performance Management Dashboard</h2>
 
-            .md-card-title {
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--md-text-primary);
-            margin-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            }
-
-            /* KPI Boxes */
-            .kpi-row {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 0 -8px;
-            align-items: stretch;
-            }
-
-            .kpi-col {
-            flex: 1 1 20%;
-            padding: 0 8px;
-            min-width: 200px;
-            display: flex;
-            }
-
-            .kpi-box {
-            display: flex;
-            align-items: center;
-            padding: 16px;
-            width: 100%;
-            }
-
-            .kpi-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-right: 12px;
-            color: white;
-            flex-shrink: 0;
-            }
-
-            .kpi-content {
-            flex-grow: 1;
-            }
-
-            .kpi-value {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            line-height: 1.2;
-            }
-
-            .kpi-label {
-            font-size: 13px;
-            color: var(--md-text-secondary);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            }
-
-            /* Accordion */
-            .md-accordion .accordion-item {
-            border: 1px solid var(--md-border);
-            border-radius: 8px !important;
-            margin-bottom: 12px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-            }
-
-            .md-accordion .accordion-button {
-            background-color: var(--md-card-bg);
-            color: var(--md-text-primary);
-            font-weight: 500;
-            box-shadow: none;
-            padding: 16px 20px;
-            }
-
-            .md-accordion .accordion-button:not(.collapsed) {
-            background-color: rgba(63, 81, 181, 0.04);
-            color: var(--md-primary);
-            }
-
-            .md-accordion .accordion-button::after {
-            filter: grayscale(1);
-            }
-
-            .obj-progress-wrap {
-            display: flex;
-            align-items: center;
-            width: 200px;
-            }
-
-            .obj-progress {
-            height: 6px;
-            border-radius: 3px;
-            background-color: #e9ecef;
-            flex-grow: 1;
-            margin-right: 12px;
-            margin-left: 12px;
-            }
-
-            /* Tables */
-            .md-table {
-            width: 100%;
-            border-collapse: collapse;
-            }
-
-            .md-table th {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--md-text-secondary);
-            text-transform: uppercase;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--md-border);
-            text-align: left;
-            }
-
-            .md-table td {
-            font-size: 14px;
-            padding: 12px 16px;
-            border-bottom: 1px solid #f8f9fa;
-            vertical-align: middle;
-            }
-
-            /* Heatmap Specific */
-            .heatmap-cell {
-            color: white;
-            font-weight: 500;
-            text-align: center;
-            border-radius: 4px;
-            padding: 8px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-            }
-
-            .hm-high {
-            background-color: var(--md-success);
-            }
-
-            .hm-med {
-            background-color: var(--md-warning);
-            }
-
-            .hm-low {
-            background-color: var(--md-danger);
-            }
-
-            /* Improvement Lists */
-
-            .improvement-list {
-            list-style-type: disc;
-            padding-left: 20px;
-            margin: 4px 0 0 0;
-            }
-
-            .improvement-list li {
-            font-size: 12px;
-            color: var(--md-danger);
-            margin-bottom: 2px;
-            }
-            </style>
-            </head>
-
-            <body>
-
-                <!-- Top App Bar -->
-                <div class="top-app-bar">
-                    <h2>Performance Management Dashboard</h2>
-                    <select class="year-selector">
-                        <option value="2023">2023 Performance Cycle</option>
-                        <option value="2022">2022 Performance Cycle</option>
-                        <option value="2021">2021 Performance Cycle</option>
+                    <select class="form-select" style="width:200px">
+                        <option>2023 Performance Cycle</option>
+                        <option>2022 Performance Cycle</option>
+                        <option>2021 Performance Cycle</option>
                     </select>
                 </div>
 
-                <div class="dashboard-container">
 
-                    <!-- 1. KPI Counters -->
-                    <div class="kpi-row">
-                        <div class="kpi-col">
-                            <div class="md-card kpi-box">
-                                <div class="kpi-icon" style="background-color: var(--md-primary);"><i
-                                        class="fa-solid fa-users-viewfinder"></i></div>
-                                <div class="kpi-content">
-                                    <div class="kpi-value">142</div>
-                                    <div class="kpi-label">Emp Evaluated</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="kpi-col">
-                            <div class="md-card kpi-box">
-                                <div class="kpi-icon" style="background-color: var(--md-warning);"><i
-                                        class="fa-solid fa-user-clock"></i></div>
-                                <div class="kpi-content">
-                                    <div class="kpi-value">28</div>
-                                    <div class="kpi-label">Not Evaluated</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="kpi-col">
-                            <div class="md-card kpi-box">
-                                <div class="kpi-icon" style="background-color: var(--md-success);"><i
-                                        class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="kpi-content">
-                                    <div class="kpi-value">4.1</div>
-                                    <div class="kpi-label">Avg Final Rating</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="kpi-col">
-                            <div class="md-card kpi-box">
-                                <div class="kpi-icon" style="background-color: var(--md-info);"><i
-                                        class="fa-solid fa-bullseye"></i>
-                                </div>
-                                <div class="kpi-content">
-                                    <div class="kpi-value">3.8</div>
-                                    <div class="kpi-label">Avg KRA Rating</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="kpi-col">
-                            <div class="md-card kpi-box">
-                                <div class="kpi-icon" style="background-color: var(--md-accent);"><i
-                                        class="fa-solid fa-brain"></i>
-                                </div>
-                                <div class="kpi-content">
-                                    <div class="kpi-value">4.3</div>
-                                    <div class="kpi-label">Avg Competency</div>
-                                </div>
+                <!-- KPI ROW -->
+
+                <div class="kpi-row">
+
+                    <div class="kpi-col">
+                        <div class="md-card kpi-box">
+                            <div class="kpi-icon kpi-primary"><i class="fa-solid fa-users"></i></div>
+                            <div>
+                                <div class="kpi-value">142</div>
+                                <div class="kpi-label">Emp Evaluated</div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="kpi-col">
+                        <div class="md-card kpi-box">
+                            <div class="kpi-icon kpi-warning"><i class="fa-solid fa-user-clock"></i></div>
+                            <div>
+                                <div class="kpi-value">28</div>
+                                <div class="kpi-label">Not Evaluated</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-col">
+                        <div class="md-card kpi-box">
+                            <div class="kpi-icon kpi-success"><i class="fa-solid fa-star"></i></div>
+                            <div>
+                                <div class="kpi-value">4.1</div>
+                                <div class="kpi-label">Avg Rating</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-col">
+                        <div class="md-card kpi-box">
+                            <div class="kpi-icon kpi-info"><i class="fa-solid fa-bullseye"></i></div>
+                            <div>
+                                <div class="kpi-value">3.8</div>
+                                <div class="kpi-label">Avg KRA</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kpi-col">
+                        <div class="md-card kpi-box">
+                            <div class="kpi-icon kpi-accent"><i class="fa-solid fa-brain"></i></div>
+                            <div>
+                                <div class="kpi-value">4.3</div>
+                                <div class="kpi-label">Competency</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="dashboard-container">
+
+
 
                     <!-- 2. Hierarchical Objectives -->
                     <div class="md-card" style="padding-bottom: 8px;">
@@ -803,8 +948,8 @@
                             <div class="md-card h-100 mb-0">
                                 <div class="md-card-title">Overall Goal Status</div>
                                 <div class="row align-items-center">
-                                    <div class="col-md-6 mb-3 mb-md-0" style="position:relative; height: 230px;">
-                                        <canvas id="goalStatusPie"></canvas>
+                                    <div class="col-md-6 mb-3 mb-md-0" style="position:relative; height:230px;">
+                                        <div id="goalStatusPie" style="width:100%; height:100%;"></div>
                                     </div>
                                     <div class="col-md-6">
                                         <ul class="list-group list-group-flush" style="font-size: 14px;">
@@ -851,70 +996,81 @@
 
                         <!-- 4. Department Performance Heatmap -->
                         <div class="col-lg-6 mb-4">
-                            <div class="md-card h-100 mb-0">
+                            <!-- HEATMAP TABLE -->
+
+                            <div class="md-card">
+
                                 <div class="md-card-title">Department Performance Heatmap</div>
-                                <div class="table-responsive">
-                                    <table class="table md-table" style="min-width: 600px; margin-bottom: 0;">
-                                        <thead>
-                                            <tr>
-                                                <th>Department</th>
-                                                <th class="text-center">Goal Completion</th>
-                                                <th class="text-center">KRA Avg</th>
-                                                <th class="text-center">Competency Avg</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="fw-bold">Engineering</td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-high">92%</div>
-                                                </td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-high">4.2</div>
-                                                </td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-high">4.5</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="fw-bold">Sales</td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-med">68%</div>
-                                                </td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-med">3.2</div>
-                                                </td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-low">2.8</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="fw-bold">Marketing</td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-high">85%</div>
-                                                </td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-high">4.0</div>
-                                                </td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-med">3.9</div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="fw-bold">HR & Admin</td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-high">95%</div>
-                                                </td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-high">4.6</div>
-                                                </td>
-                                                <td>
-                                                    <div class="heatmap-cell hm-high">4.8</div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                <table class="md-table">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Department</th>
+                                            <th>Goal Completion</th>
+                                            <th>KRA Avg</th>
+                                            <th>Competency Avg</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        <tr>
+                                            <td>Engineering</td>
+                                            <td>
+                                                <div class="heatmap-cell hm-high">92%</div>
+                                            </td>
+                                            <td>
+                                                <div class="heatmap-cell hm-high">4.2</div>
+                                            </td>
+                                            <td>
+                                                <div class="heatmap-cell hm-high">4.5</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Sales</td>
+                                            <td>
+                                                <div class="heatmap-cell hm-med">68%</div>
+                                            </td>
+                                            <td>
+                                                <div class="heatmap-cell hm-med">3.2</div>
+                                            </td>
+                                            <td>
+                                                <div class="heatmap-cell hm-low">2.8</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Marketing</td>
+                                            <td>
+                                                <div class="heatmap-cell hm-high">85%</div>
+                                            </td>
+                                            <td>
+                                                <div class="heatmap-cell hm-high">4.0</div>
+                                            </td>
+                                            <td>
+                                                <div class="heatmap-cell hm-med">3.9</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>HR & Admin</td>
+                                            <td>
+                                                <div class="heatmap-cell hm-high">95%</div>
+                                            </td>
+                                            <td>
+                                                <div class="heatmap-cell hm-high">4.6</div>
+                                            </td>
+                                            <td>
+                                                <div class="heatmap-cell hm-high">4.8</div>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
                             </div>
                         </div>
                     </div>
@@ -922,8 +1078,8 @@
                     <!-- 5. Full Bar Chart -->
                     <div class="md-card">
                         <div class="md-card-title">Goal Status by Department</div>
-                        <div style="height: 300px; position:relative;">
-                            <canvas id="goalStatusDeptBar"></canvas>
+                        <div style="height:300px;">
+                            <div id="goalStatusDeptBar" style="width:100%; height:100%;"></div>
                         </div>
                     </div>
 
@@ -933,7 +1089,8 @@
                         <div class="col-lg-6 mb-4">
                             <div class="md-card h-100 mb-0">
                                 <div class="md-card-title">Top Performers <i
-                                        class="fa-solid fa-trophy text-warning"></i></div>
+                                        class="fa-solid fa-trophy text-warning"></i>
+                                </div>
                                 <ul class="list-unstyled p-0 m-0">
                                     <li
                                         class="d-flex align-items-start p-3 mb-2 rounded border border-success border-opacity-25 bg-success bg-opacity-10">
@@ -1058,109 +1215,171 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
-                <!-- Bootstrap Core JS (For Accordion) -->
-                <script src="assets/js/bootstrap.bundle.min.js"></script>
+            </div>
 
-                <!-- Chart JS -->
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <!-- /page-wrapper -->
+        </div> <!-- /main-wrapper -->
+    </div>
 
-                <!-- Internal JS for Dashboard -->
-                <script>
-                    document.addEventListener("DOMContentLoaded", function () {
+    <!-- Highcharts -->
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@12.5.0/highcharts.min.js"></script>
+    <!-- Bootstrap Core JS -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Feather Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <!-- Moment & Datetimepicker -->
+    <script src="assets/js/moment.min.js"></script>
 
-                        // 1. Goal Status Pie Chart
-                        var pieCtx = document.getElementById('goalStatusPie');
-                        if (pieCtx) {
-                            new Chart(pieCtx, {
-                                type: 'doughnut',
-                                data: {
-                                    labels: ['Not Started', 'At Risk', 'On Track', 'In Trouble', 'Completed'],
-                                    datasets: [{
-                                        data: [10, 15, 45, 5, 25],
-                                        backgroundColor: [
-                                            '#9e9e9e', // Not Started
-                                            '#ff9800', // At Risk
-                                            '#3f51b5', // On Track (Primary)
-                                            '#f44336', // In Trouble (Danger)
-                                            '#4caf50'  // Completed (Success)
-                                        ],
-                                        borderWidth: 0,
-                                        hoverOffset: 4
-                                    }]
-                                },
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    cutout: '65%',
-                                    plugins: {
-                                        legend: {
-                                            display: false
-                                        }
-                                    }
-                                }
-                            });
+    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Daterangepicker -->
+    <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+
+
+    <!-- Internal JS for Dashboard -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if (typeof Highcharts !== "undefined") {
+
+                /* =========================================
+                1️⃣ Goal Status Pie (Doughnut)
+                ========================================= */
+
+                Highcharts.chart('goalStatusPie', {
+
+                    chart: {
+                        type: 'pie',
+                        backgroundColor: 'transparent'
+                    },
+
+                    title: {
+                        text: null
+                    },
+
+                    tooltip: {
+                        pointFormat: '<b>{point.percentage:.1f}%</b>'
+                    },
+
+                    plotOptions: {
+                        pie: {
+                            innerSize: '65%',
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: false
+                        }
+                    },
+
+                    series: [{
+                        name: 'Goal Status',
+                        colorByPoint: true,
+                        data: [
+                            { name: 'Not Started', y: 10, color: '#9e9e9e' },
+                            { name: 'At Risk', y: 15, color: '#ff9800' },
+                            { name: 'On Track', y: 45, color: '#3f51b5' },
+                            { name: 'In Trouble', y: 5, color: '#f44336' },
+                            { name: 'Completed', y: 25, color: '#4caf50' }
+                        ]
+                    }],
+
+                    credits: { enabled: false }
+
+                });
+
+
+                /* =========================================
+                2️⃣ Goal Status by Department (Stacked Bar)
+                ========================================= */
+
+                Highcharts.chart('goalStatusDeptBar', {
+
+                    chart: {
+                        type: 'column',
+                        backgroundColor: 'transparent'
+                    },
+
+                    title: {
+                        text: null
+                    },
+
+                    xAxis: {
+                        categories: [
+                            'Engineering',
+                            'Sales',
+                            'Marketing',
+                            'HR & Admin',
+                            'Support',
+                            'Finance'
+                        ],
+                        lineColor: '#eee',
+                        tickColor: '#eee'
+                    },
+
+                    yAxis: {
+                        min: 0,
+                        title: { text: null },
+                        gridLineColor: '#f0f0f0',
+                        stackLabels: {
+                            enabled: false
+                        }
+                    },
+
+                    legend: {
+                        align: 'center',
+                        verticalAlign: 'top',
+                        itemStyle: {
+                            fontWeight: '500'
+                        }
+                    },
+
+                    tooltip: {
+                        shared: true
+                    },
+
+                    plotOptions: {
+                        column: {
+                            stacking: 'normal',
+                            borderRadius: 4
+                        }
+                    },
+
+                    series: [
+
+                        {
+                            name: 'Completed',
+                            data: [35, 12, 28, 40, 25, 30],
+                            color: '#10B981'
+                        },
+
+                        {
+                            name: 'In Progress',
+                            data: [40, 30, 45, 15, 50, 20],
+                            color: '#6366F1'
+                        },
+
+                        {
+                            name: 'Pending',
+                            data: [5, 20, 10, 5, 15, 5],
+                            color: '#CBD5E1'
                         }
 
-                        // 2. Goal Status by Department Stacked Bar Chart
-                        var barCtx = document.getElementById('goalStatusDeptBar');
-                        if (barCtx) {
-                            new Chart(barCtx, {
-                                type: 'bar',
-                                data: {
-                                    labels: ['Engineering', 'Sales', 'Marketing', 'HR & Admin', 'Support', 'Finance'],
-                                    datasets: [
-                                        {
-                                            label: 'Completed',
-                                            data: [35, 12, 28, 40, 25, 30],
-                                            backgroundColor: '#10B981',
-                                            borderRadius: { topLeft: 0, topRight: 0, bottomLeft: 4, bottomRight: 4 }
-                                        },
-                                        {
-                                            label: 'In Progress',
-                                            data: [40, 30, 45, 15, 50, 20],
-                                            backgroundColor: '#6366F1'
-                                        },
-                                        {
-                                            label: 'Pending',
-                                            data: [5, 20, 10, 5, 15, 5],
-                                            backgroundColor: '#CBD5E1',
-                                            borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 }
-                                        }
-                                    ]
-                                },
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    plugins: {
-                                        legend: {
-                                            position: 'top',
-                                            labels: {
-                                                usePointStyle: true,
-                                                font: { family: 'Roboto' }
-                                            }
-                                        }
-                                    },
-                                    scales: {
-                                        x: {
-                                            stacked: true,
-                                            grid: { display: false }
-                                        },
-                                        y: {
-                                            stacked: true,
-                                            beginAtZero: true,
-                                            grid: { color: '#f0f0f0' }
-                                        }
-                                    }
-                                }
-                            });
-                        }
-                    });
-                </script>
-        </div> <!-- /page-wrapper -->
-    </div> <!-- /main-wrapper -->
+                    ],
+
+                    credits: { enabled: false }
+
+                });
+
+            }
+
+        });
+    </script>
 </body>
 
 </html>
