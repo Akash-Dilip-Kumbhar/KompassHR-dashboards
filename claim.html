@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="Kompass HR - Employee Management Dashboard">
+    <meta name="keywords" content="hr, dashboard, attendance, employee, management">
+    <meta name="author" content="Kompass HR">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Claim - Kompass HR</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <!-- Google Fonts: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Feather CSS -->
+    <link rel="stylesheet" href="assets/plugins/icons/feather/feather.css">
+    <!-- Tabler Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.46.0/tabler-icons.min.css">
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+    <!-- Daterangepikcer CSS -->
+    <link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style2.css">
+
+    <!-- KompassHR Internal Styles -->
+    <style>
+        .btn.btn-light {
+            background-color: #F8F9FA;
+            color: #111827;
+        }
+
+        .btn-primary-gradient {
+            background: linear-gradient(90deg, #FF6F28 0%, #FF5325 100%) !important;
+            color: #FFF !important;
+        }
+
+        .btn {
+            border-radius: 5px;
+            padding: 0.5rem 0.85rem;
+            font-size: 14px;
+            transition: all 0.5s;
+            font-weight: 500;
+        }
+
+        .btn-primary-gradient {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: none;
+            text-decoration: none;
+            box-shadow: var(--btn-shadow);
+        }
+
+        .company-bx {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 15px;
+        }
+
+        .company-bx img {
+            max-height: 35px;
+            width: auto;
+        }
+
+        .company-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #202C4B;
+            white-space: nowrap;
+        }
+
+        .navbar-icons {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #637381;
+            background: transparent;
+            border: none;
+            transition: all .2s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-icon:hover {
+            background: #F3F4F6;
+            color: #F26522;
+        }
+
+        .nav-icon i {
+            font-size: 18px;
+        }
+
+        .notification-bell {
+            position: relative;
+        }
+
+        .notification-bell .badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 9px;
+            min-width: 16px;
+            height: 16px;
+            line-height: 16px;
+            padding: 0 4px;
+            border-radius: 50%;
+        }
+
+        .header-user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Header Left */
+        .header .header-left {
+            display: flex !important;
+            align-items: center;
+            width: 252px;
+            padding: 0;
+            float: left;
+            height: 50px;
+            z-index: 1;
+        }
+
+        .mini-sidebar .header .header-left {
+            width: 80px;
+            justify-content: center;
+        }
+
+        .mini-sidebar .header .header-left .company-name {
+            display: none;
+        }
+
+        .mini-sidebar .header .header-left .company-bx img {
+            max-height: 28px;
+        }
+
+        /* Sidebar Base */
+        .sidebar {
+            background: #fff;
+            border-right: 1px solid #EDEDED;
+        }
+
+        .sidebar .sidebar-logo {
+            display: none;
+        }
+
+        /* hide duplicate logo â€” logo shown in header */
+        /* Profile Section */
+        .menu-profile2 {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            padding: 20px 0px 14px;
+
+        }
+
+        .menu-profile2 .menu-profile-image {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #E8E9EA;
+            outline: 2px solid #1D2A3A;
+            outline-offset: 2px;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .menu-profile2 .profile-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1D2A3A;
+            line-height: 1.4;
+            margin-bottom: 3px;
+        }
+
+        .menu-profile2 .profile-name .accent {
+            color: #1D2A3A;
+        }
+
+        .menu-profile2 .profile-role {
+            font-size: 11px;
+            color: #6B7280;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Sidebar Tabs */
+        #myTab {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+
+        #myTab .nav-item {
+            margin-inline-end: 0;
+            width: -webkit-fill-available;
+        }
+
+
+        #myTab .nav-item .nav-link:hover {
+            background: #F3F4F6;
+            color: #1D2A3A;
+        }
+
+        #myTab .nav-item .nav-link.active {
+            border: 1px solid var(--color-light-gray);
+            border-bottom: none;
+            background: #1D2A3A;
+            color: #fff;
+        }
+
+        #myTab .nav-link i {
+            font-size: 15px;
+        }
+
+        #myTab .nav-link span {
+            display: none;
+        }
+
+        /* Menu Items */
+        .sidebar-menu ul>li>a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 14px;
+            text-decoration: none;
+            color: #344054;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 0;
+            transition: all .2s;
+            position: relative;
+        }
+
+        .sidebar-menu ul>li>a:hover,
+        .sidebar-menu ul>li.active>a {
+            color: #F26522;
+            background: #FFF4EE;
+        }
+
+        /* Icon circle */
+        .sidebar-menu ul>li>a>i:first-child,
+        .sidebar-menu ul>li>a>.ti:first-child {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            border-radius: 50%;
+            font-size: 15px;
+            color: #6B7280;
+            transition: all .2s;
+        }
+
+        .sidebar-menu ul>li>a:hover>i:first-child,
+        .sidebar-menu ul>li>a:hover>.ti:first-child,
+        .sidebar-menu ul>li.active>a>i:first-child,
+        .sidebar-menu ul>li.active>a>.ti:first-child {
+            background: #F26522;
+            color: #fff;
+        }
+
+        /* Submenu arrow */
+        .sidebar-menu ul>li>a .menu-arrow {
+            margin-left: auto;
+            transition: transform .2s;
+        }
+
+        .sidebar-menu ul>li.subdrop>a .menu-arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Sub-menu indented links */
+        .sidebar-menu ul>li ul>li>a {
+            padding: 6px 14px 6px 54px;
+            color: #6B7280;
+            font-size: 12px;
+            font-weight: 400;
+            gap: 0;
+        }
+
+        .sidebar-menu ul>li ul>li>a:hover,
+        .sidebar-menu ul>li ul>li.active>a {
+            color: #F26522;
+            background: #FFF4EE;
+        }
+
+        .sidebar-menu ul>li ul>li>a>i {
+            background: transparent !important;
+            color: #CBD5E0 !important;
+            font-size: 8px !important;
+            width: auto !important;
+            height: auto !important;
+        }
+
+        /* Minify Button */
+        #toggle_btn {
+            position: absolute;
+            right: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: #1D2A3A;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background .2s;
+        }
+
+        #toggle_btn:hover {
+            background: #F26522;
+        }
+
+        #toggle_btn i {
+            line-height: 1;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <style>
+        /* ================================================= CLAIM MANAGEMENT DASHBOARD Scoped under .Claim-db ================================================= */
+
+        .Claim-db {
+            padding: 20px;
+        }
+
+        /* Header */
+
+        .Claim-db header h4 {
+            font-size: 20px;
+        }
+
+        .Claim-db header p {
+            font-size: 13px;
+        }
+
+        /* Avatar */
+
+        .Claim-db .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        /* KPI Cards */
+
+        .Claim-db .kpi-card {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #f1f3f5;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, .04);
+            transition: .3s;
+        }
+
+        .Claim-db .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
+        }
+
+        .Claim-db .kpi-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .Claim-db .kpi-info h6 {
+            font-size: 13px;
+            margin-bottom: 2px;
+            color: #6c757d;
+        }
+
+        .Claim-db .kpi-info h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Soft Background Colors */
+
+        .bg-info-soft {
+            background: #e6f7ff;
+            color: #0d6efd;
+        }
+
+        .bg-warning-soft {
+            background: #fff4e5;
+            color: #f59f00;
+        }
+
+        .bg-success-soft {
+            background: #e6f9f0;
+            color: #20c997;
+        }
+
+        .bg-danger-soft {
+            background: #ffecec;
+            color: #dc3545;
+        }
+
+        .bg-purple-soft {
+            background: #f2e7ff;
+            color: #6f42c1;
+        }
+
+        .bg-primary-light {
+            background: #e7f1ff;
+        }
+
+        /* Cards */
+
+        .Claim-db .card {
+            border: 1px solid #eef0f3;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+        }
+
+        .Claim-db .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .Claim-db .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .Claim-db .card-body {
+            padding: 18px;
+        }
+
+        /* Tables */
+
+        .Claim-db .custom-table th {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6c757d;
+            border-bottom: 1px solid #eef0f3;
+        }
+
+        .Claim-db .custom-table td {
+            font-size: 14px;
+            padding: 14px;
+            vertical-align: middle;
+        }
+
+        /* Badge Soft */
+
+        .Claim-db .badge-soft {
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .badge-soft-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-soft-approved {
+            background: #e6f9f0;
+            color: #198754;
+        }
+
+        /* Alerts */
+
+        .Claim-db .alert-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .Claim-db .alert-content h6 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .Claim-db .alert-content p {
+            font-size: 13px;
+            color: #6c757d;
+            margin: 0;
+        }
+
+        /* Activity List */
+
+        .Claim-db .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .Claim-db .activity-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #e5e7eb;
+        }
+
+        .Claim-db .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .Claim-db .activity-item h6 {
+            font-size: 14px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .Claim-db .activity-item span {
+            font-size: 12px;
+            color: #6c757d;
+        }
+    </style>
+
+
+    <div id="main-wrapper">
+        <!-- Header -->
+        <div class="header">
+            <div class="main-header d-flex justify-content-between align-items-center">
+                <div class="header-left">
+                    <a href="javascript:void(0)" class="company-bx">
+                        <img src="assets/img/KompassHR.png" alt="Kompass HR Logo">
+                        <span class="company-name">Kompass HR</span>
+                    </a>
+                </div>
+
+                <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+                    <span class="bar-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </a>
+                <!-- Search Bar -->
+                <div class="input-group d-none d-lg-flex ms-3">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-text"><i class="ti ti-search"></i></span>
+                </div>
+                <!-- Right Side Icons -->
+                <div class="d-flex align-items-center ms-auto">
+                    <div class="navbar-icons">
+                        <button class="nav-icon" title="Chat">
+                            <i class="ti ti-message-dots"></i>
+                        </button>
+                        <button class="nav-icon btnFullscreen" title="Fullscreen">
+                            <i class="ti ti-arrows-maximize"></i>
+                        </button>
+                        <button class="nav-icon" title="Apps">
+                            <i class="ti ti-layout-grid"></i>
+                        </button>
+                        <button class="nav-icon" title="Mail">
+                            <i class="ti ti-mail"></i>
+                        </button>
+                        <button class="nav-icon notification-bell" title="Notifications">
+                            <i class="ti ti-bell"></i>
+                            <span class="badge bg-danger">3</span>
+                        </button>
+                    </div>
+                    <!-- User Dropdown -->
+                    <div class="dropdown ms-2">
+                        <a href="javascript:void(0);" class="d-flex align-items-center" data-bs-toggle="dropdown">
+                            <img src="assets/img/avatar-01.jpg" alt="User" class="header-user-avatar">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end p-2" style="min-width: 180px;">
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-user me-2"></i>My
+                                Profile</a>
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-settings me-2"></i>Settings</a>
+                            <hr class="dropdown-divider my-1">
+                            <a class="dropdown-item rounded-1" href="javascript:void(0);"><i
+                                    class="ti ti-logout me-2"></i>Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Header -->
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <!-- Profile Section -->
+                    <div class="menu-profile2">
+                        <div class="profile-img">
+                            <img src="assets/img/avatar-02.jpg" alt="User" class="menu-profile-image">
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-name">
+                                DHEERENDRA <br><span class="accent">KUMAR JOSHI</span>
+                            </div>
+                            <p class="profile-role">Manager</p>
+                        </div>
+                    </div>
+
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="Menu-tab" data-bs-toggle="tab"
+                                data-bs-target="#Menu-tab-pane" type="button" role="tab" aria-controls="Menu-tab-pane"
+                                aria-selected="true"><i class="fa-solid fa-list"></i> <span>Menu</span> </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                aria-controls="profile-tab-pane" aria-selected="false"><i
+                                    class="fa-solid fa-table-cells-large"></i> <span>Dashboard</span></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                data-bs-target="#contact-tab-pane" type="button" role="tab"
+                                aria-controls="contact-tab-pane" aria-selected="false"><i class="fa-solid fa-cubes"></i>
+                                <span>others</span></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
+                                data-bs-target="#disabled-tab-pane" type="button" role="tab"
+                                aria-controls="disabled-tab-pane" aria-selected="false"><i class="fa-solid fa-gear"></i>
+                                <span>Setting</span></button>
+                        </li>
+                    </ul>
+
+                    <ul>
+                        <li>
+                            <a href="index.html">
+                                <i class="ti ti-layout-dashboard"></i>
+                                <span>Lead</span>
+                            </a>
+
+                        </li>
+                        <li>
+                            <a href="recuritment.html">
+                                <i class="ti ti-user-search"></i>
+                                <span>Recruitment</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="operation_dashboard.html">
+                                <i class="ti ti-settings-automation"></i>
+                                <span>Operation</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="onboarding-dashboard.html">
+                                <i class="ti ti-user-plus"></i>
+                                <span>Onboarding</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="employee.html">
+                                <i class="ti ti-building"></i>
+                                <span>HR Space</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="attendance.html">
+                                <i class="ti ti-clock-check"></i>
+                                <span>Attendance</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Leave_dashboard.html">
+                                <i class="ti ti-calendar-event"></i>
+                                <span>Leave</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="payroll.html">
+                                <i class="ti ti-wallet"></i>
+                                <span>Payroll</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="claim.html">
+                                <i class="ti ti-receipt"></i>
+                                <span>Claim</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="vms_dashboard.html">
+                                <i class="ti ti-device-desktop"></i>
+                                <span>VMS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Pms_dashboard.html">
+                                <i class="ti ti-chart-bar"></i>
+                                <span>PMS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ticketdashboard_manager.html">
+                                <i class="ti ti-ticket"></i>
+                                <span>Tickets</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Sidebar -->
+
+        <div class="page-wrapper">
+            <!-- ===== MAIN CONTENT ===== -->
+            <div class="content Claim-db">
+                <!-- Header -->
+                <header class="d-flex align-items-center justify-content-between mb-4">
+                    <div>
+                        <h4 class="fw-bold mb-0">Claim Management Dashboard</h4>
+                        <p class="text-muted mb-0">Overview of employee reimbursements and expenses</p>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <button class="btn btn-white shadow-sm border-0 rounded-pill px-3">
+                            <i class="ti ti-calendar me-1"></i> Today: 10 Mar 2026
+                        </button>
+                        <div class="avatar bg-primary text-white">AD</div>
+                    </div>
+                </header>
+
+                <!-- 1ï¸  Top KPI Cards -->
+                <div class="row g-3">
+                    <div class="col-xl-2 col-md-4 col-sm-6">
+                        <div class="card kpi-card">
+                            <div class="kpi-icon bg-info-soft"><i class="ti ti-clipboard-list"></i></div>
+                            <div class="kpi-info">
+                                <h6>Total Claims</h6>
+                                <h3>142</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-6">
+                        <div class="card kpi-card">
+                            <div class="kpi-icon bg-warning-soft"><i class="ti ti-clock-pause"></i></div>
+                            <div class="kpi-info">
+                                <h6>Pending Cases</h6>
+                                <h3>28</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-6">
+                        <div class="card kpi-card">
+                            <div class="kpi-icon bg-success-soft"><i class="ti ti-check"></i></div>
+                            <div class="kpi-info">
+                                <h6>Approved</h6>
+                                <h3>105</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-sm-6">
+                        <div class="card kpi-card">
+                            <div class="kpi-icon bg-danger-soft"><i class="ti ti-x"></i></div>
+                            <div class="kpi-info">
+                                <h6>Rejected</h6>
+                                <h3>9</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-8">
+                        <div class="card kpi-card">
+                            <div class="kpi-icon bg-purple-soft"><i class="ti ti-receipt-2"></i></div>
+                            <div class="kpi-info flex-grow-1">
+                                <h6>Total Claim Amount</h6>
+                                <div class="d-flex justify-content-between align-items-baseline">
+                                    <h3>₹ 4,25,800</h3>
+                                    <span class="text-success fs-12 fw-bold"><i class="ti ti-arrow-up-right"></i>
+                                        12%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 1 -->
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Claims by Category</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="categoryChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Claim Status Distribution</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <div id="statusDonutChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Monthly Claim Trend</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="trendChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2ï¸ âƒ£ Pending Claims Table -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Pending Claims Approval Queue</h5>
+                                <div class="d-flex gap-2">
+                                    <div class="input-group input-group-sm" style="width: 200px;">
+                                        <span class="input-group-text bg-white border-end-0"><i
+                                                class="ti ti-search text-muted"></i></span>
+                                        <input type="text" class="form-control border-start-0 ps-0"
+                                            placeholder="Search employee...">
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">View All Pending</button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table custom-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Claim Type</th>
+                                                <th>Amount</th>
+                                                <th>Submitted Date</th>
+                                                <th>Status</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="avatar bg-primary-light text-primary">RK</div>
+                                                        <div>
+                                                            <div class="fw-bold text-dark">Rahul Kapoor</div>
+                                                            <div class="text-muted fs-12">#EMP-0512 â€¢ IT Dept</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Travel Reimbursement</td>
+                                                <td><span class="fw-bold text-dark">₹ 1,500</span> <span
+                                                        class="text-muted fs-11">INR</span></td>
+                                                <td>10 Mar 2026</td>
+                                                <td><span class="badge-soft badge-soft-pending"><i
+                                                            class="ti ti-circle-filled fs-8 me-1"></i>Pending</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-success rounded-pill px-3 me-1"
+                                                            title="Approve"><i class="ti ti-check"></i></button>
+                                                        <button class="btn btn-sm btn-danger rounded-pill px-3 me-1"
+                                                            title="Reject"><i class="ti ti-x"></i></button>
+                                                        <button class="btn btn-sm btn-light rounded-pill px-3"
+                                                            title="View Details"><i class="ti ti-eye"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="avatar bg-info-soft text-info">PV</div>
+                                                        <div>
+                                                            <div class="fw-bold text-dark">Priya Verma</div>
+                                                            <div class="text-muted fs-12">#EMP-0421 â€¢ Marketing</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Accommodation</td>
+                                                <td><span class="fw-bold text-dark">₹ 4,200</span> <span
+                                                        class="text-muted fs-11">INR</span></td>
+                                                <td>09 Mar 2026</td>
+                                                <td><span class="badge-soft badge-soft-pending"><i
+                                                            class="ti ti-circle-filled fs-8 me-1"></i>Pending</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-success rounded-pill px-3 me-1"><i
+                                                                class="ti ti-check"></i></button>
+                                                        <button class="btn btn-sm btn-danger rounded-pill px-3 me-1"><i
+                                                                class="ti ti-x"></i></button>
+                                                        <button class="btn btn-sm btn-light rounded-pill px-3"><i
+                                                                class="ti ti-eye"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <div class="avatar bg-success-soft text-success">AS</div>
+                                                        <div>
+                                                            <div class="fw-bold text-dark">Amit Singh</div>
+                                                            <div class="text-muted fs-12">#EMP-0315 â€¢ Sales</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Office Supplies</td>
+                                                <td><span class="fw-bold text-dark">₹ 900</span> <span
+                                                        class="text-muted fs-11">INR</span></td>
+                                                <td>09 Mar 2026</td>
+                                                <td><span class="badge-soft badge-soft-pending"><i
+                                                            class="ti ti-circle-filled fs-8 me-1"></i>Pending</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-sm btn-success rounded-pill px-3 me-1"><i
+                                                                class="ti ti-check"></i></button>
+                                                        <button class="btn btn-sm btn-danger rounded-pill px-3 me-1"><i
+                                                                class="ti ti-x"></i></button>
+                                                        <button class="btn btn-sm btn-light rounded-pill px-3"><i
+                                                                class="ti ti-eye"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 2 + Dept Bar -->
+                <div class="row">
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Department-wise Claim Expenses</h5>
+                                <select class="form-select form-select-sm w-auto">
+                                    <option>This Month</option>
+                                    <option>Last Month</option>
+                                </select>
+                            </div>
+                            <div class="card-body">
+                                <div id="deptBarChart" style="height: 350px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Critical Notifications</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert-item alert-danger">
+                                    <div class="bg-danger text-white rounded-circle p-1 d-flex align-items-center justify-content-center"
+                                        style="width: 24px; height: 24px;">
+                                        <i class="ti ti-alert-triangle fs-14"></i>
+                                    </div>
+                                    <div class="alert-content">
+                                        <h6>High Value Claim Alert</h6>
+                                        <p>Rahul submitted travel claim ₹15,000 needing senior approval.</p>
+                                    </div>
+                                </div>
+                                <div class="alert-item alert-warning">
+                                    <div class="bg-warning text-white rounded-circle p-1 d-flex align-items-center justify-content-center"
+                                        style="width: 24px; height: 24px;">
+                                        <i class="ti ti-clock fs-14"></i>
+                                    </div>
+                                    <div class="alert-content">
+                                        <h6>Approvals Overdue</h6>
+                                        <p>5 claims are pending approval for more than 48 hours.</p>
+                                    </div>
+                                </div>
+                                <div class="alert-item alert-info">
+                                    <div class="bg-info text-white rounded-circle p-1 d-flex align-items-center justify-content-center"
+                                        style="width: 24px; height: 24px;">
+                                        <i class="ti ti-coin fs-14"></i>
+                                    </div>
+                                    <div class="alert-content">
+                                        <h6>Daily Claim Summary</h6>
+                                        <p>3 claims submitted today totaling ₹6,600.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row: High Value & Frequent Submitters -->
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">High Value Claims (Above ₹10,000)</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table custom-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Category</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="fw-bold text-dark">Sameer Khurana</div>
+                                                    <div class="text-muted fs-11">#EMP-0102</div>
+                                                </td>
+                                                <td>International Travel</td>
+                                                <td>08 Mar 2026</td>
+                                                <td><span class="text-danger fw-bold">₹ 25,000</span></td>
+                                                <td><span class="badge-soft badge-soft-pending">Pending</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="fw-bold text-dark">Neha Gupta</div>
+                                                    <div class="text-muted fs-11">#EMP-0156</div>
+                                                </td>
+                                                <td>Accommodation</td>
+                                                <td>05 Mar 2026</td>
+                                                <td><span class="text-danger fw-bold">₹ 18,500</span></td>
+                                                <td><span class="badge-soft badge-soft-approved">Approved</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Frequent Claim Submitters</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table custom-table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Claims Count</th>
+                                                <th>Total Amount</th>
+                                                <th>Trend</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="fw-bold text-dark">Vikram Singh</div>
+                                                    <div class="text-muted fs-11">Sales Executive</div>
+                                                </td>
+                                                <td><span class="badge bg-light text-dark px-3 mt-1">12</span></td>
+                                                <td class="fw-bold">₹ 32,000</td>
+                                                <td><i class="ti ti-trending-up text-danger"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="fw-bold text-dark">Anjali Rao</div>
+                                                    <div class="text-muted fs-11">Field Support</div>
+                                                </td>
+                                                <td><span class="badge bg-light text-dark px-3 mt-1">8</span></td>
+                                                <td class="fw-bold">₹ 15,400</td>
+                                                <td><i class="ti ti-trending-down text-success"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Recent Claims Activity</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <h6>Rahul submitted travel claim ₹1500</h6>
+                                        <span>2 hours ago</span>
+                                    </div>
+                                    <div class="activity-item">
+                                        <h6>Priya's accommodation claim approved ₹2200</h6>
+                                        <span>5 hours ago</span>
+                                    </div>
+                                    <div class="activity-item">
+                                        <h6>Amit's office supplies claim rejected ₹900</h6>
+                                        <span>Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- /Main Wrapper -->
+    <!-- jQuery -->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+
+
+    <!-- Highcharts -->
+    <script src="https://cdn.jsdelivr.net/npm/highcharts@12.5.0/highcharts.min.js"></script>
+    <!-- Bootstrap Core JS -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Feather Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="assets/js/jquery.slimscroll.min.js"></script>
+    <!-- Moment & Datetimepicker -->
+    <script src="assets/js/moment.min.js"></script>
+
+    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- Daterangepicker -->
+    <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Highcharts.setOptions({
+                colors: ['#F26522', '#1B84FF', '#03C95A', '#FFC107', '#8B5CF6', '#F43F5E'],
+                chart: {
+                    style: { fontFamily: "'Roboto', sans-serif" },
+                    backgroundColor: 'transparent'
+                },
+                title: { text: null },
+                credits: { enabled: false }
+            });
+
+            // 3ï¸ âƒ£ Claims by Category (Pie Chart)
+            Highcharts.chart('categoryChart', {
+                chart: { type: 'pie' },
+                tooltip: { pointFormat: '{series.name}: <b>{point.y}</b> (₹)' },
+                plotOptions: {
+                    pie: {
+                        innerSize: '0%',
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: { enabled: false },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Amount',
+                    data: [
+                        { name: 'Travel', y: 35000 },
+                        { name: 'Food', y: 12000 },
+                        { name: 'Accommodation', y: 42000 },
+                        { name: 'Medical', y: 15000 },
+                        { name: 'Office', y: 8000 },
+                        { name: 'Other', y: 5000 }
+                    ]
+                }]
+            });
+
+            // 8ï¸ âƒ£ Claim Status Distribution (Donut Chart)
+            Highcharts.chart('statusDonutChart', {
+                chart: { type: 'pie' },
+                plotOptions: {
+                    pie: {
+                        innerSize: '70%',
+                        dataLabels: { enabled: true, format: '{point.name}: {point.percentage:.0f}%' }
+                    }
+                },
+                series: [{
+                    name: 'Status',
+                    data: [
+                        { name: 'Approved', y: 105, color: '#03C95A' },
+                        { name: 'Pending', y: 28, color: '#FFC107' },
+                        { name: 'Rejected', y: 9, color: '#E70D0D' }
+                    ]
+                }]
+            });
+
+            // 4ï¸ âƒ£ Monthly Claim Trend (Line Chart)
+            Highcharts.chart('trendChart', {
+                chart: { type: 'areaspline' },
+                xAxis: { categories: ['Jan', 'Feb', 'Mar'] },
+                yAxis: { title: { text: 'Amount (₹)' } },
+                series: [{
+                    name: 'Expense',
+                    data: [35000, 42000, 38000],
+                    fillColor: {
+                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                        stops: [[0, '#F265224D'], [1, '#F2652200']]
+                    }
+                }]
+            });
+
+            // 5ï¸ âƒ£ Department-wise Claim Expenses (Bar Chart)
+            Highcharts.chart('deptBarChart', {
+                chart: { type: 'column' },
+                xAxis: { categories: ['Sales', 'Development', 'HR', 'Support'] },
+                yAxis: { title: { text: 'Amount (₹)' } },
+                series: [{
+                    name: 'Department Expenses',
+                    data: [25000, 10000, 5000, 8000]
+                }]
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,319 @@
+/* ==================================
+   KOMPASS HR - COMPONENTS
+   cards | buttons | badges | avatar
+   tables | dropdown | alerts
+=================================== */
+
+
+
+/* =========================
+   CARD COMPONENT
+========================= */
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all .3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #202C4B;
+}
+
+.card-body {
+    font-size: 14px;
+}
+
+.card-footer {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+
+
+/* =========================
+   DASHBOARD CARDS
+========================= */
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-info h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.stat-info p {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 4px;
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background: #F4F6FA;
+}
+
+
+
+/* =========================
+   BUTTON SYSTEM
+========================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+
+/* PRIMARY */
+
+.btn-primary {
+    background: #F26522;
+    color: #fff;
+    border-color: #F26522;
+}
+
+.btn-primary:hover {
+    background: #e45716;
+}
+
+
+/* SECONDARY */
+
+.btn-secondary {
+    background: #0C4B5E;
+    color: #fff;
+    border-color: #0C4B5E;
+}
+
+
+/* SUCCESS */
+
+.btn-success {
+    background: #03C95A;
+    color: #fff;
+}
+
+
+/* DANGER */
+
+.btn-danger {
+    background: #E70D0D;
+    color: #fff;
+}
+
+
+/* LIGHT */
+
+.btn-light {
+    background: #F4F6FA;
+    border: 1px solid #e5e7eb;
+    color: #111827;
+}
+
+
+
+/* =========================
+   BADGES
+========================= */
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.badge-primary {
+    background: #F26522;
+    color: #fff;
+}
+
+.badge-success {
+    background: #03C95A;
+    color: #fff;
+}
+
+.badge-danger {
+    background: #E70D0D;
+    color: #fff;
+}
+
+.badge-warning {
+    background: #FFC107;
+    color: #000;
+}
+
+.badge-info {
+    background: #1B84FF;
+    color: #fff;
+}
+
+
+
+/* =========================
+   AVATAR
+========================= */
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-lg {
+    width: 50px;
+    height: 50px;
+}
+
+.avatar-sm {
+    width: 28px;
+    height: 28px;
+}
+
+
+
+/* =========================
+   TABLES
+========================= */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table th {
+    text-align: left;
+    padding: 12px;
+    background: #F4F6FA;
+    font-weight: 600;
+    color: #111827;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.table tr:hover {
+    background: #fafafa;
+}
+
+
+
+/* =========================
+   DROPDOWN
+========================= */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 180px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    display: none;
+    z-index: 100;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #374151;
+}
+
+.dropdown-menu a:hover {
+    background: #F4F6FA;
+}
+
+.dropdown.active .dropdown-menu {
+    display: block;
+}
+
+
+
+/* =========================
+   ALERTS
+========================= */
+
+.alert {
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.alert-success {
+    background: #D2F5E1;
+    color: #03C95A;
+}
+
+.alert-danger {
+    background: #F6CECE;
+    color: #E70D0D;
+}
+
+.alert-warning {
+    background: #FFF4D2;
+    color: #FFC107;
+}
+
+.alert-info {
+    background: #D6E9FF;
+    color: #1B84FF;
+}
